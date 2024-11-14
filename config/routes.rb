@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  # devise_for :fsp_users
   get "dashboard/index"
   resources :incomes
   resources :expenses
@@ -29,6 +30,25 @@ end
   authenticated :user do
     root to: 'dashboard#index', as: :authenticated_root
   end
+
+  authenticated :fsp_user do
+    root to: 'fsp_dashboard#index', as: :authenticated_fsp_root
+  end
+
+  resources :fsp_dashboard, only: [:index] do
+    member do
+      post :request_data_access
+    end
+  end
+
+  namespace :admin do
+    resources :data_access_requests, only: [:index, :update]
+  end
+
+  devise_for :fsp_users, path: 'fsp', controllers: {
+    registrations: 'fsp_users/registrations'
+  }
+
   root to: 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

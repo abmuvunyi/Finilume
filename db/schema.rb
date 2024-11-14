@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_14_100753) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_14_135645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,6 +51,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_14_100753) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "data_access_requests", force: :cascade do |t|
+    t.bigint "fsp_user_id", null: false
+    t.bigint "user_id", null: false
+    t.string "status", default: "0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fsp_user_id"], name: "index_data_access_requests_on_fsp_user_id"
+    t.index ["user_id"], name: "index_data_access_requests_on_user_id"
+  end
+
   create_table "expenses", force: :cascade do |t|
     t.string "name"
     t.decimal "amount"
@@ -71,6 +81,19 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_14_100753) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "fsp_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.integer "role", default: 0
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_fsp_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_fsp_users_on_reset_password_token", unique: true
   end
 
   create_table "incomes", force: :cascade do |t|
@@ -166,6 +189,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_14_100753) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "data_access_requests", "fsp_users"
+  add_foreign_key "data_access_requests", "users"
   add_foreign_key "expenses", "users"
   add_foreign_key "incomes", "users"
   add_foreign_key "products", "users"
