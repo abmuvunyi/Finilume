@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <!-- Total Revenue Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Total Revenue</div>
+        <div class="card-body">
+          <h5 class="card-title"><%= number_to_currency(@total_revenue, unit: "RWF ", precision: 0) %></h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Expenses Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Total Expenses</div>
+        <div class="card-body">
+          <h5 class="card-title"><%= number_to_currency(@total_expenses, unit: "RWF ", precision: 0) %></h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Income Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-info mb-3">
+        <div class="card-header">Total Income</div>
+        <div class="card-body">
+          <h5 class="card-title"><%= number_to_currency(@total_income, unit: "RWF ", precision: 0) %></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Net Profit Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Net Profit</div>
+        <div class="card-body">
+          <h5 class="card-title"><%= number_to_currency(@net_profit, unit: "RWF ", precision: 0) %></h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Low Stock Products Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-danger mb-3">
+        <div class="card-header">Low Stock Products</div>
+        <div class="card-body">
+          <% if @low_stock_products.any? %>
+            <% @low_stock_products.each do |product| %>
+              <p><%= product.name %> - Stock left: <%= product.quantity %></p>
+            <% end %>
+          <% else %>
+            <p>All products are adequately stocked.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top-Selling Products Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-secondary mb-3">
+        <div class="card-header">Top-Selling Products</div>
+        <div class="card-body">
+          <% if @top_selling_products.any? %>
+            <% @top_selling_products.each do |product| %>
+              <p><%= product.name %> - Sold: <%= product.total_sold %></p>
+            <% end %>
+          <% else %>
+            <p>No top-selling products available.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="container">
+  <div class="row">
+    <!-- Total Revenue, Total Expenses, etc. (Existing Cards) -->
+
+    <!-- Button to Download PDF -->
+    <div class="col-md-12 mt-4">
+      <%= link_to "Download Business Report as PDF", download_pdf_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+

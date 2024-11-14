@@ -27,6 +27,17 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
+gem 'chartkick', '~> 5.1', '>= 5.1.2'
+gem 'groupdate'
+gem 'highcharts-rails', '~> 6.0', '>= 6.0.3'
+gem 'apexcharts', '~> 0.2.0'
+gem 'prawn'
+gem 'prawn-table', '~> 0.2.2'
+gem 'ransack'
+
+
+
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false

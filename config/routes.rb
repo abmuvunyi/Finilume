@@ -1,6 +1,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get "dashboard/index"
+  resources :incomes
+  resources :expenses
+  resources :sales
+  resources :products
   draw :madmin
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
@@ -18,6 +23,12 @@ end
   resources :notifications, only: [:index]
   resources :announcements, only: [:index]
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+
+  get 'dashboard/download_pdf', to: 'dashboard#download_pdf', as: :download_pdf
+  
+  authenticated :user do
+    root to: 'dashboard#index', as: :authenticated_root
+  end
   root to: 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

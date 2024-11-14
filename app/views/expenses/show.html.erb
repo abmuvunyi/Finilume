@@ -1,0 +1,22 @@
+<div class="page-header">
+  <%= link_to expenses_path, class: 'btn btn-default' do %>
+    All Expenses
+  <% end %>
+  <%= link_to edit_expense_path(@expense), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show expense</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @expense.name %></dd>
+  <dt>Amount:</dt>
+  <dd><%= @expense.amount %></dd>
+  <dt>Category:</dt>
+  <dd><%= @expense.category %></dd>
+  <dt>Date:</dt>
+  <dd><%= @expense.date %></dd>
+  <dt>User:</dt>
+  <dd><%= @expense.user %></dd>
+</dl>

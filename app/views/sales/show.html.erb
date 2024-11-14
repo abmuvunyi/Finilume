@@ -1,0 +1,22 @@
+<div class="page-header">
+  <%= link_to sales_path, class: 'btn btn-default' do %>
+    All Sales
+  <% end %>
+  <%= link_to edit_sale_path(@sale), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show sale</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Product:</dt>
+  <dd><%= @sale.product.name %></dd>
+  <dt>Quantity:</dt>
+  <dd><%= @sale.quantity %></dd>
+  <dt>Total price:</dt>
+  <dd><%= number_to_currency(@sale.total_price, unit: "RWF ", precision: 0) %></dd>
+  <dt>User:</dt>
+  <dd><%= @sale.user.name %></dd>
+  <dt>Date:</dt>
+  <dd><%= @sale.date %></dd>
+</dl>

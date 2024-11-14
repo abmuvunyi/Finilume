@@ -1,0 +1,44 @@
+<%= form_with(model: sale) do |form| %>
+  <% if sale.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+
+      <ul>
+      <% sale.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :product_id, class: 'form-label' %>
+      <%= form.collection_select :product_id, @products, :id, :name, prompt: "Select a Product", class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :quantity, class: 'form-label' %>
+      <%= form.number_field :quantity, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :date, class: 'form-label' %>
+      <%= form.datetime_field :date, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <% if sale.persisted? %>
+      <div class="float-end">
+        <%= link_to 'Destroy', sale, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if sale.persisted? %>
+      <%= link_to "Cancel", sale, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", sales_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>
