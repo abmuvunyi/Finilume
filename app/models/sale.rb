@@ -20,4 +20,12 @@ class Sale < ApplicationRecord
       self.total_price = product.price * quantity
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[quantity total_price date created_at updated_at product_id user_id]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[product user]
+  end
 end

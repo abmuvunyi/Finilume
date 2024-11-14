@@ -88,3 +88,149 @@
   </div>
 </div>
 
+<div class="container">
+  <div class="row">
+    <!-- Existing Summary Cards for Revenue, Expenses, etc. -->
+
+    <!-- Products List with Search -->
+    <div class="col-md-12 mt-4">
+      <h2>Products List</h2>
+      <%= search_form_for @q_products, url: authenticated_root_path, method: :get do |f| %>
+        <div class="form-group row">
+          <div class="col-md-10">
+            <%= f.search_field :name_cont, placeholder: "Search Products by Name", class: "form-control" %>
+          </div>
+          <div class="col-md-2">
+            <%= f.submit "Search", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td><%= product.name %></td>
+              <td><%= product.category %></td>
+              <td>RWF <%= product.price %></td>
+              <td><%= product.quantity %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sales List with Search -->
+    <div class="col-md-12 mt-4">
+      <h2>Sales List</h2>
+      <%= search_form_for @q_sales, url: authenticated_root_path, method: :get do |f| %>
+        <div class="form-group row">
+          <div class="col-md-10">
+            <%= f.search_field :product_name_cont, placeholder: "Search Sales by Product Name", class: "form-control" %>
+          </div>
+          <div class="col-md-2">
+            <%= f.submit "Search", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sales.each do |sale| %>
+            <tr>
+              <td><%= sale.product.name %></td>
+              <td><%= sale.quantity %></td>
+              <td>RWF <%= sale.total_price %></td>
+              <td><%= sale.date.strftime("%Y-%m-%d") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Income List with Search -->
+    <div class="col-md-12 mt-4">
+      <h2>Income List</h2>
+      <%= search_form_for @q_incomes, url: authenticated_root_path, method: :get do |f| %>
+        <div class="form-group row">
+          <div class="col-md-10">
+            <%= f.search_field :name_cont, placeholder: "Search Income by Name", class: "form-control" %>
+          </div>
+          <div class="col-md-2">
+            <%= f.submit "Search", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @incomes.each do |income| %>
+            <tr>
+              <td><%= income.name %></td>
+              <td><%= income.category %></td>
+              <td>RWF <%= income.amount %></td>
+              <td><%= income.date.strftime("%Y-%m-%d") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Expenses List with Search -->
+    <div class="col-md-12 mt-4">
+      <h2>Expenses List</h2>
+      <%= search_form_for @q_expenses, url: authenticated_root_path, method: :get do |f| %>
+        <div class="form-group row">
+          <div class="col-md-10">
+            <%= f.search_field :name_cont, placeholder: "Search Expenses by Name", class: "form-control" %>
+          </div>
+          <div class="col-md-2">
+            <%= f.submit "Search", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @expenses.each do |expense| %>
+            <tr>
+              <td><%= expense.name %></td>
+              <td><%= expense.category %></td>
+              <td>RWF <%= expense.amount %></td>
+              <td><%= expense.date.strftime("%Y-%m-%d") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

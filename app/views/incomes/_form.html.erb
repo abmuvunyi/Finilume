@@ -32,11 +32,6 @@
     </div>
 
   <div class="mb-3">
-    <%= form.label :user_id, class: 'form-label' %>
-      <%= form.text_field :user_id, class: 'form-control' %>
-    </div>
-
-  <div class="mb-3">
     <% if income.persisted? %>
       <div class="float-end">
         <%= link_to 'Destroy', income, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>

@@ -3,6 +3,23 @@ class DashboardController < ApplicationController
   before_action :set_dashboard_data, only: [:index, :download_pdf]
 
   def index
+    
+    # Ransack Search for Products
+    @q_products = current_user.products.ransack(params[:q_products])
+    @products = @q_products.result(distinct: true)
+
+    # Ransack Search for Sales
+    @q_sales = current_user.sales.ransack(params[:q_sales])
+    @sales = @q_sales.result(distinct: true)
+
+    # Ransack Search for Income
+    @q_incomes = current_user.incomes.ransack(params[:q_incomes])
+    @incomes = @q_incomes.result(distinct: true)
+
+    # Ransack Search for Expenses
+    @q_expenses = current_user.expenses.ransack(params[:q_expenses])
+    @expenses = @q_expenses.result(distinct: true)
+
     # Total Revenue from Sales
     @total_revenue = current_user.sales.sum(:total_price)
 

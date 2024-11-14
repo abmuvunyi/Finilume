@@ -33,6 +33,11 @@
             <% end %>
             <div id="nav-account-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
               <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
+               <%= link_to "Dashboard", authenticated_root_path, class: "dropdown-item" %>
+               <%= link_to "Products", products_path, class: "dropdown-item" %>
+               <%= link_to "Sales", sales_path, class: "dropdown-item" %>
+               <%= link_to "Income", incomes_path, class: "dropdown-item" %>
+               <%= link_to "Expenses", expenses_path, class: "dropdown-item" %>
               <% if current_user.admin? && respond_to?(:madmin_root_path) %>
                 <div class="dropdown-divider"></div>
                 <%= link_to "Admin Area", madmin_root_path, class: "dropdown-item" %>
