@@ -4,6 +4,13 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :data_access_requests, only: [:index, :update]
   end
+
+  namespace :fsp_dashboard do
+    get 'view_business/:id', to: 'fsp_dashboard#view_business', as: 'view_business'
+    post 'request_data_access/:id', to: 'fsp_dashboard#request_data_access', as: 'request_data_access'
+  end
+  
+  
   # devise_for :fsp_users
   get "dashboard/index"
   resources :incomes

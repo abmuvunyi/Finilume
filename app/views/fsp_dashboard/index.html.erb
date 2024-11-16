@@ -16,9 +16,15 @@
         <td><%= user.first_name %> <%= user.last_name %></td>
         <td><%= user.business_category %></td>
         <td><%= user.phone_number %></td>
-        <td>
-          <%= link_to 'Request Data Access', request_data_access_fsp_dashboard_path(user), method: :post, class: 'btn btn-warning' %>
-        </td>
+        <td><% data_request = DataAccessRequest.find_by(fsp_user: current_fsp_user, user: user) %>
+          
+          <% if data_request&.pending? %>
+            Request Pending Approval
+          <% elsif data_request&.approved? %>
+            <%= link_to 'View Business Dashboard', fsp_dashboard_view_business_path(user), class: 'btn btn-primary' %>
+          <% else %>
+            <%= link_to 'Request Data Access', request_data_access_fsp_dashboard_path(user), method: :post, class: 'btn btn-warning' %>
+          <% end %> </td>
       </tr>
     <% end %>
   </tbody>
