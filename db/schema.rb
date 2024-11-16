@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_14_135645) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_16_170022) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -54,9 +54,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_14_135645) do
   create_table "data_access_requests", force: :cascade do |t|
     t.bigint "fsp_user_id", null: false
     t.bigint "user_id", null: false
-    t.string "status", default: "0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
     t.index ["fsp_user_id"], name: "index_data_access_requests_on_fsp_user_id"
     t.index ["user_id"], name: "index_data_access_requests_on_user_id"
   end

@@ -1,6 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :data_access_requests, only: [:index, :update]
+  end
   # devise_for :fsp_users
   get "dashboard/index"
   resources :incomes
