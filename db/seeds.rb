@@ -14,9 +14,9 @@
 
 # Create one sample user with business information
 user = User.create!(
-  first_name: "John",
+  first_name: "Jane",
   last_name: "Doe",
-  email: "example1@example.com",
+  email: "example2@example.com",
   password: "123456",
   password_confirmation: "123456",
   business_name: "John's Retail Shop",
@@ -66,6 +66,8 @@ end
 # Create Expense Records for the User
 3.times do |i|
   Expense.create!(
+    name: "Income Source #{i + 1}",
+    amount: rand(1000..5000),
     category: ["Utilities", "Rent", "Supplies"].sample,
     amount: rand(500..3000),  # Random expense between 500 and 3000
     date: Date.today - rand(1..30).days,
@@ -73,4 +75,4 @@ end
   )
 end
 
-puts "Created one sample user with products, sales, income, and expenses."
+puts "seeds created successfully"
