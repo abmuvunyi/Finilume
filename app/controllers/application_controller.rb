@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   impersonates :user
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  layout :layout_by_resource
 
   protect_from_forgery with: :exception
 
@@ -16,6 +17,13 @@ class ApplicationController < ActionController::Base
     def user_not_authorized
       flash[:alert] = "You are not authorized to perform this action."
       redirect_to(request.referrer || main_app.root_path)
+    end
+    def layout_by_resource
+      if devise_controller?
+        "application" # This ensures that Devise uses the application layout
+      else
+        "application"
+      end
     end
     
 end

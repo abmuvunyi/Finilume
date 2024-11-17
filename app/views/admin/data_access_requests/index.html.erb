@@ -10,16 +10,16 @@
     </tr>
   </thead>
   <tbody>
-    <% @data_access_requests.each do |request| %>
-      <tr>
-        <td><%= request.fsp_user.email %></td>
-        <td><%= request.user.email %> (Business: <%= request.user.business_name %>)</td>
-        <td><%= request.status_label %></td>
-        <td>
-          <%= button_to "Approve", admin_data_access_request_path(request, approve: true), method: :put, class: "btn btn-success" %>
-          <%= button_to "Reject", admin_data_access_request_path(request, approve: false), method: :put, class: "btn btn-danger" %>
-        </td>
-      </tr>
-    <% end %>
+  <% @data_access_requests.each do |request| %>
+    <tr>
+      <td><%= request.fsp_user.email %></td>
+      <td><%= request.user.email %> (Business: <%= request.user.business_name %>)</td>
+      <td><%= request.status_label %></td>
+      <td>
+        <%= button_to "Approve", admin_data_access_request_path(request, approve: true), method: :put, class: "btn btn-success" %>
+        <%= button_to "Reject", admin_data_access_request_path(request, approve: false), method: :put, class: "btn btn-danger" %>
+      </td>
+    </tr>
+  <% end %>  
   </tbody>
 </table>

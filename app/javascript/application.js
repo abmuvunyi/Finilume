@@ -2,7 +2,7 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
-require("chartkick/chart.js")
+
 
 import "@hotwired/turbo-rails"
 require("@rails/activestorage").start()
@@ -11,12 +11,7 @@ require("@rails/activestorage").start()
 require("local-time").start()
 require("@rails/ujs").start()
 
-import './channels/**/*_channel.js'
-import "./controllers"
-import "chartkick"
-import "Chart.bundle"
-import "chartkick/chart.js"
-import "highcharts"
+
 
 
 import * as bootstrap from "bootstrap"
@@ -33,7 +28,7 @@ document.addEventListener("turbo:load", () => {
   })
 })
 
-import ApexCharts from 'apexcharts'
+
 
 document.addEventListener("turbo:load", () => {
   if (window.ApexCharts) {

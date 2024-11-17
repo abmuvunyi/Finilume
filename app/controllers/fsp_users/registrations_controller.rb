@@ -1,4 +1,5 @@
 class FspUsers::RegistrationsController < Devise::RegistrationsController
+  layout 'application'
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 

@@ -90,7 +90,6 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
-    apexcharts (0.2.0)
     ast (2.4.2)
     base64 (0.2.0)
     bcrypt (3.1.20)
@@ -114,7 +113,6 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    chartkick (5.1.2)
     chronic (0.10.2)
     concurrent-ruby (1.3.4)
     connection_pool (2.4.1)
@@ -137,12 +135,12 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
-    faraday (2.12.0)
-      faraday-net_http (>= 2.0, < 3.4)
+    faraday (2.12.1)
+      faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-net_http (3.3.0)
-      net-http
+    faraday-net_http (3.4.0)
+      net-http (>= 0.5.0)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     fugit (1.11.1)
@@ -153,8 +151,6 @@ GEM
     groupdate (6.5.1)
       activesupport (>= 7)
     hashie (5.0.0)
-    highcharts-rails (6.0.3)
-      railties (>= 3.1)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.3)
@@ -170,7 +166,7 @@ GEM
       activesupport (>= 5.0.0)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
-    json (2.8.1)
+    json (2.8.2)
     jwt (2.9.3)
       base64
     kamal (2.3.0)
@@ -269,7 +265,7 @@ GEM
       rack
     orm_adapter (0.5.0)
     ostruct (0.6.1)
-    pagy (9.2.2)
+    pagy (9.3.0)
     parallel (1.26.3)
     parser (3.3.6.0)
       ast (~> 2.4.1)
@@ -361,12 +357,12 @@ GEM
       rubocop-ast (>= 1.32.2, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.35.0)
+    rubocop-ast (1.36.1)
       parser (>= 3.3.1.0)
     rubocop-minitest (0.36.0)
       rubocop (>= 1.61, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-performance (1.22.1)
+    rubocop-performance (1.23.0)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rails (2.27.0)
@@ -406,7 +402,7 @@ GEM
       activejob (>= 7.2)
       activerecord (>= 7.2)
       railties (>= 7.2)
-    solid_queue (1.0.1)
+    solid_queue (1.0.2)
       activejob (>= 7.1)
       activerecord (>= 7.1)
       concurrent-ruby (>= 1.3.1)
@@ -423,11 +419,11 @@ GEM
       railties (>= 6.0.0)
     stringio (3.1.2)
     thor (1.3.2)
-    thruster (0.1.8)
-    thruster (0.1.8-aarch64-linux)
-    thruster (0.1.8-arm64-darwin)
-    thruster (0.1.8-x86_64-darwin)
-    thruster (0.1.8-x86_64-linux)
+    thruster (0.1.9)
+    thruster (0.1.9-aarch64-linux)
+    thruster (0.1.9-arm64-darwin)
+    thruster (0.1.9-x86_64-darwin)
+    thruster (0.1.9-x86_64-linux)
     timeout (0.4.2)
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
@@ -437,7 +433,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
-    uri (1.0.1)
+    uri (1.0.2)
     useragent (0.16.10)
     version_gem (1.1.4)
     warden (1.2.9)
@@ -467,17 +463,14 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  apexcharts (~> 0.2.0)
   bootsnap
   brakeman
   capybara
-  chartkick (~> 5.1, >= 5.1.2)
   cssbundling-rails
   debug
   devise (~> 4.9)
   friendly_id (~> 5.4)
   groupdate
-  highcharts-rails (~> 6.0, >= 6.0.3)
   importmap-rails
   jbuilder
   jsbundling-rails

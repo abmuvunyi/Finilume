@@ -1,0 +1,32 @@
+<h1>Financial Service Provider Dashboard</h1>
+<h2>Registered Users with Business Information</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>User Name</th>
+      <th>Business Category</th>
+      <th>Contact</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %> <%= user.last_name %></td>
+        <td><%= user.business_category %></td>
+        <td><%= user.phone_number %></td>
+        <td>
+        <% data_request = DataAccessRequest.find_by(fsp_user: current_fsp_user, user: user) %>
+        <% if data_request&.pending? %>
+          Request Pending Approval
+        <% elsif data_request&.approved? %>
+          <%= link_to 'View Business Dashboard', fsp_dashboard_view_business_path(user), class: 'btn btn-primary' %>
+        <% else %>
+        <%= button_to 'Request Data Access', url_for(controller: 'fsp_dashboard/fsp_dashboard', action: 'request_data_access', id: user.id), method: :post, class: 'btn btn-warning' %>
+
+        <% end %>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
