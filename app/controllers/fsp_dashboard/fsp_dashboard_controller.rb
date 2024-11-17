@@ -9,38 +9,17 @@ module FspDashboard
       
     end
 
-#     def request_data_access
-#   Rails.logger.debug "Request Data Access triggered for user: #{params[:id]}"
-  
-#   user = User.find(params[:id])
-#   data_access_request = DataAccessRequest.create!(
-#     user: user,
-#     fsp_user: current_fsp_user,
-#     status: DataAccessRequest::STATUS_PENDING
-#   )
-  
-#   if data_access_request.persisted?
-#     Rails.logger.debug "Data Access Request successfully created: #{data_access_request.inspect}"
-#   else
-#     Rails.logger.debug "Failed to create Data Access Request: #{data_access_request.errors.full_messages}"
-#   end
-
-#   redirect_to authenticated_fsp_root_path, notice: "Data access request has been sent."
-# end
-def request_data_access
-  Rails.logger.debug "Request Data Access triggered for user: #{params[:id]}"
-  user = User.find(params[:id])
-  data_access_request = DataAccessRequest.create!(
-    user: user,
-    fsp_user: current_fsp_user,
-    status: DataAccessRequest::STATUS_PENDING
-  )
-  Rails.logger.debug "DataAccessRequest: #{data_access_request.inspect}" if data_access_request.persisted?
-  redirect_to authenticated_fsp_root_path, notice: "Data access request has been sent."
-end
-
-
-    
+    def request_data_access
+      Rails.logger.debug "Request Data Access triggered for user: #{params[:id]}"
+      user = User.find(params[:id])
+      data_access_request = DataAccessRequest.create!(
+        user: user,
+        fsp_user: current_fsp_user,
+        status: DataAccessRequest::STATUS_PENDING
+      )
+      Rails.logger.debug "DataAccessRequest: #{data_access_request.inspect}" if data_access_request.persisted?
+      redirect_to authenticated_fsp_root_path, notice: "Data access request has been sent."
+    end
 
     def view_business
       @user = User.find(params[:id])
