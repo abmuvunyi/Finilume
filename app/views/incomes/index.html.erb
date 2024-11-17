@@ -1,0 +1,49 @@
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Incomes</h1>
+  </div>
+
+  <div class="col-sm-6 text-end">
+  <%= link_to new_income_path, class: 'btn btn-primary' do %>
+    Add New Income
+  <% end %>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+    
+        <th>Name</th>
+    
+
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>User</th>
+            
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @incomes.each do |income| %>
+        <%= content_tag :tr, id: dom_id(income), class: dom_class(income) do %>
+          
+            <td><%= link_to income.name, income %></td>
+          
+
+                      <td><%= income.amount %></td>
+                      <td><%= income.category %></td>
+                      <td><%= income.date %></td>
+                      <td><%= income.user.name %></td>
+          
+          
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

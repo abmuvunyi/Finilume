@@ -1,0 +1,50 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :category, class: 'form-label' %>
+      <%= form.text_field :category, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :price, class: 'form-label' %>
+      <%= form.text_field :price, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :quantity, class: 'form-label' %>
+      <%= form.number_field :quantity, class: 'form-control' %>
+    </div>
+
+
+  <div class="mb-3">
+    <% if product.persisted? %>
+      <div class="float-end">
+        <%= link_to 'Destroy', product, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if product.persisted? %>
+      <%= link_to "Cancel", product, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", products_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

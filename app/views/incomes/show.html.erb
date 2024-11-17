@@ -1,0 +1,22 @@
+<div class="page-header">
+  <%= link_to incomes_path, class: 'btn btn-default' do %>
+    All Incomes
+  <% end %>
+  <%= link_to edit_income_path(@income), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show income</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @income.name %></dd>
+  <dt>Amount:</dt>
+  <dd><%= @income.amount %></dd>
+  <dt>Category:</dt>
+  <dd><%= @income.category %></dd>
+  <dt>Date:</dt>
+  <dd><%= @income.date %></dd>
+  <dt>User:</dt>
+  <dd><%= @income.user.name %></dd>
+</dl>

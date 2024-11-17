@@ -27,6 +27,14 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
+gem 'groupdate'
+gem 'prawn'
+gem 'prawn-table', '~> 0.2.2'
+gem 'ransack'
+
+
+
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false

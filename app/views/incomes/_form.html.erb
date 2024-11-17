@@ -1,0 +1,49 @@
+<%= form_with(model: income) do |form| %>
+  <% if income.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(income.errors.count, "error") %> prohibited this income from being saved:</h2>
+
+      <ul>
+      <% income.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :amount, class: 'form-label' %>
+      <%= form.text_field :amount, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :category, class: 'form-label' %>
+      <%= form.text_field :category, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :date, class: 'form-label' %>
+      <%= form.date_field :date, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <% if income.persisted? %>
+      <div class="float-end">
+        <%= link_to 'Destroy', income, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if income.persisted? %>
+      <%= link_to "Cancel", income, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", incomes_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

@@ -3,6 +3,7 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+
 import "@hotwired/turbo-rails"
 require("@rails/activestorage").start()
 //require("trix")
@@ -10,8 +11,8 @@ require("@rails/activestorage").start()
 require("local-time").start()
 require("@rails/ujs").start()
 
-import './channels/**/*_channel.js'
-import "./controllers"
+
+
 
 import * as bootstrap from "bootstrap"
 
@@ -26,3 +27,12 @@ document.addEventListener("turbo:load", () => {
     return new bootstrap.Popover(popoverTriggerEl)
   })
 })
+
+
+
+document.addEventListener("turbo:load", () => {
+  if (window.ApexCharts) {
+    ApexCharts.exec('revenue_over_time', 'updateOptions', {}); // Force ApexCharts to reinitialize
+  }
+});
+

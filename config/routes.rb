@@ -1,6 +1,8 @@
 require 'sidekiq/web'
+# config/routes.rb
 
 Rails.application.routes.draw do
+  # Admin routes
   draw :madmin
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
@@ -15,20 +17,53 @@ authenticate :user, lambda { |u| u.admin? } do
   end
 end
 
+  # Admin Dashboard routes
+  namespace :admin do
+    resources :data_access_requests, only: [:index, :update]
+  end
+
+  # FSP Dashboard routes
+  namespace :fsp_dashboard do
+    get 'view_business/:id', to: 'fsp_dashboard#view_business', as: 'view_business'
+    post 'request_data_access/:id', to: 'fsp_dashboard#request_data_access', as: 'request_data_access'
+  end
+
+  # Devise configurations for different users
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", sessions: 'users/sessions',  registrations: 'users/registrations', passwords: 'users/passwords', confirmations: 'users/confirmations', unlocks: 'users/unlocks'}
+  devise_for :fsp_users, path: 'fsp', controllers: {
+    sessions: 'fsp_users/sessions',
+    registrations: 'fsp_users/registrations',
+    passwords: 'fsp_users/passwords',
+    confirmations: 'fsp_users/confirmations',
+    unlocks: 'fsp_users/unlocks'
+  }
+
+  # Dashboard and main pages routes
+  get "dashboard/index"
+  resources :incomes
+  resources :expenses
+  resources :sales
+  resources :products
+
+
+  # Announcements and notifications
   resources :notifications, only: [:index]
   resources :announcements, only: [:index]
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+
+  # Root paths
+  authenticated :user do
+    root to: 'dashboard#index', as: :authenticated_root
+  end
+
+  authenticated :fsp_user do
+    root to: 'fsp_dashboard/fsp_dashboard#index', as: :authenticated_fsp_root
+  end
+
+  # Default root
   root to: 'home#index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
+  get 'dashboard/download_pdf', to: 'dashboard#download_pdf', as: :download_pdf
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

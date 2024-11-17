@@ -1,0 +1,2 @@
+module FspDashboardHelper
+end
