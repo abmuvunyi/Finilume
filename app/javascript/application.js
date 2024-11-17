@@ -29,10 +29,3 @@ document.addEventListener("turbo:load", () => {
 })
 
 
-
-document.addEventListener("turbo:load", () => {
-  if (window.ApexCharts) {
-    ApexCharts.exec('revenue_over_time', 'updateOptions', {}); // Force ApexCharts to reinitialize
-  }
-});
-
