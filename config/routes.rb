@@ -29,9 +29,13 @@ end
   end
 
   # Devise configurations for different users
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", sessions: 'users/sessions',  registrations: 'users/registrations', passwords: 'users/passwords', confirmations: 'users/confirmations', unlocks: 'users/unlocks'}
   devise_for :fsp_users, path: 'fsp', controllers: {
-    registrations: 'fsp_users/registrations'
+    sessions: 'fsp_users/sessions',
+    registrations: 'fsp_users/registrations',
+    passwords: 'fsp_users/passwords',
+    confirmations: 'fsp_users/confirmations',
+    unlocks: 'fsp_users/unlocks'
   }
 
   # Dashboard and main pages routes

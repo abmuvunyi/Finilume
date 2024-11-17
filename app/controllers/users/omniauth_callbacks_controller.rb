@@ -1,5 +1,6 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    layout 'application'
     before_action :set_service, except: [:failure]
     before_action :set_user, except: [:failure]
 
