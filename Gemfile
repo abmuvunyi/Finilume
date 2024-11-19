@@ -28,6 +28,8 @@ gem 'groupdate'
 gem 'prawn'
 gem 'prawn-table', '~> 0.2.2'
 gem 'ransack'
+gem 'sidekiq'
+
 
 
 
