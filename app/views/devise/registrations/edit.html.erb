@@ -21,13 +21,6 @@
         <%= f.select :business_category, [['Retail', 'Retail'], ['Services', 'Services'], ['Manufacturing', 'Manufacturing'], ['Other', 'Other']], prompt: 'Select your business category', autofocus: false, class: 'form-control', placeholder: "Business_category" %>
       </div>
 
-      <div class="mb-3">
-        <%= f.label :avatar, class: "form-label" %>
-        <%= f.file_field :avatar, accept:'image/*' %>
-      </div>
-
-      <%= image_tag avatar_path(f.object), class: "rounded border shadow-sm d-block mx-auto my-3" %>
-
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div class="alert alert-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
