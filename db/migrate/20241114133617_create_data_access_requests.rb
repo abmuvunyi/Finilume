@@ -1,4 +1,4 @@
-class CreateDataAccessRequests < ActiveRecord::Migration[8.0]
+class CreateDataAccessRequests < ActiveRecord::Migration[7.0]
   def change
     create_table :data_access_requests do |t|
       t.references :fsp_user, null: false, foreign_key: true

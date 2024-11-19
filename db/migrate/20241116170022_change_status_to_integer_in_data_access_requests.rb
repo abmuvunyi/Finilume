@@ -1,4 +1,4 @@
-class ChangeStatusToIntegerInDataAccessRequests < ActiveRecord::Migration[8.0]
+class ChangeStatusToIntegerInDataAccessRequests < ActiveRecord::Migration[7.0]
 
   def change
     # Step 1: Remove the old status column

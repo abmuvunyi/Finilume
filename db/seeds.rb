@@ -16,7 +16,7 @@
 user = User.create!(
   first_name: "Jane",
   last_name: "Doe",
-  email: "example2@example.com",
+  email: "example@example.com",
   password: "123456",
   password_confirmation: "123456",
   business_name: "John's Retail Shop",
