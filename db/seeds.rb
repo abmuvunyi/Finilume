@@ -10,7 +10,7 @@
 
 
 # Clear existing data to avoid duplicates
-
+User.create!(first_name:"example",email: "admin@example.com",password:"123456",password_confirmation:"123456",admin:true)
 
 # Create one sample user with business information
 user = User.create!(
@@ -67,7 +67,6 @@ end
 3.times do |i|
   Expense.create!(
     name: "Income Source #{i + 1}",
-    amount: rand(1000..5000),
     category: ["Utilities", "Rent", "Supplies"].sample,
     amount: rand(500..3000),  # Random expense between 500 and 3000
     date: Date.today - rand(1..30).days,
