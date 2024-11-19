@@ -79,6 +79,7 @@ gem "noticed", "~> 2.0"
 gem "omniauth-facebook", "~> 8.0"
 gem "omniauth-github", "~> 2.0"
 gem "omniauth-twitter", "~> 1.4"
+gem 'zeitwerk', '~> 2.6', '>= 2.6.18'
 gem "pretender", "~> 0.3.4"
 gem "pundit", "~> 2.1"
 gem "sidekiq", "~> 6.2"
