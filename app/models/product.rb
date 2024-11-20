@@ -3,6 +3,8 @@ class Product < ApplicationRecord
   has_many :sales, dependent: :destroy
 
   validates :name, :price, :quantity, presence: true
+  validates :user, presence: true
+  
   def self.ransackable_attributes(auth_object = nil)
     %w[name category price quantity created_at updated_at]
   end

@@ -2,6 +2,8 @@ class Sale < ApplicationRecord
   belongs_to :product
   belongs_to :user
 
+  validates :user, presence: true
+
   validates :quantity, presence: true, numericality: { greater_than: 0 }
   validate :quantity_in_stock
 
