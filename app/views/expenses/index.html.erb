@@ -36,7 +36,7 @@
             <td><%= link_to expense.name, expense %></td>
           
 
-                      <td><%= expense.amount %></td>
+                      <td><%= number_to_currency(expense.amount, unit: "RWF ", precision: 0) %></td>
                       <td><%= expense.category %></td>
                       <td><%= expense.date %></td>
                       <td><%= expense.user.name %></td>

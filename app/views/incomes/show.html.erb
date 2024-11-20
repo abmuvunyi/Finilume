@@ -12,7 +12,7 @@
   <dt>Name:</dt>
   <dd><%= @income.name %></dd>
   <dt>Amount:</dt>
-  <dd><%= @income.amount %></dd>
+  <dd><%= number_to_currency(@income.amount, unit: "RWF ", precision: 0) %></dd>
   <dt>Category:</dt>
   <dd><%= @income.category %></dd>
   <dt>Date:</dt>

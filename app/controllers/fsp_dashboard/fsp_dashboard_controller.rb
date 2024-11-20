@@ -4,7 +4,7 @@ module FspDashboard
     before_action :check_approval, only: [:view_business]
 
     def index
-      @users = User.where.not(business_name: [nil, ''])
+      @users = User.where.not(phone_number: [nil, ''])
       @data_access_requests = DataAccessRequest.where(fsp_user: current_fsp_user)
       
     end
