@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html class="h-100">
   <head>
-  
     <%= render 'shared/head' %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body class="d-flex flex-column h-100">
