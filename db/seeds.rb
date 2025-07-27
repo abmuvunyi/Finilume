@@ -10,7 +10,19 @@
 
 
 # Clear existing data to avoid duplicates
-User.create!(first_name:"example",email: "admin@example.com",password:"123456",password_confirmation:"123456",admin:true)
+# User.create!(first_name: "ab", email: "admin@finilume.com", password: "123456", password_confirmation: "123456", admin: true)
+
+# Create admin user if it doesn't exist
+User.where(email: 'admin@finilume.com').first_or_create!(
+  first_name: "Abdallah",
+  last_name: "Admin",
+  phone_number: "0788998899",
+  business_category: "Administration",
+  password: "123456",
+  password_confirmation: "123456",
+  admin: true
+)
+
 
 # Create one sample user with business information
 user = User.create!(
@@ -28,7 +40,7 @@ user = User.create!(
 5.times do |i|
   Product.create!(
     name: "Product#{i + 1}",
-    category: ["Electronics", "Clothing", "Food", "Furniture", "Books"].sample,
+    category: [ "Electronics", "Clothing", "Food", "Furniture", "Books" ].sample,
     price: rand(10..100),  # Random price between 10 and 100
     quantity: rand(5..50),  # Random quantity between 5 and 50
     user: user
@@ -57,7 +69,7 @@ end
   Income.create!(
     name: "Income Source #{i + 1}", # Changed 'source' to 'name'
     amount: rand(1000..5000),  # Random income between 1000 and 5000
-    category: ["Sales", "Service", "Other"].sample, # Added category since the schema has it
+    category: [ "Sales", "Service", "Other" ].sample, # Added category since the schema has it
     date: Date.today - rand(1..30).days,
     user: user
   )
@@ -67,7 +79,7 @@ end
 3.times do |i|
   Expense.create!(
     name: "Income Source #{i + 1}",
-    category: ["Utilities", "Rent", "Supplies"].sample,
+    category: [ "Utilities", "Rent", "Supplies" ].sample,
     amount: rand(500..3000),  # Random expense between 500 and 3000
     date: Date.today - rand(1..30).days,
     user: user

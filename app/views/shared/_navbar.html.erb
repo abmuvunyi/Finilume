@@ -1,97 +1,89 @@
 <% if current_user && defined?(true_user) && current_user != true_user %>
   <div class="alert alert-warning text-center">
     You're logged in as <b><%= current_user.name %> (<%= current_user.email %>)</b>
-    <%= link_to stop_impersonating_madmin_impersonates_path, method: :post do %><%= icon("fas", "times") %> Logout <% end %>
+    <%= link_to stop_impersonating_madmin_impersonates_path, method: :post do %>
+      <%= icon("fas", "times") %> Logout
+    <% end %>
   </div>
 <% end %>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-  <div class="container mx-auto">
+  <div class="container">
     <%= link_to Rails.configuration.application_name, root_path, class: "navbar-brand" %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarMain">
-      <ul class="navbar-nav me-auto mt-2 mt-md-0">
+      <ul class="navbar-nav me-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to "Products", products_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Sales", sales_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Income", incomes_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Expenses", expenses_path, class: "nav-link" %></li>
+        <% end %>
       </ul>
 
-      <ul class="navbar-nav">
-
-<ul class="navbar-nav">
-  <% if user_signed_in? || fsp_user_signed_in? %>
-
-    <li class="nav-item">
-      <%= link_to notifications_path, class: "nav-link" do %>
-        <span><i class="far fa-bell" aria-hidden="true"></i></span>
-      <% end %>
-    </li>
-
-    <li class="nav-item dropdown">
-      <%= link_to "#", id: "navbar-dropdown", class: "nav-link dropdown-toggle", data: { target: "nav-account-dropdown", bs_toggle: "dropdown" }, aria: { haspopup: true, expanded: false } do %>
-        <% if user_signed_in? %>
-         
-        <% elsif fsp_user_signed_in? %>
-       
-        <% end %>
-      <% end %>
-      
-      <div id="nav-account-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown">
-        <% if user_signed_in? %>
-          <%= link_to edit_user_registration_path, class: "dropdown-item", style: "color: #317140;" do %>
-            <i class="fas fa-cog me-2"></i> Settings
-          <% end %>
-          <%= link_to  authenticated_root_path, class: "dropdown-item", style: "color: #317140;" do %>
-            <i class="fas fa-home me-2"></i> Dashboard
-          <% end %>
-          <%= link_to products_path, class: "dropdown-item", style: "color: #317140;" do %>
-             <i class="fas fa-plus me-2"></i> Products
-          <% end %>
-
-          <%= link_to sales_path, class: "dropdown-item", style: "color: #317140;" do %>
-            <i class="fas fa-plus me-2"></i> Sales
-          <% end %>
-
-          <%= link_to incomes_path, class: "dropdown-item", style: "color: #317140;" do %>
-            <i class="fas fa-plus me-2"></i> Income
-          <% end %>
-
-          <%= link_to expenses_path, class: "dropdown-item", style: "color: #317140;" do %>
-            <i class="fas fa-plus me-2"></i> Expenses
-          <% end %>
-
-          <% if current_user.admin? && respond_to?(:madmin_root_path) %>
-            <div class="dropdown-divider"></div>
-            <%= link_to  madmin_root_path, class: "dropdown-item", style: "color: #317140;" do %>
-              <i class="fas fa-user-shield me-2"></i> Admin Area
+      <ul class="navbar-nav ms-auto">
+        <% if user_signed_in? || fsp_user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to notifications_path, class: "nav-link" do %>
+              <i class="far fa-bell"></i>
             <% end %>
+          </li>
 
-            <%= link_to  admin_data_access_requests_path, class: "dropdown-item", style: "color: #317140;" do %>
-              <i class="fas fa-database me-2"></i> Data Access Requests
-            <% end %>  
-          <% end %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-circle"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+                    <i class="fas fa-cog me-2"></i> Settings
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to authenticated_root_path, class: "dropdown-item" do %>
+                    <i class="fas fa-home me-2"></i> Dashboard
+                  <% end %>
+                </li>
 
-        <% elsif fsp_user_signed_in? %>
-          <%= link_to authenticated_fsp_root_path, class: "dropdown-item", style: "color: #317140;" do %>
-            <i class="fas fa-home me-2"></i> Dashboard
-          <% end %>
+                <% if current_user.admin? && respond_to?(:madmin_root_path) %>
+                  <li>
+                    <%= link_to madmin_root_path, class: "dropdown-item" do %>
+                      <i class="fas fa-user-shield me-2"></i> Admin Area
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to admin_data_access_requests_path, class: "dropdown-item" do %>
+                      <i class="fas fa-database me-2"></i> Data Access Requests
+                    <% end %>
+                  </li>
+                <% end %>
+              <% elsif fsp_user_signed_in? %>
+                <li>
+                  <%= link_to authenticated_fsp_root_path, class: "dropdown-item" do %>
+                    <i class="fas fa-home me-2"></i> Dashboard
+                  <% end %>
+                </li>
+              <% end %>
 
+              <li><hr class="dropdown-divider"></li>
+
+              <li>
+                <%= button_to (fsp_user_signed_in? ? destroy_fsp_user_session_path : destroy_user_session_path), method: :delete, class: "dropdown-item text-danger" do %>
+                  <i class="fas fa-sign-out-alt me-2"></i> Logout
+                <% end %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
         <% end %>
-
-        <div class="dropdown-divider"></div>
-        <%= button_to "Logout", (fsp_user_signed_in? ? destroy_fsp_user_session_path : destroy_user_session_path), method: :delete, class: "dropdown-item", style: "color: #317140;" %>
-      </div>
-    </li>
-
-  <% else %>
-    <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %></li>
-    <li class="nav-item"><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
-  <% end %>
-</ul>
-
-
-      
+      </ul>
     </div>
   </div>
 </nav>
