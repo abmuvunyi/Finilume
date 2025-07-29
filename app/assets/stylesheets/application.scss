@@ -1,10 +1,12 @@
 // app/assets/stylesheets/application.scss
 
-@import "bootstrap";
-@import "bootstrap/scss/bootstrap";
-@import "bootstrap-icons"; // Optional: for Bootstrap icons
-@import "bootstrap-utilities"; // Optional: for Bootstrap utilities
-@import "bootstrap-variables"; // Optional: for Bootstrap variables
-@import "bootstrap-mixins"; // Optional: for Bootstrap mixins
-@import "custom"; // Optional: for your own styles
-@import "font-awesome"; // Optional: for Font Awesome icons
+@use "bootstrap/scss/bootstrap" as *;
+
+// @import "bootstrap";
+// @import "bootstrap/scss/bootstrap";
+// @import "bootstrap-icons"; // Optional: for Bootstrap icons
+// @import "bootstrap-utilities"; // Optional: for Bootstrap utilities
+// @import "bootstrap-variables"; // Optional: for Bootstrap variables
+// @import "bootstrap-mixins"; // Optional: for Bootstrap mixins
+// @import "custom"; // Optional: for your own styles
+// @import "font-awesome"; // Optional: for Font Awesome icons
