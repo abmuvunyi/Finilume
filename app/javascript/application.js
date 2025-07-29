@@ -13,7 +13,7 @@ require("@rails/activestorage").start()
 //require("@rails/actiontext")
 require("local-time").start()
 require("@rails/ujs").start()
-import "controllers"
+import "./controllers"
 
 document.addEventListener("turbo:load", () => {
   // Enable tooltips
