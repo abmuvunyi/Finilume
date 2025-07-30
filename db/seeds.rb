@@ -1,89 +1,70 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
-
-# Clear existing data to avoid duplicates
-# User.create!(first_name: "ab", email: "admin@finilume.com", password: "123456", password_confirmation: "123456", admin: true)
+# This file ensures the existence of records required to run the application in every environment.
+# The code is idempotent to safely execute in production, development, and test environments.
+# Run with `bin/rails db:seed` or alongside `db:setup`.
 
 # Create admin user if it doesn't exist
-User.where(email: 'admin@finilume.com').first_or_create!(
-  first_name: "Abdallah",
-  last_name: "Admin",
-  phone_number: "0788998899",
-  business_category: "Administration",
-  password: "123456",
-  password_confirmation: "123456",
-  admin: true
-)
-
-
-# Create one sample user with business information
-user = User.create!(
-  first_name: "Jane",
-  last_name: "Doe",
-  email: "example@example.com",
-  password: "123456",
-  password_confirmation: "123456",
-  business_name: "John's Retail Shop",
-  business_category: "Retail",
-  phone_number: "123-456-7890"
-)
-
-# Create Products for the User
-5.times do |i|
-  Product.create!(
-    name: "Product#{i + 1}",
-    category: [ "Electronics", "Clothing", "Food", "Furniture", "Books" ].sample,
-    price: rand(10..100),  # Random price between 10 and 100
-    quantity: rand(5..50),  # Random quantity between 5 and 50
-    user: user
-  )
+User.find_or_create_by(email: 'admin@finilume.com') do |user|
+  user.first_name = "Abdallah"
+  user.last_name = "Admin"
+  user.phone_number = "0788998899"
+  user.business_category = "Administration"
+  user.password = ENV["ADMIN_PASSWORD"] || "123456"
+  user.password_confirmation = ENV["ADMIN_PASSWORD"] || "123456"
+  user.admin = true
 end
 
-# Create Sales for the User (linked to existing products)
-5.times do
-  product = user.products.sample
-  quantity_sold = rand(1..5)
+# Create sample data only in development or test environments
+if Rails.env.development? || Rails.env.test?
+  # Create one sample user with business information
+  user = User.find_or_create_by(email: 'example@example.com') do |u|
+    u.first_name = "Jane"
+    u.last_name = "Doe"
+    u.password = "123456"
+    u.password_confirmation = "123456"
+    u.business_name = "John's Retail Shop"
+    u.business_category = "Retail"
+    u.phone_number = "123-456-7890"
+  end
 
-  Sale.create!(
-    product: product,
-    quantity: quantity_sold,
-    total_price: product.price * quantity_sold,
-    user: user,
-    date: Date.today - rand(1..10).days  # Random date within the last 10 days
-  )
+  # Create Products for the User
+  5.times do |i|
+    Product.find_or_create_by(name: "Product#{i + 1}", user: user) do |product|
+      product.category = [ "Electronics", "Clothing", "Food", "Furniture", "Books" ].sample
+      product.price = rand(10..100)
+      product.quantity = rand(5..50)
+    end
+  end
 
-  # Decrease product quantity after sale
-  product.update(quantity: product.quantity - quantity_sold)
+  # Create Sales for the User (linked to existing products)
+  5.times do
+    product = user.products.sample
+    quantity_sold = [ rand(1..5), product.quantity ].min # Prevent negative quantities
+    total_price = product.price * quantity_sold
+    date = Date.today - rand(1..10).days
+
+    Sale.find_or_create_by(product: product, user: user, date: date, total_price: total_price) do |sale|
+      sale.quantity = quantity_sold
+      product.update(quantity: product.quantity - quantity_sold) unless sale.persisted? # Update only for new sales
+    end
+  end
+
+  # Create Income Records for the User
+  3.times do |i|
+    Income.find_or_create_by(name: "Income Source #{i + 1}", user: user, date: Date.today - rand(1..30).days) do |income|
+      income.amount = rand(1000..5000)
+      income.category = [ "Sales", "Service", "Other" ].sample
+    end
+  end
+
+  # Create Expense Records for the User
+  3.times do |i|
+    Expense.find_or_create_by(name: "Expense #{i + 1}", user: user, date: Date.today - rand(1..30).days) do |expense|
+      expense.category = [ "Utilities", "Rent", "Supplies" ].sample
+      expense.amount = rand(500..3000)
+    end
+  end
+
+  puts "Sample data created successfully for #{Rails.env} environment"
 end
 
-# Create Income Records for the User
-3.times do |i|
-  Income.create!(
-    name: "Income Source #{i + 1}", # Changed 'source' to 'name'
-    amount: rand(1000..5000),  # Random income between 1000 and 5000
-    category: [ "Sales", "Service", "Other" ].sample, # Added category since the schema has it
-    date: Date.today - rand(1..30).days,
-    user: user
-  )
-end
-
-# Create Expense Records for the User
-3.times do |i|
-  Expense.create!(
-    name: "Income Source #{i + 1}",
-    category: [ "Utilities", "Rent", "Supplies" ].sample,
-    amount: rand(500..3000),  # Random expense between 500 and 3000
-    date: Date.today - rand(1..30).days,
-    user: user
-  )
-end
-
-puts "seeds created successfully"
+puts "Seeds completed successfully"
