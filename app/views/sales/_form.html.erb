@@ -1,44 +1,57 @@
 <%= form_with(model: sale) do |form| %>
   <% if sale.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
-
+      <h2>
+        <%= t('errors.template.header',
+              count: sale.errors.count,
+              model: t('activerecord.models.sale')) %>
+        <%= t('errors.template.prohibited',
+              model: t('activerecord.models.sale')) %>
+      </h2>
       <ul>
-      <% sale.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% sale.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="mb-3">
-    <%= form.label :product_id, class: 'form-label' %>
-      <%= form.collection_select :product_id, @products, :id, :name, prompt: "Select a Product", class: 'form-control' %>
-    </div>
+    <%= form.label :product_id, t('activerecord.attributes.sale.product'), class: 'form-label' %>
+    <%= form.collection_select :product_id, @products, :id, :name,
+          { prompt: t('sales.form.prompts.product') },
+          { class: 'form-control' } %>
+  </div>
 
   <div class="mb-3">
-    <%= form.label :quantity, class: 'form-label' %>
-      <%= form.number_field :quantity, class: 'form-control' %>
-    </div>
+    <%= form.label :quantity, t('activerecord.attributes.sale.quantity'), class: 'form-label' %>
+    <%= form.number_field :quantity, class: 'form-control',
+          placeholder: t('sales.form.placeholders.quantity') %>
+  </div>
 
   <div class="mb-3">
-    <%= form.label :date, class: 'form-label' %>
-      <%= form.datetime_field :date, class: 'form-control' %>
-    </div>
+    <%= form.label :date, t('activerecord.attributes.sale.date'), class: 'form-label' %>
+    <%= form.datetime_field :date, class: 'form-control' %>
+  </div>
 
   <div class="mb-3">
     <% if sale.persisted? %>
       <div class="float-end">
-        <%= link_to 'Destroy', sale, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+        <%= link_to t('shared.buttons.destroy'), sale, method: :delete,
+              class: "text-danger",
+              data: { confirm: t('shared.confirmations.destroy') } %>
       </div>
     <% end %>
 
-    <%= form.submit class: 'btn btn-primary' %>
+    <%= form.submit(
+          sale.persisted? ? t('shared.buttons.update') : t('shared.buttons.save'),
+          class: 'btn btn-primary'
+        ) %>
 
     <% if sale.persisted? %>
-      <%= link_to "Cancel", sale, class: "btn btn-link" %>
+      <%= link_to t('shared.buttons.cancel'), sale, class: "btn btn-link" %>
     <% else %>
-      <%= link_to "Cancel", sales_path, class: "btn btn-link" %>
+      <%= link_to t('shared.buttons.cancel'), sales_path, class: "btn btn-link" %>
     <% end %>
   </div>
 <% end %>

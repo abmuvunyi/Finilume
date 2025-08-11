@@ -1,49 +1,32 @@
-<%= form_with(model: expense) do |form| %>
-  <% if expense.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(expense.errors.count, "error") %> prohibited this expense from being saved:</h2>
-
-      <ul>
-      <% expense.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with(model: expense) do |f| %>
+  <%= render "devise/shared/error_messages", resource: expense %>
 
   <div class="mb-3">
-    <%= form.label :name, class: 'form-label' %>
-      <%= form.text_field :name, class: 'form-control' %>
-    </div>
+    <%= f.label :name, t('activerecord.attributes.expense.name'), class: "form-label" %>
+    <%= f.text_field :name, class: "form-control",
+          placeholder: t('expenses.form.placeholders.name') %>
+  </div>
 
   <div class="mb-3">
-    <%= form.label :amount, class: 'form-label' %>
-      <%= form.text_field :amount, class: 'form-control' %>
-    </div>
+    <%= f.label :amount, t('activerecord.attributes.expense.amount'), class: "form-label" %>
+    <%= f.number_field :amount, step: "0.01", class: "form-control",
+          placeholder: t('expenses.form.placeholders.amount') %>
+  </div>
 
   <div class="mb-3">
-    <%= form.label :category, class: 'form-label' %>
-      <%= form.text_field :category, class: 'form-control' %>
-    </div>
+    <%= f.label :category, t('activerecord.attributes.expense.category'), class: "form-label" %>
+    <%= f.text_field :category, class: "form-control",
+          placeholder: t('expenses.form.placeholders.category') %>
+  </div>
 
   <div class="mb-3">
-    <%= form.label :date, class: 'form-label' %>
-      <%= form.date_field :date, class: 'form-control' %>
-    </div>
+    <%= f.label :date, t('activerecord.attributes.expense.date'), class: "form-label" %>
+    <%= f.date_field :date, class: "form-control" %>
+  </div>
 
-  <div class="mb-3">
-    <% if expense.persisted? %>
-      <div class="float-end">
-        <%= link_to 'Destroy', expense, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
-      </div>
-    <% end %>
-
-    <%= form.submit class: 'btn btn-primary' %>
-
-    <% if expense.persisted? %>
-      <%= link_to "Cancel", expense, class: "btn btn-link" %>
-    <% else %>
-      <%= link_to "Cancel", expenses_path, class: "btn btn-link" %>
-    <% end %>
+  <div class="d-flex gap-2">
+    <%= f.submit (expense.persisted? ? t('shared.buttons.update') : t('shared.buttons.save')),
+                 class: "btn btn-primary" %>
+    <%= link_to t('shared.buttons.back'), expenses_path, class: "btn btn-link" %>
   </div>
 <% end %>

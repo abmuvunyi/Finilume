@@ -1,27 +1,26 @@
 <div id="<%= dom_id product %>">
   <p>
-    <strong>Name:</strong>
+    <strong><%= t('products.fields.name') %>:</strong>
     <%= product.name %>
   </p>
 
   <p>
-    <strong>Category:</strong>
+    <strong><%= t('products.fields.category') %>:</strong>
     <%= product.category %>
   </p>
 
   <p>
-    <strong>Price:</strong>
+    <strong><%= t('products.fields.price') %>:</strong>
     <%= product.price %>
   </p>
 
   <p>
-    <strong>Quantity:</strong>
+    <strong><%= t('products.fields.quantity') %>:</strong>
     <%= product.quantity %>
   </p>
 
   <p>
-    <strong>User:</strong>
+    <strong><%= t('products.fields.user') %>:</strong>
     <%= product.user_id %>
   </p>
-
 </div>

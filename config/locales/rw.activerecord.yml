@@ -1,0 +1,21 @@
+rw:
+  activerecord:
+    models:
+      expense: "Ikiguzi"
+      income: "Inyungu"
+      sale: "Igurishwa"
+    attributes:
+      expense:
+        name: "Izina"
+        amount: "Umubare w’amafaranga"
+        category: "Icyiciro"
+        date: "Itariki"
+      income:
+        name: "Izina"
+        amount: "Umubare w’amafaranga"
+        category: "Icyiciro"
+        date: "Itariki"
+      sale:
+        product: "Igicuruzwa"
+        quantity: "Umubare"
+        date: "Itariki"

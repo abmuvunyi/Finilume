@@ -1,10 +1,40 @@
-<h1>Notifications</h1>
+<div class="container py-4">
+  <h1><%= t('notifications.index.title') %></h1>
 
-<ul>
-  <% @notifications.each do |notification| %>
-    <%# Customize your notification format here. We typically recommend a `message` and `url` method on the Notifier classes. %>
-    <%#= link_to notification.message, notification.url %>
+  <% if @notifications.blank? %>
+    <p class="text-muted"><%= t('notifications.index.empty') %></p>
+  <% else %>
+    <ul class="list-group">
+      <% @notifications.each do |notification| %>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="me-auto">
+            <%# Prefer a message/url if your Notifier defines them %>
+            <% if notification.respond_to?(:message) && notification.message.present? %>
+              <% if notification.respond_to?(:url) && notification.url.present? %>
+                <%= link_to notification.message, notification.url, class: "fw-semibold text-decoration-none" %>
+              <% else %>
+                <span class="fw-semibold"><%= notification.message %></span>
+              <% end %>
+            <% else %>
+              <span class="fw-semibold"><%= t('notifications.index.item.default_title') %></span>
+            <% end %>
 
-    <li><%= notification.params %></li>
+            <%# Show params for debugging/extra context (optional) %>
+            <% if notification.params.present? %>
+              <div class="small text-muted mt-1">
+                <%= t('notifications.index.item.params') %>:
+                <code><%= notification.params.to_json %></code>
+              </div>
+            <% end %>
+          </div>
+
+          <% if notification.created_at %>
+            <span class="badge bg-secondary rounded-pill">
+              <%= l(notification.created_at, format: :short) %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
-</ul>
+</div>

@@ -1,13 +1,13 @@
-<h1>Business Dashboard</h1>
+<h1><%= t('dashboard.title') %></h1>
 
 <div class="container">
   <div class="row">
     <!-- Total Revenue Card -->
     <div class="col-md-4">
       <div class="card text-white bg-primary mb-3">
-        <div class="card-header">Total Revenue</div>
+        <div class="card-header"><%= t('dashboard.cards.total_revenue') %></div>
         <div class="card-body">
-          <h5 class="card-title"><%= number_to_currency(@total_revenue, unit: "RWF ", precision: 0) %></h5>
+          <h5 class="card-title"><%= number_to_currency(@total_revenue, unit: t('currency.unit'), precision: 0) %></h5>
         </div>
       </div>
     </div>
@@ -15,9 +15,9 @@
     <!-- Total Expenses Card -->
     <div class="col-md-4">
       <div class="card text-white bg-warning mb-3">
-        <div class="card-header">Total Expenses</div>
+        <div class="card-header"><%= t('dashboard.cards.total_expenses') %></div>
         <div class="card-body">
-          <h5 class="card-title"><%= number_to_currency(@total_expenses, unit: "RWF ", precision: 0) %></h5>
+          <h5 class="card-title"><%= number_to_currency(@total_expenses, unit: t('currency.unit'), precision: 0) %></h5>
         </div>
       </div>
     </div>
@@ -25,9 +25,9 @@
     <!-- Total Income Card -->
     <div class="col-md-4">
       <div class="card text-white bg-info mb-3">
-        <div class="card-header">Total Income</div>
+        <div class="card-header"><%= t('dashboard.cards.total_income') %></div>
         <div class="card-body">
-          <h5 class="card-title"><%= number_to_currency(@total_income, unit: "RWF ", precision: 0) %></h5>
+          <h5 class="card-title"><%= number_to_currency(@total_income, unit: t('currency.unit'), precision: 0) %></h5>
         </div>
       </div>
     </div>
@@ -37,9 +37,9 @@
     <!-- Net Profit Card -->
     <div class="col-md-4">
       <div class="card text-white bg-success mb-3">
-        <div class="card-header">Net Profit</div>
+        <div class="card-header"><%= t('dashboard.cards.net_profit') %></div>
         <div class="card-body">
-          <h5 class="card-title"><%= number_to_currency(@net_profit, unit: "RWF ", precision: 0) %></h5>
+          <h5 class="card-title"><%= number_to_currency(@net_profit, unit: t('currency.unit'), precision: 0) %></h5>
         </div>
       </div>
     </div>
@@ -47,14 +47,18 @@
     <!-- Low Stock Products Card -->
     <div class="col-md-4">
       <div class="card text-white bg-danger mb-3">
-        <div class="card-header">Low Stock Products</div>
+        <div class="card-header"><%= t('dashboard.cards.low_stock_products') %></div>
         <div class="card-body">
           <% if @low_stock_products.any? %>
             <% @low_stock_products.each do |product| %>
-              <p><%= product.name %> - Stock left: <%= product.quantity %></p>
+              <p>
+                <%= product.name %> —
+                <%= t('dashboard.labels.stock_left') %>:
+                <%= product.quantity %>
+              </p>
             <% end %>
           <% else %>
-            <p>All products are adequately stocked.</p>
+            <p><%= t('dashboard.messages.all_stock_ok') %></p>
           <% end %>
         </div>
       </div>
@@ -63,57 +67,55 @@
     <!-- Top-Selling Products Card -->
     <div class="col-md-4">
       <div class="card text-white bg-secondary mb-3">
-        <div class="card-header">Top-Selling Products</div>
+        <div class="card-header"><%= t('dashboard.cards.top_selling_products') %></div>
         <div class="card-body">
           <% if @top_selling_products.any? %>
             <% @top_selling_products.each do |product| %>
-              <p><%= product.name %> - Sold: <%= product.total_sold %></p>
+              <p>
+                <%= product.name %> —
+                <%= t('dashboard.labels.sold') %>:
+                <%= product.total_sold %>
+              </p>
             <% end %>
           <% else %>
-            <p>No top-selling products available.</p>
+            <p><%= t('dashboard.messages.no_top_selling') %></p>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 
-
-
-<div class="container">
+  <!-- Download PDF -->
   <div class="row">
-    <!-- Total Revenue, Total Expenses, etc. (Existing Cards) -->
-
-    <!-- Button to Download PDF -->
     <div class="col-md-12 mt-4">
-      <%= link_to "Download Business Report as PDF", download_pdf_path, class: "btn btn-primary" %>
+      <%= link_to t('dashboard.download_pdf'), download_pdf_path, class: "btn btn-primary" %>
     </div>
   </div>
-</div>
 
-<div class="container">
+  <!-- Products List -->
   <div class="row">
-    <!-- Existing Summary Cards for Revenue, Expenses, etc. -->
-
-    <!-- Products List with Search -->
     <div class="col-md-12 mt-4">
-      <h2>Products List</h2>
+      <h2><%= t('dashboard.tables.products.title') %></h2>
       <%= search_form_for @q_products, url: authenticated_root_path, method: :get do |f| %>
         <div class="form-group row">
           <div class="col-md-10">
-            <%= f.search_field :name_cont, placeholder: "Search Products by Name", class: "form-control" %>
+            <%= f.search_field :name_cont,
+              placeholder: t('dashboard.tables.products.search_placeholder'),
+              class: "form-control" %>
           </div>
           <div class="col-md-2">
-            <%= f.submit "Search", class: "btn btn-primary" %>
+            <%= f.submit t('shared.buttons.search', default: 'Search'), class: "btn btn-primary" %>
           </div>
         </div>
       <% end %>
+
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Quantity</th>
+            <th><%= t('dashboard.tables.products.columns.name') %></th>
+            <th><%= t('dashboard.tables.products.columns.category') %></th>
+            <th><%= t('dashboard.tables.products.columns.price') %></th>
+            <th><%= t('dashboard.tables.products.columns.quantity') %></th>
           </tr>
         </thead>
         <tbody>
@@ -121,7 +123,7 @@
             <tr>
               <td><%= product.name %></td>
               <td><%= product.category %></td>
-              <td>RWF <%= product.price %></td>
+              <td><%= t('currency.unit') %> <%= product.price %></td>
               <td><%= product.quantity %></td>
             </tr>
           <% end %>
@@ -129,26 +131,29 @@
       </table>
     </div>
 
-    <!-- Sales List with Search -->
+    <!-- Sales List -->
     <div class="col-md-12 mt-4">
-      <h2>Sales List</h2>
+      <h2><%= t('dashboard.tables.sales.title') %></h2>
       <%= search_form_for @q_sales, url: authenticated_root_path, method: :get do |f| %>
         <div class="form-group row">
           <div class="col-md-10">
-            <%= f.search_field :product_name_cont, placeholder: "Search Sales by Product Name", class: "form-control" %>
+            <%= f.search_field :product_name_cont,
+              placeholder: t('dashboard.tables.sales.search_placeholder'),
+              class: "form-control" %>
           </div>
           <div class="col-md-2">
-            <%= f.submit "Search", class: "btn btn-primary" %>
+            <%= f.submit t('shared.buttons.search', default: 'Search'), class: "btn btn-primary" %>
           </div>
         </div>
       <% end %>
+
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Total Price</th>
-            <th>Date</th>
+            <th><%= t('dashboard.tables.sales.columns.product') %></th>
+            <th><%= t('dashboard.tables.sales.columns.quantity') %></th>
+            <th><%= t('dashboard.tables.sales.columns.total_price') %></th>
+            <th><%= t('dashboard.tables.sales.columns.date') %></th>
           </tr>
         </thead>
         <tbody>
@@ -156,34 +161,37 @@
             <tr>
               <td><%= sale.product.name %></td>
               <td><%= sale.quantity %></td>
-              <td>RWF <%= sale.total_price %></td>
-              <td><%= sale.date.strftime("%Y-%m-%d") %></td>
+              <td><%= t('currency.unit') %> <%= sale.total_price %></td>
+              <td><%= l(sale.date, format: :ymd) %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
 
-    <!-- Income List with Search -->
+    <!-- Income List -->
     <div class="col-md-12 mt-4">
-      <h2>Income List</h2>
+      <h2><%= t('dashboard.tables.incomes.title') %></h2>
       <%= search_form_for @q_incomes, url: authenticated_root_path, method: :get do |f| %>
         <div class="form-group row">
           <div class="col-md-10">
-            <%= f.search_field :name_cont, placeholder: "Search Income by Name", class: "form-control" %>
+            <%= f.search_field :name_cont,
+              placeholder: t('dashboard.tables.incomes.search_placeholder'),
+              class: "form-control" %>
           </div>
           <div class="col-md-2">
-            <%= f.submit "Search", class: "btn btn-primary" %>
+            <%= f.submit t('shared.buttons.search', default: 'Search'), class: "btn btn-primary" %>
           </div>
         </div>
       <% end %>
+
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Date</th>
+            <th><%= t('dashboard.tables.incomes.columns.name') %></th>
+            <th><%= t('dashboard.tables.incomes.columns.category') %></th>
+            <th><%= t('dashboard.tables.incomes.columns.amount') %></th>
+            <th><%= t('dashboard.tables.incomes.columns.date') %></th>
           </tr>
         </thead>
         <tbody>
@@ -191,34 +199,37 @@
             <tr>
               <td><%= income.name %></td>
               <td><%= income.category %></td>
-              <td>RWF <%= income.amount %></td>
-              <td><%= income.date.strftime("%Y-%m-%d") %></td>
+              <td><%= t('currency.unit') %> <%= income.amount %></td>
+              <td><%= l(income.date, format: :ymd) %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
 
-    <!-- Expenses List with Search -->
+    <!-- Expenses List -->
     <div class="col-md-12 mt-4">
-      <h2>Expenses List</h2>
+      <h2><%= t('dashboard.tables.expenses.title') %></h2>
       <%= search_form_for @q_expenses, url: authenticated_root_path, method: :get do |f| %>
         <div class="form-group row">
           <div class="col-md-10">
-            <%= f.search_field :name_cont, placeholder: "Search Expenses by Name", class: "form-control" %>
+            <%= f.search_field :name_cont,
+              placeholder: t('dashboard.tables.expenses.search_placeholder'),
+              class: "form-control" %>
           </div>
           <div class="col-md-2">
-            <%= f.submit "Search", class: "btn btn-primary" %>
+            <%= f.submit t('shared.buttons.search', default: 'Search'), class: "btn btn-primary" %>
           </div>
         </div>
       <% end %>
+
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Date</th>
+            <th><%= t('dashboard.tables.expenses.columns.name') %></th>
+            <th><%= t('dashboard.tables.expenses.columns.category') %></th>
+            <th><%= t('dashboard.tables.expenses.columns.amount') %></th>
+            <th><%= t('dashboard.tables.expenses.columns.date') %></th>
           </tr>
         </thead>
         <tbody>
@@ -226,8 +237,8 @@
             <tr>
               <td><%= expense.name %></td>
               <td><%= expense.category %></td>
-              <td>RWF <%= expense.amount %></td>
-              <td><%= expense.date.strftime("%Y-%m-%d") %></td>
+              <td><%= t('currency.unit') %> <%= expense.amount %></td>
+              <td><%= l(expense.date, format: :ymd) %></td>
             </tr>
           <% end %>
         </tbody>
@@ -235,4 +246,3 @@
     </div>
   </div>
 </div>
-

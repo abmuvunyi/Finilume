@@ -1,22 +1,22 @@
 <div class="page-header">
-  <%= link_to sales_path, class: 'btn btn-default' do %>
-    All Sales
-  <% end %>
-  <%= link_to edit_sale_path(@sale), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show sale</h1>
+  <%= link_to t('sales.show.all_sales'), sales_path, class: 'btn btn-default' %>
+  <%= link_to t('sales.show.edit'), edit_sale_path(@sale), class: 'btn btn-primary' %>
+  <h1><%= t('sales.show.title') %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Product:</dt>
-  <dd><%= @sale.product.name %></dd>
-  <dt>Quantity:</dt>
+  <dt><%= t('sales.show.product') %>:</dt>
+  <dd><%= @sale.product&.name %></dd>
+
+  <dt><%= t('sales.show.quantity') %>:</dt>
   <dd><%= @sale.quantity %></dd>
-  <dt>Total price:</dt>
-  <dd><%= number_to_currency(@sale.total_price, unit: "RWF ", precision: 0) %></dd>
-  <dt>User:</dt>
-  <dd><%= @sale.user.name %></dd>
-  <dt>Date:</dt>
-  <dd><%= @sale.date %></dd>
+
+  <dt><%= t('sales.show.total_price') %>:</dt>
+  <dd><%= number_to_currency(@sale.total_price, unit: t('currency.unit'), precision: 0) %></dd>
+
+  <dt><%= t('sales.show.user') %>:</dt>
+  <dd><%= @sale.user&.name %></dd>
+
+  <dt><%= t('sales.show.date') %>:</dt>
+  <dd><%= l(@sale.date, format: :ymd) %></dd>
 </dl>

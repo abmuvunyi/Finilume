@@ -1,31 +1,42 @@
-<h1>Financial Service Provider Dashboard</h1>
-<h2>Registered Users with Business Information</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>User Name</th>
-      <th>Business Category</th>
-      <th>Contact</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.first_name %> <%= user.last_name %></td>
-      <td><%= user.business_category %></td>
-      <td><%= user.phone_number %></td>
-      <td>
-        <% data_request = @data_access_requests[user.id] %>
-        <% if data_request&.pending? %>
-          Request Pending Approval
-        <% elsif data_request&.approved? %>
-          <%= link_to 'View Business Dashboard', fsp_dashboard_view_business_path(user), class: 'btn btn-primary' %>
-        <% else %>
-          <%= button_to 'Request Data Access', url_for(controller: 'fsp_dashboard/fsp_dashboard', action: 'request_data_access', id: user.id), method: :post, class: 'btn btn-warning' %>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>  
-  </tbody>
-</table>
+<div class="container py-4">
+  <h1><%= t('fsp.index.title') %></h1>
+  <h2 class="h5 text-muted mb-3"><%= t('fsp.index.subtitle') %></h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= t('fsp.index.table.user_name') %></th>
+        <th><%= t('fsp.index.table.business_category') %></th>
+        <th><%= t('fsp.index.table.contact') %></th>
+        <th><%= t('fsp.index.table.actions') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr id="<%= dom_id(user) %>">
+          <td><%= [user.first_name, user.last_name].compact.join(' ') %></td>
+          <td><%= user.business_category %></td>
+          <td><%= user.phone_number %></td>
+          <td>
+            <% data_request = @data_access_requests[user.id] %>
+
+            <% if data_request&.pending? %>
+              <span class="badge bg-warning text-dark"><%= t('fsp.index.status.pending') %></span>
+            <% elsif data_request&.approved? %>
+              <%= link_to t('fsp.index.actions.view_dashboard'),
+                          fsp_dashboard_view_business_path(user),
+                          class: 'btn btn-primary btn-sm' %>
+            <% else %>
+              <%= button_to t('fsp.index.actions.request_access'),
+                            url_for(controller: 'fsp_dashboard/fsp_dashboard',
+                                    action: 'request_data_access',
+                                    id: user.id),
+                            method: :post,
+                            class: 'btn btn-warning btn-sm' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

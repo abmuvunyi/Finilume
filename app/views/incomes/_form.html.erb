@@ -1,49 +1,63 @@
 <%= form_with(model: income) do |form| %>
   <% if income.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(income.errors.count, "error") %> prohibited this income from being saved:</h2>
+      <h2>
+        <%= t('errors.template.header',
+              count: income.errors.count,
+              model: t('activerecord.models.income')) %>
+        <%= t('errors.template.prohibited',
+              model: t('activerecord.models.income')) %>
+      </h2>
 
       <ul>
-      <% income.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% income.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="mb-3">
-    <%= form.label :name, class: 'form-label' %>
-      <%= form.text_field :name, class: 'form-control' %>
-    </div>
+    <%= form.label :name, t('activerecord.attributes.income.name'), class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control',
+          placeholder: t('incomes.form.placeholders.name') %>
+  </div>
 
   <div class="mb-3">
-    <%= form.label :amount, class: 'form-label' %>
-      <%= form.text_field :amount, class: 'form-control' %>
-    </div>
+    <%= form.label :amount, t('activerecord.attributes.income.amount'), class: 'form-label' %>
+    <%= form.text_field :amount, class: 'form-control',
+          placeholder: t('incomes.form.placeholders.amount') %>
+  </div>
 
   <div class="mb-3">
-    <%= form.label :category, class: 'form-label' %>
-      <%= form.text_field :category, class: 'form-control' %>
-    </div>
+    <%= form.label :category, t('activerecord.attributes.income.category'), class: 'form-label' %>
+    <%= form.text_field :category, class: 'form-control',
+          placeholder: t('incomes.form.placeholders.category') %>
+  </div>
 
   <div class="mb-3">
-    <%= form.label :date, class: 'form-label' %>
-      <%= form.date_field :date, class: 'form-control' %>
-    </div>
+    <%= form.label :date, t('activerecord.attributes.income.date'), class: 'form-label' %>
+    <%= form.date_field :date, class: 'form-control' %>
+  </div>
 
   <div class="mb-3">
     <% if income.persisted? %>
       <div class="float-end">
-        <%= link_to 'Destroy', income, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+        <%= link_to t('shared.buttons.destroy'), income, method: :delete,
+              class: "text-danger",
+              data: { confirm: t('shared.confirmations.destroy') } %>
       </div>
     <% end %>
 
-    <%= form.submit class: 'btn btn-primary' %>
+    <%= form.submit(
+          income.persisted? ? t('shared.buttons.update') : t('shared.buttons.save'),
+          class: 'btn btn-primary'
+        ) %>
 
     <% if income.persisted? %>
-      <%= link_to "Cancel", income, class: "btn btn-link" %>
+      <%= link_to t('shared.buttons.cancel'), income, class: "btn btn-link" %>
     <% else %>
-      <%= link_to "Cancel", incomes_path, class: "btn btn-link" %>
+      <%= link_to t('shared.buttons.cancel'), incomes_path, class: "btn btn-link" %>
     <% end %>
   </div>
 <% end %>

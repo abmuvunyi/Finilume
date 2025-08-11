@@ -1,31 +1,426 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
+---
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      income: Income
+      sale: Sale
+  admin:
+    data_access_requests:
+      index:
+        actions: Actions
+        approve: Approve
+        empty: No requests found.
+        reject: Reject
+        requester: Requester
+        status: Status
+        title: Data Access Requests
+        user: User
+  announcements:
+    date:
+      formats:
+        short: "%b %d"
+    index:
+      empty: Exciting stuff coming very soon!
+      title: What's New
+    types:
+      alert: Alert
+      info: Info
+      update: Update
+  are_you_sure: Are you sure?
+  currency:
+    unit: 'RWF '
+  dashboard:
+    cards:
+      low_stock: Low Stock Products
+      low_stock_products: Low Stock Products
+      net_profit: Net Profit
+      top_selling: Top-Selling Products
+      top_selling_products: Top-Selling Products
+      total_expenses: Total Expenses
+      total_income: Total Income
+      total_revenue: Total Revenue
+    download_pdf: Download Business Report as PDF
+    labels:
+      sold: Sold
+      stock_left: Stock left
+    messages:
+      all_stock_ok: All products are adequately stocked.
+      no_top_selling: No top-selling products available.
+    tables:
+      expenses:
+        columns:
+          amount: Amount
+          category: Category
+          date: Date
+          name: Name
+        search_placeholder: Search Expenses by Name
+        title: Expenses List
+      incomes:
+        columns:
+          amount: Amount
+          category: Category
+          date: Date
+          name: Name
+        search_placeholder: Search Income by Name
+        title: Income List
+      products:
+        columns:
+          category: Category
+          name: Name
+          price: Price
+          quantity: Quantity
+        search_placeholder: Search Products by Name
+        title: Products List
+      sales:
+        columns:
+          date: Date
+          product: Product
+          quantity: Quantity
+          total_price: Total Price
+        search_placeholder: Search Sales by Product Name
+        title: Sales List
+    title: Business Dashboard
+  date:
+    formats:
+      ymd: "%Y-%m-%d"
+  errors:
+    template:
+      header:
+        one: 1 error prevented this %{model} from being saved
+        other: "%{count} errors prevented this %{model} from being saved"
+      prohibited: 'prohibited this %{model} from being saved:'
+  expenses:
+    edit:
+      title: Edit Expense
+    form:
+      placeholders:
+        amount: e.g., 50000
+        category: e.g., Utilities
+        name: e.g., Office rent
+    index:
+      add_new: Add New Expense
+      columns:
+        amount: Amount
+        category: Category
+        date: Date
+        name: Name
+        user: User
+      title: Expenses
+    new:
+      title: New Expense
+    show:
+      amount: Amount
+      back_to_all: All Expenses
+      category: Category
+      date: Date
+      edit: Edit
+      name: Name
+      title: Expense Details
+      user: User
+  fsp:
+    index:
+      actions:
+        request_access: Request Data Access
+        view_dashboard: View Business Dashboard
+      status:
+        pending: Request Pending Approval
+      subtitle: Registered Users with Business Information
+      table:
+        actions: Actions
+        business_category: Business Category
+        contact: Contact
+        user_name: User Name
+      title: Financial Service Provider Dashboard
+    view:
+      title: Business Dashboard for %{name}
+  fsp_devise:
+    confirmations:
+      new:
+        email_label: Email
+        submit: Resend confirmation instructions
+        title: Resend confirmation instructions
+    mailer:
+      confirmation_instructions:
+        confirm_link: Confirm my account
+        greeting: Welcome %{email}!
+        instructions: 'You can confirm your account email through the link below:'
+      email_changed:
+        greeting: Hello %{email}!
+        notify_changed: We're contacting you to notify you that your email has been
+          changed to %{email}.
+        notify_unconfirmed: We're contacting you to notify you that your email is
+          being changed to %{unconfirmed_email}.
+      password_change:
+        greeting: Hello %{email}!
+        notify: We're contacting you to notify you that your password has been changed.
+      reset_password_instructions:
+        change_link: Change my password
+        greeting: Hello %{email}!
+        ignore_notice: If you didn't request this, please ignore this email.
+        instructions: Someone has requested a link to change your password. You can
+          do this through the link below.
+        warning: Your password won't change until you access the link above and create
+          a new one.
+      unlock_instructions:
+        greeting: Hello %{email}!
+        locked_notice: Your account has been locked due to an excessive number of
+          unsuccessful sign in attempts.
+        unlock_link_text: Unlock my account
+    passwords:
+      edit:
+        confirm_password_label: Confirm new password
+        new_password_label: New password
+        new_password_min_length: "(%{count} characters minimum)"
+        submit: Change my password
+        title: Change your password
+      new:
+        email_label: Email
+        submit: Send me reset password instructions
+        title: Forgot your password?
+    registrations:
+      edit:
+        back_link: Back
+        cancel_account_button: Cancel my account
+        cancel_account_prompt: Unhappy?
+        cancel_account_title: Cancel my account
+        confirm_prompt: Are you sure?
+        current_password_hint: "(we need your current password to confirm your changes)"
+        current_password_label: Current password
+        email_label: Email
+        password_confirmation_label: Confirm new password
+        password_hint: "(leave blank if you don't want to change it)"
+        password_label: Password
+        password_min_length: "%{count} characters minimum"
+        reconfirmation_notice: 'Currently waiting confirmation for: %{unconfirmed_email}'
+        submit: Update
+        title: Edit account
+      new:
+        email_placeholder: Email Address
+        password_confirmation_placeholder: Confirm Password
+        password_placeholder: Password
+        submit: Sign up
+        title: Sign Up
+    sessions:
+      new:
+        email_placeholder: Email Address
+        password_placeholder: Password
+        remember_me: Remember me
+        submit: Log in
+        title: Log in
+    shared:
+      links:
+        did_not_receive_confirmation: Didn't receive confirmation instructions?
+        did_not_receive_unlock: Didn't receive unlock instructions?
+        forgot_password: Forgot your password?
+        log_in: Log in
+        sign_in_with: Sign in with %{provider}
+        sign_up: Sign up
+  home:
+    index:
+      cta:
+        button: Sign Up Now
+        subtitle: Join thousands of others in improving their financial future with
+          FinReach.
+        title: Ready to Take Control of Your Finances?
+      features:
+        cards:
+          insights:
+            body: Analyze your financial data and uncover valuable insights for better
+              decision-making.
+            title: Gain Insights
+          manage:
+            body: Track your income, expenses, and savings effortlessly with our intuitive
+              dashboard.
+            title: Manage Your Finances
+          services:
+            body: Easily connect with trusted financial service providers to help
+              manage your finances.
+            title: Access Financial Services
+        subtitle: Empowering your financial journey with our cutting-edge solutions.
+        title: Our Features
+      hero:
+        cta: Get Started
+        subtitle: Simplify your financial management with our innovative tools and
+          actionable insights designed to help you thrive.
+        title: Welcome to FinReach
+      how_it_works:
+        steps:
+          step1:
+            body: Join FinReach to begin your financial journey.
+            title: 'Step 1: Sign Up'
+          step2:
+            body: Input your income, expenses, and set financial goals to start tracking.
+            title: 'Step 2: Add Your Data'
+          step3:
+            body: Access visual financial insights and take control of your growth.
+            title: 'Step 3: Gain Insights'
+        subtitle: Three simple steps to take control of your financial journey.
+        title: How It Works
+      testimonials:
+        items:
+          jane:
+            author: Jane Smith, Freelancer
+            quote: The insights and financial tools from FinReach helped me save smarter
+              and invest better.
+          john:
+            author: John Doe, Small Business Owner
+            quote: FinReach transformed how I manage my money, providing the tools
+              I need to succeed!
+        subtitle: See why people trust FinReach with their finances.
+        title: What Our Customers Say
+  incomes:
+    edit:
+      title: Edit Income
+    form:
+      placeholders:
+        amount: e.g., 150000
+        category: e.g., Consulting
+        name: e.g., Service payment
+    index:
+      add_new: Add New Income
+      columns:
+        amount: Amount
+        category: Category
+        date: Date
+        name: Name
+        user: User
+      title: Income
+    new:
+      title: New Income
+    show:
+      amount: Amount
+      back_to_all: All Income
+      category: Category
+      date: Date
+      edit: Edit
+      name: Name
+      title: Income Details
+      user: User
+  meta:
+    description: Track products, sales, income and expenses. Analyze trends and grow
+      with clear, actionable insights.
+    title: "%{app} — Simple finance for growing businesses"
+  notifications:
+    index:
+      empty: No notifications yet.
+      item:
+        default_title: Notification
+        params: Details
+      title: Notifications
+  products:
+    edit:
+      title: Edit Product
+    fields:
+      category: Category
+      name: Name
+      price: Price
+      quantity: Quantity
+      user: User
+    form:
+      category: Category
+      destroy: Delete
+      name: Name
+      price: Price
+      quantity: Quantity
+    index:
+      add_new: Add New Product
+      columns:
+        category: Category
+        name: Name
+        price: Price
+        quantity: Quantity
+        user: User
+      title: Products
+    new:
+      title: New Product
+    show:
+      back_to_all: All Products
+      category: Category
+      edit: Edit
+      name: Name
+      price: Price
+      quantity: Quantity
+      title: Product Details
+      user: User
+    singular: product
+  sales:
+    edit:
+      title: Edit Sale
+    form:
+      placeholders:
+        quantity: e.g., 3
+      prompts:
+        product: Select a Product
+    index:
+      add_new: Add New Sale
+      columns:
+        date: Date
+        product: Product
+        quantity: Quantity
+        total_price: Total price
+        user: User
+      show: Show
+      title: Sales
+    new:
+      title: New Sale
+    show:
+      all_sales: All Sales
+      date: Date
+      edit: Edit
+      product: Product
+      quantity: Quantity
+      title: Show Sale
+      total_price: Total price
+      user: User
+  shared:
+    buttons:
+      back: Back
+      cancel: Cancel
+      delete: Delete
+      destroy: Destroy
+      save: Save
+      search: Search
+      update: Update
+    cancel: Cancel
+    confirm: Are you sure?
+    confirmations:
+      destroy: Are you sure?
+    errors:
+      prohibited_save: "%{count} error(s) prohibited this %{resource} from being saved:"
+    footer:
+      company_name: FinReach
+      facebook: Facebook
+      privacy: Privacy
+      terms: Terms
+      twitter: Twitter
+    nav:
+      admin_area: Admin Area
+      dashboard: Dashboard
+      data_access_requests: Data Access Requests
+      expenses: Expenses
+      impersonating: You're logged in as %{name} (%{email})
+      incomes: Income
+      locale:
+        current:
+          default: "🌐"
+          en: "🇺🇸"
+          rw: "🇷🇼"
+        option:
+          en: "🇺🇸 English"
+          rw: "🇷🇼 Kinyarwanda"
+      login: Login
+      logout: Logout
+      notifications: Notifications
+      products: Products
+      sales: Sales
+      settings: Settings
+      sign_up: Sign Up
+      stop_impersonating: Logout
+    notices:
+      close: Close
+    save: Save
+  time:
+    formats:
+      short: "%b %d, %Y %H:%M"
+      ymd: "%Y-%m-%d"
+  unauthorized: You are not authorized to perform this action.

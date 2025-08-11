@@ -1,22 +1,22 @@
-<div class="page-header">
-  <%= link_to incomes_path, class: 'btn btn-default' do %>
-    All Incomes
-  <% end %>
-  <%= link_to edit_income_path(@income), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show income</h1>
+<div class="page-header d-flex align-items-center gap-2 mb-3">
+  <%= link_to t('incomes.show.back_to_all'), incomes_path, class: 'btn btn-outline-secondary' %>
+  <%= link_to t('incomes.show.edit'), edit_income_path(@income), class: 'btn btn-primary' %>
+  <h1 class="ms-auto"><%= t('incomes.show.title') %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Name:</dt>
-  <dd><%= @income.name %></dd>
-  <dt>Amount:</dt>
-  <dd><%= number_to_currency(@income.amount, unit: "RWF ", precision: 0) %></dd>
-  <dt>Category:</dt>
-  <dd><%= @income.category %></dd>
-  <dt>Date:</dt>
-  <dd><%= @income.date %></dd>
-  <dt>User:</dt>
-  <dd><%= @income.user.name %></dd>
+<dl class="row">
+  <dt class="col-sm-3"><%= t('incomes.show.name') %>:</dt>
+  <dd class="col-sm-9"><%= @income.name %></dd>
+
+  <dt class="col-sm-3"><%= t('incomes.show.amount') %>:</dt>
+  <dd class="col-sm-9"><%= number_to_currency(@income.amount, unit: t('currency.unit'), precision: 0) %></dd>
+
+  <dt class="col-sm-3"><%= t('incomes.show.category') %>:</dt>
+  <dd class="col-sm-9"><%= @income.category %></dd>
+
+  <dt class="col-sm-3"><%= t('incomes.show.date') %>:</dt>
+  <dd class="col-sm-9"><%= l(@income.date, format: :ymd) %></dd>
+
+  <dt class="col-sm-3"><%= t('incomes.show.user') %>:</dt>
+  <dd class="col-sm-9"><%= @income.user&.name %></dd>
 </dl>

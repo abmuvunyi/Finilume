@@ -1,27 +1,26 @@
 <div id="<%= dom_id expense %>">
   <p>
-    <strong>Name:</strong>
+    <strong><%= t('expenses.show.name') %>:</strong>
     <%= expense.name %>
   </p>
 
   <p>
-    <strong>Amount:</strong>
+    <strong><%= t('expenses.show.amount') %>:</strong>
     <%= expense.amount %>
   </p>
 
   <p>
-    <strong>Category:</strong>
+    <strong><%= t('expenses.show.category') %>:</strong>
     <%= expense.category %>
   </p>
 
   <p>
-    <strong>Date:</strong>
-    <%= expense.date %>
+    <strong><%= t('expenses.show.date') %>:</strong>
+    <%= l(expense.date, format: :ymd) %>
   </p>
 
   <p>
-    <strong>User:</strong>
+    <strong><%= t('expenses.show.user') %>:</strong>
     <%= expense.user_id %>
   </p>
-
 </div>

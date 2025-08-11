@@ -1,8 +1,8 @@
 <% if current_user && defined?(true_user) && current_user != true_user %>
   <div class="alert alert-warning text-center">
-    You're logged in as <b><%= current_user.name %> (<%= current_user.email %>)</b>
+    <%= t('shared.nav.impersonating', name: current_user.name, email: current_user.email) %>
     <%= link_to stop_impersonating_madmin_impersonates_path, method: :post do %>
-      <%= icon("fas", "times") %> Logout
+      <%= icon("fas", "times") %> <%= t('shared.nav.stop_impersonating') %>
     <% end %>
   </div>
 <% end %>
@@ -18,54 +18,54 @@
     <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item"><%= link_to "Products", products_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "Sales", sales_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "Income", incomes_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "Expenses", expenses_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to t('shared.nav.products'),  products_path,  class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to t('shared.nav.sales'),     sales_path,     class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to t('shared.nav.incomes'),   incomes_path,   class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to t('shared.nav.expenses'),  expenses_path,  class: "nav-link" %></li>
         <% end %>
       </ul>
 
       <ul class="navbar-nav ms-auto">
         <% if user_signed_in? || fsp_user_signed_in? %>
           <li class="nav-item">
-            <%= link_to notifications_path, class: "nav-link" do %>
-              <i class="far fa-bell"></i>
+            <%= link_to notifications_path, class: "nav-link", aria: { label: t('shared.nav.notifications') } do %>
+              <i class="far fa-bell" aria-hidden="true"></i>
             <% end %>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-user-circle"></i>
+              <i class="fas fa-user-circle" aria-hidden="true"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <% if user_signed_in? %>
                 <li>
                   <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
-                    <i class="fas fa-cog me-2"></i> Settings
+                    <i class="fas fa-cog me-2" aria-hidden="true"></i> <%= t('shared.nav.settings') %>
                   <% end %>
                 </li>
                 <li>
                   <%= link_to authenticated_root_path, class: "dropdown-item" do %>
-                    <i class="fas fa-home me-2"></i> Dashboard
+                    <i class="fas fa-home me-2" aria-hidden="true"></i> <%= t('shared.nav.dashboard') %>
                   <% end %>
                 </li>
 
                 <% if current_user.admin? && respond_to?(:madmin_root_path) %>
                   <li>
                     <%= link_to madmin_root_path, class: "dropdown-item" do %>
-                      <i class="fas fa-user-shield me-2"></i> Admin Area
+                      <i class="fas fa-user-shield me-2" aria-hidden="true"></i> <%= t('shared.nav.admin_area') %>
                     <% end %>
                   </li>
                   <li>
                     <%= link_to admin_data_access_requests_path, class: "dropdown-item" do %>
-                      <i class="fas fa-database me-2"></i> Data Access Requests
+                      <i class="fas fa-database me-2" aria-hidden="true"></i> <%= t('shared.nav.data_access_requests') %>
                     <% end %>
                   </li>
                 <% end %>
               <% elsif fsp_user_signed_in? %>
                 <li>
                   <%= link_to authenticated_fsp_root_path, class: "dropdown-item" do %>
-                    <i class="fas fa-home me-2"></i> Dashboard
+                    <i class="fas fa-home me-2" aria-hidden="true"></i> <%= t('shared.nav.dashboard') %>
                   <% end %>
                 </li>
               <% end %>
@@ -73,16 +73,43 @@
               <li><hr class="dropdown-divider"></li>
 
               <li>
-                <%= button_to (fsp_user_signed_in? ? destroy_fsp_user_session_path : destroy_user_session_path), method: :delete, class: "dropdown-item text-danger" do %>
-                  <i class="fas fa-sign-out-alt me-2"></i> Logout
+                <%= button_to (fsp_user_signed_in? ? destroy_fsp_user_session_path : destroy_user_session_path),
+                              method: :delete,
+                              class: "dropdown-item text-danger" do %>
+                  <i class="fas fa-sign-out-alt me-2" aria-hidden="true"></i> <%= t('shared.nav.logout') %>
                 <% end %>
               </li>
             </ul>
           </li>
         <% else %>
-          <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to t('shared.nav.sign_up'), new_user_registration_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to t('shared.nav.login'),   new_user_session_path,      class: "nav-link" %></li>
         <% end %>
+
+        <!-- Locale dropdown -->
+        <li class="nav-item dropdown d-flex align-items-center">
+          <a class="nav-link dropdown-toggle px-2" href="#" id="localeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= case I18n.locale.to_s
+                when 'en' then t('shared.nav.locale.current.en')
+                when 'rw' then t('shared.nav.locale.current.rw')
+                else t('shared.nav.locale.current.default')
+                end %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="localeDropdown">
+            <% I18n.available_locales.each do |locale| %>
+              <% next if locale.to_s == I18n.locale.to_s %>
+              <li>
+                <%= link_to url_for(locale: locale), class: "dropdown-item" do %>
+                  <%= case locale.to_s
+                      when 'en' then t('shared.nav.locale.option.en')
+                      when 'rw' then t('shared.nav.locale.option.rw')
+                      else locale.to_s.upcase
+                      end %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

@@ -1,22 +1,22 @@
-<div class="page-header">
-  <%= link_to expenses_path, class: 'btn btn-default' do %>
-    All Expenses
-  <% end %>
-  <%= link_to edit_expense_path(@expense), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show expense</h1>
+<div class="page-header d-flex align-items-center gap-2 mb-3">
+  <%= link_to t('expenses.show.back_to_all'), expenses_path, class: 'btn btn-outline-secondary' %>
+  <%= link_to t('expenses.show.edit'), edit_expense_path(@expense), class: 'btn btn-primary' %>
+  <h1 class="ms-auto"><%= t('expenses.show.title') %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Name:</dt>
-  <dd><%= @expense.name %></dd>
-  <dt>Amount:</dt>
-  <dd><%= number_to_currency(@expense.amount, unit: "RWF ", precision: 0) %></dd>
-  <dt>Category:</dt>
-  <dd><%= @expense.category %></dd>
-  <dt>Date:</dt>
-  <dd><%= @expense.date %></dd>
-  <dt>User:</dt>
-  <dd><%= @expense.user.name %></dd>
+<dl class="row">
+  <dt class="col-sm-3"><%= t('expenses.show.name') %>:</dt>
+  <dd class="col-sm-9"><%= @expense.name %></dd>
+
+  <dt class="col-sm-3"><%= t('expenses.show.amount') %>:</dt>
+  <dd class="col-sm-9"><%= number_to_currency(@expense.amount, unit: t('currency.unit'), precision: 0) %></dd>
+
+  <dt class="col-sm-3"><%= t('expenses.show.category') %>:</dt>
+  <dd class="col-sm-9"><%= @expense.category %></dd>
+
+  <dt class="col-sm-3"><%= t('expenses.show.date') %>:</dt>
+  <dd class="col-sm-9"><%= l(@expense.date, format: :ymd) %></dd>
+
+  <dt class="col-sm-3"><%= t('expenses.show.user') %>:</dt>
+  <dd class="col-sm-9"><%= @expense.user&.name %></dd>
 </dl>

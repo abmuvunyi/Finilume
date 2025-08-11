@@ -1,0 +1,13 @@
+rw:
+  shared:
+    buttons:
+      save: "Bika"
+      update: "Hindura"
+      cancel: "Kureka"
+      delete: "Siba"
+      destroy: "Siba"
+      search: "Shakisha"
+    confirmations:
+      destroy: "Uremeza?"
+    notices:
+      close: "Funga"

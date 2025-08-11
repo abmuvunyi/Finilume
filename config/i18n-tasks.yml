@@ -1,0 +1,17 @@
+base_locale: en
+locales: [en, rw]
+
+data:
+  read:
+    - config/locales/%{locale}.yml
+    - config/locales/**/*.%{locale}.yml
+
+search:
+  paths:
+    - app
+    - config
+
+# We'll translate these progressively; don't fail the check while we wire things up
+ignore_missing:
+  - activerecord.attributes.*
+  - devise.*

@@ -1,31 +1,31 @@
-<h1>Business Dashboard for <%= @user.name %></h1>
+<div class="container py-4">
+  <h1><%= t('fsp.view.title', name: @user.name) %></h1>
 
-<div class="container">
   <div class="row">
-    <!-- Total Revenue Card -->
+    <!-- Total Revenue -->
     <div class="col-md-4">
       <div class="card text-white bg-primary mb-3">
-        <div class="card-header">Total Revenue</div>
+        <div class="card-header"><%= t('dashboard.cards.total_revenue') %></div>
         <div class="card-body">
           <h5 class="card-title"><%= number_to_currency(@total_revenue, unit: "RWF ", precision: 0) %></h5>
         </div>
       </div>
     </div>
 
-    <!-- Total Expenses Card -->
+    <!-- Total Expenses -->
     <div class="col-md-4">
       <div class="card text-white bg-warning mb-3">
-        <div class="card-header">Total Expenses</div>
+        <div class="card-header"><%= t('dashboard.cards.total_expenses') %></div>
         <div class="card-body">
           <h5 class="card-title"><%= number_to_currency(@total_expenses, unit: "RWF ", precision: 0) %></h5>
         </div>
       </div>
     </div>
 
-    <!-- Total Income Card -->
+    <!-- Total Income -->
     <div class="col-md-4">
       <div class="card text-white bg-info mb-3">
-        <div class="card-header">Total Income</div>
+        <div class="card-header"><%= t('dashboard.cards.total_income') %></div>
         <div class="card-body">
           <h5 class="card-title"><%= number_to_currency(@total_income, unit: "RWF ", precision: 0) %></h5>
         </div>
@@ -34,65 +34,61 @@
   </div>
 
   <div class="row">
-    <!-- Net Profit Card -->
+    <!-- Net Profit -->
     <div class="col-md-4">
       <div class="card text-white bg-success mb-3">
-        <div class="card-header">Net Profit</div>
+        <div class="card-header"><%= t('dashboard.cards.net_profit') %></div>
         <div class="card-body">
           <h5 class="card-title"><%= number_to_currency(@net_profit, unit: "RWF ", precision: 0) %></h5>
         </div>
       </div>
     </div>
 
-    <!-- Low Stock Products Card -->
+    <!-- Low Stock -->
     <div class="col-md-4">
       <div class="card text-white bg-danger mb-3">
-        <div class="card-header">Low Stock Products</div>
+        <div class="card-header"><%= t('dashboard.cards.low_stock') %></div>
         <div class="card-body">
           <% if @low_stock_products.any? %>
             <% @low_stock_products.each do |product| %>
-              <p><%= product.name %> - Stock left: <%= product.quantity %></p>
+              <p><%= product.name %> — <%= t('dashboard.labels.stock_left') %>: <%= product.quantity %></p>
             <% end %>
           <% else %>
-            <p>All products are adequately stocked.</p>
+            <p><%= t('dashboard.messages.all_stock_ok') %></p>
           <% end %>
         </div>
       </div>
     </div>
 
-    <!-- Top-Selling Products Card -->
+    <!-- Top Selling -->
     <div class="col-md-4">
       <div class="card text-white bg-secondary mb-3">
-        <div class="card-header">Top-Selling Products</div>
+        <div class="card-header"><%= t('dashboard.cards.top_selling') %></div>
         <div class="card-body">
           <% if @top_selling_products.any? %>
             <% @top_selling_products.each do |product| %>
-              <p><%= product.name %> - Sold: <%= product.total_sold %></p>
+              <p><%= product.name %> — <%= t('dashboard.labels.sold') %>: <%= product.total_sold %></p>
             <% end %>
           <% else %>
-            <p>No top-selling products available.</p>
+            <p><%= t('dashboard.messages.no_top_selling') %></p>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 
-
-<div class="container">
+  <!-- Products -->
   <div class="row">
-    <!-- Existing Summary Cards for Revenue, Expenses, etc. -->
-
-    <!-- Products List with Search -->
     <div class="col-md-12 mt-4">
-      <h2>Products List</h2>
-    
+      <h2><%= t('dashboard.tables.products.title') %></h2>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Quantity</th>
+            <th><%= t("dashboard.tables.products.columns.name") %></th>
+            <th><%= t("dashboard.tables.products.columns.category") %></th>
+            <th><%= t("dashboard.tables.products.columns.price") %></th>
+            <th><%= t("dashboard.tables.products.columns.quantity") %></th>
+
           </tr>
         </thead>
         <tbody>
@@ -108,17 +104,17 @@
       </table>
     </div>
 
-    <!-- Sales List with Search -->
+    <!-- Sales -->
     <div class="col-md-12 mt-4">
-      <h2>Sales List</h2>
-      
+      <h2><%= t('dashboard.tables.sales.title') %></h2>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Total Price</th>
-            <th>Date</th>
+            <th><%= t("dashboard.tables.sales.columns.product") %></th>
+            <th><%= t("dashboard.tables.sales.columns.quantity") %></th>
+            <th><%= t("dashboard.tables.sales.columns.total_price") %></th>
+            <th><%= t("dashboard.tables.sales.columns.date") %></th>
+
           </tr>
         </thead>
         <tbody>
@@ -127,24 +123,23 @@
               <td><%= sale.product.name %></td>
               <td><%= sale.quantity %></td>
               <td>RWF <%= sale.total_price %></td>
-              <td><%= sale.date.strftime("%Y-%m-%d") %></td>
+              <td><%= l(sale.date, format: :ymd) %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
 
-    <!-- Income List with Search -->
+    <!-- Income -->
     <div class="col-md-12 mt-4">
-      <h2>Income List</h2>
-      
+      <h2><%= t('dashboard.tables.incomes.title') %></h2>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Date</th>
+            <th><%= t("dashboard.tables.incomes.columns.name") %></th>
+            <th><%= t("dashboard.tables.incomes.columns.category") %></th>
+            <th><%= t("dashboard.tables.incomes.columns.amount") %></th>
+            <th><%= t("dashboard.tables.incomes.columns.date") %></th>
           </tr>
         </thead>
         <tbody>
@@ -153,24 +148,23 @@
               <td><%= income.name %></td>
               <td><%= income.category %></td>
               <td>RWF <%= income.amount %></td>
-              <td><%= income.date.strftime("%Y-%m-%d") %></td>
+              <td><%= l(income.date, format: :ymd) %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
 
-    <!-- Expenses List with Search -->
+    <!-- Expenses -->
     <div class="col-md-12 mt-4">
-      <h2>Expenses List</h2>
-
+      <h2><%= t('dashboard.tables.expenses.title') %></h2>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Date</th>
+            <th><%= t("dashboard.tables.expenses.columns.name") %></th>
+            <th><%= t("dashboard.tables.expenses.columns.category") %></th>
+            <th><%= t("dashboard.tables.expenses.columns.amount") %></th>
+            <th><%= t("dashboard.tables.expenses.columns.date") %></th>
           </tr>
         </thead>
         <tbody>
@@ -179,7 +173,7 @@
               <td><%= expense.name %></td>
               <td><%= expense.category %></td>
               <td>RWF <%= expense.amount %></td>
-              <td><%= expense.date.strftime("%Y-%m-%d") %></td>
+              <td><%= l(expense.date, format: :ymd) %></td>
             </tr>
           <% end %>
         </tbody>
@@ -187,4 +181,3 @@
     </div>
   </div>
 </div>
-

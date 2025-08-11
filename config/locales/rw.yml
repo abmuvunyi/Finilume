@@ -1,0 +1,429 @@
+---
+rw:
+  activerecord:
+    models:
+      income: Inyinjiza
+      sale: Igurishwa
+  admin:
+    data_access_requests:
+      index:
+        actions: Ibikorwa
+        approve: Emeza
+        empty: Nta busabe bubonetse.
+        reject: Hakana
+        requester: Usaba
+        status: Imiterere
+        title: Ubusabe bwo Kugera ku Makuru
+        user: Ukoresha
+  announcements:
+    date:
+      formats:
+        short: "%b %d"
+    index:
+      empty: Hari ibintu bishimishije biza vuba!
+      title: Ibyo Hashya
+    types:
+      alert: Iburira
+      info: Amakuru
+      update: Amakuru Mashya
+  are_you_sure: Wemeza?
+  currency:
+    unit: 'FRw '
+  dashboard:
+    cards:
+      low_stock: Ibicuruzwa biri hafi gushira
+      low_stock_products: Ibicuruzwa biri hafi gushira
+      net_profit: Inyungu isigaye
+      top_selling: Ibicuruzwa byaguzwe cyane
+      top_selling_products: Ibicuruzwa byaguzwe cyane
+      total_expenses: Ibisohoka byose
+      total_income: Inyinjiza zose
+      total_revenue: Amafaranga yinjiye yose
+    download_pdf: Kuramo Raporo y’Ubucuruzi (PDF)
+    labels:
+      sold: Byagurishijwe
+      stock_left: Ibiri ku bubiko
+    messages:
+      all_stock_ok: Ibicuruzwa byose bihagije ku bubiko.
+      no_top_selling: Nta bicuruzwa biri ku isonga bibonetse.
+    tables:
+      expenses:
+        columns:
+          amount: Umubare w’amafaranga
+          category: Icyiciro
+          date: Itariki
+          name: Izina
+        search_placeholder: Shakisha ibisohoka ukoresheje izina
+        title: Urutonde rw’Ibisohoka
+      incomes:
+        columns:
+          amount: Umubare w’amafaranga
+          category: Icyiciro
+          date: Itariki
+          name: Izina
+        search_placeholder: Shakisha inyinjiza ukoresheje izina
+        title: Urutonde rw’Inyinjiza
+      products:
+        columns:
+          category: Icyiciro
+          name: Izina
+          price: Igiciro
+          quantity: Umubare
+        search_placeholder: Shakisha ibicuruzwa ukoresheje izina
+        title: Urutonde rw’Ibicuruzwa
+      sales:
+        columns:
+          date: Itariki
+          product: Igicuruzwa
+          quantity: Umubare
+          total_price: Igiciro cyose
+        search_placeholder: Shakisha ibyagurishijwe ukoresheje izina ry’icyicuruzwa
+        title: Urutonde rw’Ibyagurishijwe
+    title: Dashboard y’Ubucuruzi
+  date:
+    formats:
+      ymd: "%Y-%m-%d"
+  errors:
+    template:
+      header:
+        one: Ikosa 1 ryabujije %{model} kubikwa
+        other: Amakosa %{count} yabujije %{model} kubikwa
+      prohibited: 'byabujije %{model} kubikwa:'
+  expenses:
+    edit:
+      title: Hindura Ikiguzi
+    form:
+      placeholders:
+        amount: 'urugero: 50000'
+        category: 'urugero: Serivisi'
+        name: 'urugero: Ubukode bw’ofisi'
+    index:
+      add_new: Ongeraho Ikiguzi Gishya
+      columns:
+        amount: Umubare w’amafaranga
+        category: Icyiciro
+        date: Itariki
+        name: Izina
+        user: Ukoresha
+      title: Ibisohoka
+    new:
+      title: Ikiguzi Gishya
+    show:
+      amount: Umubare w’amafaranga
+      back_to_all: Ibisohoka Byose
+      category: Icyiciro
+      date: Itariki
+      edit: Hindura
+      name: Izina
+      title: Ibisobanuro by’Ikiguzi
+      user: Ukoresha
+  fsp:
+    index:
+      actions:
+        request_access: Saba Kwinjiza Amakuru
+        view_dashboard: Reba Dashboard y’Ubucuruzi
+      status:
+        pending: Gusaba biri gutegereza kwemezwa
+      subtitle: Abakoresha biyandikishije bafite amakuru y’ubucuruzi
+      table:
+        actions: Ibikorwa
+        business_category: Icyiciro cy’Ubucuruzi
+        contact: Numero ya Telefone
+        user_name: Amazina y’Umukoresha
+      title: Dashboard y’Abatanga Serivisi z’Imari
+    view:
+      title: Dashboard y’Ubucuruzi ya %{name}
+  fsp_devise:
+    confirmations:
+      new:
+        email_label: Imeli
+        submit: Ohereza andi mabwiriza yo kwemeza
+        title: Ohereza andi mabwiriza yo kwemeza
+    mailer:
+      confirmation_instructions:
+        confirm_link: Emeza konti yanjye
+        greeting: Murakaza neza %{email}!
+        instructions: 'Mushobora kwemeza imeli ya konti yanyu mukoresheje umurongo
+          uri hepfo:'
+      email_changed:
+        greeting: Muraho %{email}!
+        notify_changed: Tubamenyesheje ko imeli yanyu yahinduwe ikajya kuri %{email}.
+        notify_unconfirmed: Tubamenyesheje ko imeli yanyu iri guhindurwa ikajya kuri
+          %{unconfirmed_email}.
+      password_change:
+        greeting: Muraho %{email}!
+        notify: Tubamenyesheje ko ijambo ry’ibanga ryahinduwe.
+      reset_password_instructions:
+        change_link: Hindura ijambo ry’ibanga
+        greeting: Muraho %{email}!
+        ignore_notice: Nimutaba arimwe mwabisabye, mwirengagize ubu butumwa.
+        instructions: Hari uwasabye ihuzanzira ryo guhindura ijambo ry’ibanga. Mushobora
+          kubikora mukanda kuri link iri hepfo.
+        warning: Ijambo ry’ibanga ntirihita rihinduka kugeza mukandye kuri link iri
+          hejuru mukemeza irishya.
+      unlock_instructions:
+        greeting: Muraho %{email}!
+        locked_notice: Konti yanyu yafunzwe kubera kugerageza kwinjira inshuro nyinshi
+          bidakunze.
+        unlock_link_text: Fungura konti yanjye
+    passwords:
+      edit:
+        confirm_password_label: Emeza ijambo ry’ibanga rishya
+        new_password_label: Ijambo ry’ibanga rishya
+        new_password_min_length: "(byibuze inyuguti %{count})"
+        submit: Hindura ijambo ry’ibanga ryanjye
+        title: Hindura ijambo ry’ibanga
+      new:
+        email_label: Imeli
+        submit: Ohereza amabwiriza yo kugarura ijambo ry’ibanga
+        title: Wibagiwe ijambo ry’ibanga?
+    registrations:
+      edit:
+        back_link: Subira inyuma
+        cancel_account_button: Siba konti yanjye
+        cancel_account_prompt: Ntunyuzwe?
+        cancel_account_title: Siba konti yanjye
+        confirm_prompt: Uremeza koko?
+        current_password_hint: "(turacyeneye ijambo ry’ibanga ukoresha kugira ngo
+          duhamye impinduka)"
+        current_password_label: Ijambo ry’ibanga rikoreshwa ubu
+        email_label: Imeli
+        password_confirmation_label: Emeza ijambo ry’ibanga rishya
+        password_hint: "(usige ubusa niba udashaka kurihindura)"
+        password_label: Ijambo ry’ibanga
+        password_min_length: Nibura inyuguti %{count}
+        reconfirmation_notice: 'Harategerejwe kwemeza: %{unconfirmed_email}'
+        submit: Hindura
+        title: Hindura konti
+      new:
+        email_placeholder: Imeli
+        password_confirmation_placeholder: Emeza ijambo ry’ibanga
+        password_placeholder: Ijambo ry’ibanga
+        submit: Iyandikishe
+        title: Iyandikishe
+    sessions:
+      new:
+        email_placeholder: Imeli
+        password_placeholder: Ijambo ry’ibanga
+        remember_me: Ibuka
+        submit: Injira
+        title: Injira
+    shared:
+      links:
+        did_not_receive_confirmation: Ntubonye amabwiriza yo kwemeza?
+        did_not_receive_unlock: Ntubonye amabwiriza yo gufungura?
+        forgot_password: Wibagiwe ijambo ry’ibanga?
+        log_in: Injira
+        sign_in_with: Injira ukoresheje %{provider}
+        sign_up: Iyandikishe
+  home:
+    index:
+      cta:
+        button: Iyandikishe Ubu
+        subtitle: Jya mu bihumbi by’abamaze guteza imbere ejo hazaza habo h’imari
+          binyuze muri FinReach.
+        title: Witeguye Gufata Igenzura ry’Imari Yawe?
+      features:
+        cards:
+          insights:
+            body: Sobanura amakuru yawe y’imari ubone ubwenge bugufasha gufata ibyemezo
+              byiza.
+            title: Shyira mu Migirire
+          manage:
+            body: Kurikira inyinjiza, ibisohoka no kuzigama byoroshye binyuze kuri
+              dashboard yoroshye.
+            title: Cunga Imari Yawe
+          services:
+            body: Huzaho byoroshye n’abatanga serivisi ziringirwa mu micungire y’imari
+              yawe.
+            title: Geraho Serivisi z’Imari
+        subtitle: Dushyigikira urugendo rwawe rw’imari dukoresheje ibisubizo bigezweho.
+        title: Iby’ingenzi dukora
+      hero:
+        cta: Tangira Ubu
+        subtitle: Korohereza imicungire y’imari ukoresheje ibikoresho byacu by’udushya
+          n’inama zikugirira akamaro kugira ngo utere imbere.
+        title: Murakaza neza kuri FinReach
+      how_it_works:
+        steps:
+          step1:
+            body: Jya kuri FinReach utangire urugendo rwawe rw’imari.
+            title: 'Intambwe ya 1: Iyandikishe'
+          step2:
+            body: Andika inyinjiza, ibisohoka, kandi wihaze intego z’imari kugira
+              ngo utangire gukurikirana.
+            title: 'Intambwe ya 2: Shyiramo Amakuru'
+          step3:
+            body: Geraho ishusho zigaragaza uko imari ihagaze maze ufate ububasha
+              bwo gukura.
+            title: 'Intambwe ya 3: Menya byinshi'
+        subtitle: Intambwe eshatu zoroshye zo kugenzura urugendo rwawe rw’imari.
+        title: Uko Bikora
+      testimonials:
+        items:
+          jane:
+            author: Jane Smith, Ukorera ku giti cye
+            quote: Uburyo bwo gusobanura amakuru n’ibikoresho bya FinReach byamfashije
+              kuzigama neza no gushora neza.
+          john:
+            author: John Doe, Nyiri Ubucuruzi Buto
+            quote: FinReach yahinduye uko nicungira amafaranga, impa ibikoresho nkeneye
+              ngo ntsinde!
+        subtitle: Reba impamvu abantu bizeye FinReach mu micungire y’imari.
+        title: Ibyo Abakiliya bacu bavuga
+  incomes:
+    edit:
+      title: Hindura Inyinjiza
+    form:
+      placeholders:
+        amount: 'urugero: 150000'
+        category: 'urugero: Inama/Serivisi'
+        name: 'urugero: Kwishyurwa serivisi'
+    index:
+      add_new: Ongeraho Inyinjiza Nshya
+      columns:
+        amount: Umubare w’amafaranga
+        category: Icyiciro
+        date: Itariki
+        name: Izina
+        user: Ukoresha
+      title: Inyinjiza
+    new:
+      title: Inyinjiza Nshya
+    show:
+      amount: Umubare w’amafaranga
+      back_to_all: Inyinjiza Zose
+      category: Icyiciro
+      date: Itariki
+      edit: Hindura
+      name: Izina
+      title: Ibisobanuro by’Inyinjiza
+      user: Ukoresha
+  meta:
+    description: Kurikira ibicuruzwa, ibyagurishijwe, inyinjiza n’ibisohoka. Sobanukirwa
+      imigendekere kandi utegere imbere ukoresheje inama zigaragara.
+    title: "%{app} — Imicungire y’imari yoroshye ku bacuruzi bari gukura"
+  notifications:
+    index:
+      empty: Nta tangazo riraboneka.
+      item:
+        default_title: Itangazo
+        params: Ibisobanuro
+      title: Amatangazo
+  products:
+    edit:
+      title: Hindura Igicuruzwa
+    fields:
+      category: Icyiciro
+      name: Izina
+      price: Igiciro
+      quantity: Umubare
+      user: Ukoresha
+    form:
+      category: Icyiciro
+      destroy: Siba
+      name: Izina
+      price: Igiciro
+      quantity: Ingano
+    index:
+      add_new: Ongeraho Igicuruzwa Gishya
+      columns:
+        category: Icyiciro
+        name: Izina
+        price: Igiciro
+        quantity: Umubare
+        user: Ukoresha
+      title: Ibicuruzwa
+    new:
+      title: Igicuruzwa Gishya
+    show:
+      back_to_all: Ibicuruzwa Byose
+      category: Icyiciro
+      edit: Hindura
+      name: Izina
+      price: Igiciro
+      quantity: Umubare
+      title: Ibisobanuro by’Igicuruzwa
+      user: Ukoresha
+    singular: igicuruzwa
+  sales:
+    edit:
+      title: Hindura Igurishwa
+    form:
+      placeholders:
+        quantity: 'urugero: 3'
+      prompts:
+        product: Hitamo Igicuruzwa
+    index:
+      add_new: Ongeraho Igurishwa Rishya
+      columns:
+        date: Itariki
+        product: Igicuruzwa
+        quantity: Umubare
+        total_price: Igiciro cyose
+        user: Ukoresha
+      show: Reba
+      title: Ibicuruzwa byagurishijwe
+    new:
+      title: Igurishwa Rishya
+    show:
+      all_sales: Ibyagurishijwe byose
+      date: Itariki
+      edit: Hindura
+      product: Igicuruzwa
+      quantity: Umubare
+      title: Reba Igurishwa
+      total_price: Igiciro cyose
+      user: Ukoresha
+  shared:
+    buttons:
+      back: Subira inyuma
+      cancel: Kureka
+      delete: Siba
+      destroy: Siba
+      save: Bika
+      search: Shakisha
+      update: Hindura
+    cancel: Kureka
+    confirm: Uremeza?
+    confirmations:
+      destroy: Wemeza?
+    errors:
+      prohibited_save: 'Amakosa %{count} yabujije %{resource} kubikwa:'
+    footer:
+      company_name: FinReach
+      facebook: Facebook
+      privacy: Politiki y’Ibanga
+      terms: Amategeko
+      twitter: Twitter
+    nav:
+      admin_area: Ahantu h’Umuyobozi
+      dashboard: Dashboard
+      data_access_requests: Gusaba Kwinjiza Amakuru
+      expenses: Ibisohoka
+      impersonating: Uri kwinjira nka %{name} (%{email})
+      incomes: Inyinjiza
+      locale:
+        current:
+          default: "🌐"
+          en: "🇺🇸"
+          rw: "🇷🇼"
+        option:
+          en: "🇺🇸 Icyongereza"
+          rw: "🇷🇼 Ikinyarwanda"
+      login: Injira
+      logout: Sohoka
+      notifications: Amatangazo
+      products: Ibicuruzwa
+      sales: Ibyagurishijwe
+      settings: Igenamiterere
+      sign_up: Iyandikishe
+      stop_impersonating: Sohoka
+    notices:
+      close: Funga
+    save: Bika
+  time:
+    formats:
+      short: "%d %b %Y %H:%M"
+      ymd: "%Y-%m-%d"
+  unauthorized: Ntaburenganzira ufite bwo gukora iki gikorwa.

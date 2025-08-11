@@ -1,0 +1,21 @@
+en:
+  activerecord:
+    models:
+      expense: "Expense"
+      income: "Income"
+      sale: "Sale"
+    attributes:
+      expense:
+        name: "Name"
+        amount: "Amount"
+        category: "Category"
+        date: "Date"
+      income:
+        name: "Name"
+        amount: "Amount"
+        category: "Category"
+        date: "Date"
+      sale:
+        product: "Product"
+        quantity: "Quantity"
+        date: "Date"

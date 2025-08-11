@@ -1,44 +1,53 @@
-<!-- Hero Section (Wider, Richer Design with Proper Asset Reference) -->
-<div class="container-fluid hero-section text-white text-center py-5" style="background: url('') no-repeat center center; background-size: cover; padding-left: 20%; padding-right: 20%;">
+<!-- Hero Section -->
+<div class="container-fluid hero-section text-white text-center py-5"
+     style="background: url('') no-repeat center center; background-size: cover; padding-left: 20%; padding-right: 20%;">
   <div class="container">
-    <h1 class="display-3 mb-4" style="color: #DAA520; font-weight: bold;">Welcome to FinReach</h1>
-    <p class="lead mb-4" style="font-size: 1.5rem;">Simplify your financial management with our innovative tools and actionable insights designed to help you thrive.</p>
-    <%= link_to "Get Started", new_user_registration_path, class: "btn btn-warning btn-lg px-5 py-3" %>
+    <h1 class="display-3 mb-4" style="color: #DAA520; font-weight: bold;">
+      <%= t('home.index.hero.title') %>
+    </h1>
+    <p class="lead mb-4" style="font-size: 1.5rem;">
+      <%= t('home.index.hero.subtitle') %>
+    </p>
+    <%= link_to t('home.index.hero.cta'),
+                new_user_registration_path,
+                class: "btn btn-warning btn-lg px-5 py-3" %>
   </div>
 </div>
-
 
 <!-- Features Section -->
 <div class="container features-section mt-5">
   <div class="text-center mb-5">
-    <h2>Our Features</h2>
-    <p class="text-muted">Empowering your financial journey with our cutting-edge solutions.</p>
+    <h2><%= t('home.index.features.title') %></h2>
+    <p class="text-muted"><%= t('home.index.features.subtitle') %></p>
   </div>
+
   <div class="row text-center">
     <div class="col-md-4 mb-4">
       <div class="card border-0 shadow-sm h-100">
         <div class="card-body">
-          <i class="fas fa-wallet fa-3x text-primary mb-3"></i>
-          <h5 class="card-title">Manage Your Finances</h5>
-          <p class="card-text text-muted">Track your income, expenses, and savings effortlessly with our intuitive dashboard.</p>
+          <i class="fas fa-wallet fa-3x text-primary mb-3" aria-hidden="true"></i>
+          <h5 class="card-title"><%= t('home.index.features.cards.manage.title') %></h5>
+          <p class="card-text text-muted"><%= t('home.index.features.cards.manage.body') %></p>
         </div>
       </div>
     </div>
+
     <div class="col-md-4 mb-4">
       <div class="card border-0 shadow-sm h-100">
         <div class="card-body">
-          <i class="fas fa-chart-pie fa-3x text-success mb-3"></i>
-          <h5 class="card-title">Gain Insights</h5>
-          <p class="card-text text-muted">Analyze your financial data and uncover valuable insights for better decision-making.</p>
+          <i class="fas fa-chart-pie fa-3x text-success mb-3" aria-hidden="true"></i>
+          <h5 class="card-title"><%= t('home.index.features.cards.insights.title') %></h5>
+          <p class="card-text text-muted"><%= t('home.index.features.cards.insights.body') %></p>
         </div>
       </div>
     </div>
+
     <div class="col-md-4 mb-4">
       <div class="card border-0 shadow-sm h-100">
         <div class="card-body">
-          <i class="fas fa-university fa-3x text-danger mb-3"></i>
-          <h5 class="card-title">Access Financial Services</h5>
-          <p class="card-text text-muted">Easily connect with trusted financial service providers to help manage your finances.</p>
+          <i class="fas fa-university fa-3x text-danger mb-3" aria-hidden="true"></i>
+          <h5 class="card-title"><%= t('home.index.features.cards.services.title') %></h5>
+          <p class="card-text text-muted"><%= t('home.index.features.cards.services.body') %></p>
         </div>
       </div>
     </div>
@@ -49,34 +58,37 @@
 <div class="container-fluid how-it-works-section bg-light py-5 mt-5">
   <div class="container">
     <div class="text-center mb-5">
-      <h2>How It Works</h2>
-      <p class="text-muted">Three simple steps to take control of your financial journey.</p>
+      <h2><%= t('home.index.how_it_works.title') %></h2>
+      <p class="text-muted"><%= t('home.index.how_it_works.subtitle') %></p>
     </div>
+
     <div class="row">
       <div class="col-md-4 text-center">
         <div class="card border-0 h-100">
           <div class="card-body">
-            <i class="fas fa-user-plus fa-3x text-info mb-3"></i>
-            <h5 class="card-title">Step 1: Sign Up</h5>
-            <p>Join FinReach to begin your financial journey.</p>
+            <i class="fas fa-user-plus fa-3x text-info mb-3" aria-hidden="true"></i>
+            <h5 class="card-title"><%= t('home.index.how_it_works.steps.step1.title') %></h5>
+            <p><%= t('home.index.how_it_works.steps.step1.body') %></p>
           </div>
         </div>
       </div>
+
       <div class="col-md-4 text-center">
         <div class="card border-0 h-100">
           <div class="card-body">
-            <i class="fas fa-edit fa-3x text-warning mb-3"></i>
-            <h5 class="card-title">Step 2: Add Your Data</h5>
-            <p>Input your income, expenses, and set financial goals to start tracking.</p>
+            <i class="fas fa-edit fa-3x text-warning mb-3" aria-hidden="true"></i>
+            <h5 class="card-title"><%= t('home.index.how_it_works.steps.step2.title') %></h5>
+            <p><%= t('home.index.how_it_works.steps.step2.body') %></p>
           </div>
         </div>
       </div>
+
       <div class="col-md-4 text-center">
         <div class="card border-0 h-100">
           <div class="card-body">
-            <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
-            <h5 class="card-title">Step 3: Gain Insights</h5>
-            <p>Access visual financial insights and take control of your growth.</p>
+            <i class="fas fa-chart-line fa-3x text-success mb-3" aria-hidden="true"></i>
+            <h5 class="card-title"><%= t('home.index.how_it_works.steps.step3.title') %></h5>
+            <p><%= t('home.index.how_it_works.steps.step3.body') %></p>
           </div>
         </div>
       </div>
@@ -87,26 +99,28 @@
 <!-- Testimonials Section -->
 <div class="container testimonials-section py-5 mt-5">
   <div class="text-center mb-5">
-    <h2>What Our Customers Say</h2>
-    <p class="text-muted">See why people trust FinReach with their finances.</p>
+    <h2><%= t('home.index.testimonials.title') %></h2>
+    <p class="text-muted"><%= t('home.index.testimonials.subtitle') %></p>
   </div>
+
   <div class="row">
     <div class="col-md-6 mb-4">
       <div class="card border-0 shadow-sm h-100">
         <div class="card-body text-center">
           <blockquote class="blockquote">
-            <p>"FinReach transformed how I manage my money, providing the tools I need to succeed!"</p>
-            <footer class="blockquote-footer">John Doe, Small Business Owner</footer>
+            <p>“<%= t('home.index.testimonials.items.john.quote') %>”</p>
+            <footer class="blockquote-footer"><%= t('home.index.testimonials.items.john.author') %></footer>
           </blockquote>
         </div>
       </div>
     </div>
+
     <div class="col-md-6 mb-4">
       <div class="card border-0 shadow-sm h-100">
         <div class="card-body text-center">
           <blockquote class="blockquote">
-            <p>"The insights and financial tools from FinReach helped me save smarter and invest better."</p>
-            <footer class="blockquote-footer">Jane Smith, Freelancer</footer>
+            <p>“<%= t('home.index.testimonials.items.jane.quote') %>”</p>
+            <footer class="blockquote-footer"><%= t('home.index.testimonials.items.jane.author') %></footer>
           </blockquote>
         </div>
       </div>
@@ -114,9 +128,12 @@
   </div>
 </div>
 
-<!-- Call to Action Section (Wide) -->
-<div class="container-fluid call-to-action-section text-white py-5 mt-5 text-center" style="background: linear-gradient(to right, #A0E7E5, #FBE7C6); padding-left: 15%; padding-right: 15%;">
-  <h2 style="color: #DAA520; font-weight: bold;">Ready to Take Control of Your Finances?</h2>
-  <p class="lead mb-4">Join thousands of others in improving their financial future with FinReach.</p>
-  <%= link_to "Sign Up Now", new_user_registration_path, class: "btn btn-warning btn-lg px-5 py-3" %>
+<!-- Call to Action Section -->
+<div class="container-fluid call-to-action-section text-white py-5 mt-5 text-center"
+     style="background: linear-gradient(to right, #A0E7E5, #FBE7C6); padding-left: 15%; padding-right: 15%;">
+  <h2 style="color: #DAA520; font-weight: bold;"><%= t('home.index.cta.title') %></h2>
+  <p class="lead mb-4"><%= t('home.index.cta.subtitle') %></p>
+  <%= link_to t('home.index.cta.button'),
+              new_user_registration_path,
+              class: "btn btn-warning btn-lg px-5 py-3" %>
 </div>

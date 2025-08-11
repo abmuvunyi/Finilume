@@ -1,58 +1,46 @@
-<div class="row">
-  <div class="col-lg-4 offset-lg-4">
-    <h1 class="text-center">Account</h1>
+<h2><%= t('devise.registrations.edit.edit_account', default: "Edit #{resource_name.to_s.humanize}") %></h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="mb-3">
-        <%= f.text_field :business_name, autofocus: false, class: 'form-control', placeholder: "Business name" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.text_field :first_name, autofocus: false, class: 'form-control', placeholder: "First Name" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.text_field :last_name, autofocus: false, class: 'form-control', placeholder: "Last Name" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.email_field :email, class: 'form-control', placeholder: 'Email Address' %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.text_field :phone_number, autofocus: false, class: 'form-control', placeholder: "Phone_number" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.select :business_category, [['Retail', 'Retail'], ['Services', 'Services'], ['Manufacturing', 'Manufacturing'], ['Other', 'Other']], prompt: 'Select your business category', autofocus: false, class: 'form-control', placeholder: "Business_category" %>
-      </div>
-
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div class="alert alert-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-
-      <div class="mb-3">
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password'  %>
-        <p class="form-text text-muted"><small>Leave password blank if you don't want to change it</small></p>
-      </div>
-
-      <div class="mb-3">
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'Confirm Password'  %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: 'Current Password'  %>
-        <p class="form-text text-muted"><small>We need your current password to confirm your changes</small></p>
-      </div>
-
-      <div class="mb-3 d-grid">
-        <%= f.submit "Save Changes", class: 'btn btn-lg btn-primary' %>
-      </div>
-    <% end %>
-    <hr>
-
-    <p class="text-center"><%= link_to "Deactivate my account", registration_path(resource_name), data: { confirm: "Are you sure? You cannot undo this." }, method: :delete %></p>
+  <div class="field">
+    <%= f.label :email, t('devise.registrations.edit.email', default: 'Email') %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div><%= t('devise.registrations.edit.waiting_confirmation', default: "Currently waiting confirmation for:") %> <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password, t('devise.registrations.edit.password', default: 'Password') %> <i>(<%= t('devise.registrations.edit.leave_blank', default: "leave blank if you don't want to change it") %>)</i><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= t('devise.registrations.edit.minimum_length', count: @minimum_password_length, default: "%{count} characters minimum") %></em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, t('devise.registrations.edit.password_confirmation', default: 'Password confirmation') %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password, t('devise.registrations.edit.current_password', default: 'Current password') %> <i>(<%= t('devise.registrations.edit.password_required', default: 'we need your current password to confirm your changes') %>)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t('devise.registrations.edit.update', default: 'Update') %>
+  </div>
+<% end %>
+
+<h3><%= t('devise.registrations.edit.cancel_account', default: 'Cancel my account') %></h3>
+
+<div>
+  <%= t('devise.registrations.edit.unhappy', default: 'Unhappy?') %> 
+  <%= button_to t('devise.registrations.edit.cancel_my_account', default: 'Cancel my account'), registration_path(resource_name), data: { confirm: t('devise.registrations.edit.are_you_sure', default: 'Are you sure?'), turbo_confirm: t('devise.registrations.edit.are_you_sure', default: 'Are you sure?') }, method: :delete %>
 </div>
+
+<%= link_to t('devise.shared.back', default: 'Back'), :back %>

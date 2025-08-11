@@ -1,0 +1,13 @@
+en:
+  shared:
+    buttons:
+      save: "Save"
+      update: "Update"
+      cancel: "Cancel"
+      delete: "Delete"
+      destroy: "Destroy"
+      search: "Search"
+    confirmations:
+      destroy: "Are you sure?"
+    notices:
+      close: "Close"

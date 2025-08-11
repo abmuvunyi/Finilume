@@ -1,22 +1,22 @@
 <div class="page-header">
-  <%= link_to products_path, class: 'btn btn-default' do %>
-    All Products
-  <% end %>
-  <%= link_to edit_product_path(@product), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show product</h1>
+  <%= link_to t('products.show.back_to_all'), products_path, class: 'btn btn-default' %>
+  <%= link_to t('products.show.edit'), edit_product_path(@product), class: 'btn btn-primary' %>
+  <h1><%= t('products.show.title') %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Name:</dt>
+  <dt><%= t('products.show.name') %>:</dt>
   <dd><%= @product.name %></dd>
-  <dt>Category:</dt>
+
+  <dt><%= t('products.show.category') %>:</dt>
   <dd><%= @product.category %></dd>
-  <dt>Price:</dt>
-  <dd><%= number_to_currency(@product.price, unit: "RWF ", precision: 0) %></dd>
-  <dt>Quantity:</dt>
+
+  <dt><%= t('products.show.price') %>:</dt>
+  <dd><%= number_to_currency(@product.price, unit: t('currency.unit'), precision: 0) %></dd>
+
+  <dt><%= t('products.show.quantity') %>:</dt>
   <dd><%= @product.quantity %></dd>
-  <dt>User:</dt>
-  <dd><%= @product.user.name %></dd>
+
+  <dt><%= t('products.show.user') %>:</dt>
+  <dd><%= @product.user&.name %></dd>
 </dl>

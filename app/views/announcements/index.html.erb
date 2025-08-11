@@ -1,4 +1,4 @@
-<h1>What's New</h1>
+<h1><%= t('announcements.index.title') %></h1>
 
 <div class="card">
   <div class="card-body">
@@ -10,11 +10,13 @@
       <div class="row announcement" id="<%= dom_id(announcement) %>">
         <div class="col-sm-1 text-center">
           <%= link_to announcements_path(anchor: dom_id(announcement)) do %>
-            <strong><%= announcement.published_at.strftime("%b %d") %></strong>
+            <strong><%= l(announcement.published_at, format: :short) %></strong>
           <% end %>
         </div>
         <div class="col">
-          <strong class="<%= announcement_class(announcement.announcement_type) %>"><%= announcement.announcement_type.titleize %>:</strong>
+          <strong class="<%= announcement_class(announcement.announcement_type) %>">
+            <%= t("announcements.types.#{announcement.announcement_type}", default: announcement.announcement_type.titleize) %>:
+          </strong>
           <strong><%= announcement.name %></strong>
           <%= simple_format announcement.description %>
         </div>
@@ -22,7 +24,7 @@
     <% end %>
 
     <% if @announcements.empty? %>
-      <div>Exciting stuff coming very soon!</div>
+      <div><%= t('announcements.index.empty') %></div>
     <% end %>
   </div>
 </div>

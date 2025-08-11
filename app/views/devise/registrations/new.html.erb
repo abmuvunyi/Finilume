@@ -1,49 +1,51 @@
-<div class="row">
-  <div class="col-lg-4 offset-lg-4">
-    <h1 class="text-center">Sign Up</h1>
+<h2><%= t('devise.registrations.new.title') %></h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="mb-3">
-        <%= f.text_field :first_name, autofocus: false, class: 'form-control', placeholder: "First Name" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.text_field :last_name, autofocus: false, class: 'form-control', placeholder: "Last Name" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.text_field :business_name, autofocus: false, class: 'form-control', placeholder: "Business Name" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.text_field :phone_number, autofocus: false, class: 'form-control', placeholder: "Phone Number" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.select :business_category, [['Retail', 'Retail'], ['Services', 'Services'], ['Manufacturing', 'Manufacturing'], ['Other', 'Other']], prompt: 'Select your business category', class: 'form-control' %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.email_field :email, autofocus: false, class: 'form-control', placeholder: "Email Address" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'Confirm Password' %>
-      </div>
-
-      <div class="mb-3 d-grid">
-        <%= f.submit "Sign up", class: "btn btn-primary btn-lg" %>
-      </div>
-    <% end %>
-
-    <div class="text-center">
-      <%= render "devise/shared/links" %>
-    </div>
+  <div class="field">
+    <%= f.label :first_name, t('devise.registrations.new.first_name') %><br />
+    <%= f.text_field :first_name, autofocus: true %>
   </div>
-</div>
+
+  <div class="field">
+    <%= f.label :last_name, t('devise.registrations.new.last_name') %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :business_name, t('devise.registrations.new.business_name') %><br />
+    <%= f.text_field :business_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number, t('devise.registrations.new.phone_number') %><br />
+    <%= f.telephone_field :phone_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :business_category, t('devise.registrations.new.business_category') %><br />
+    <%= f.select :business_category, options_for_select(['Retail', 'Service', 'Manufacturing', 'Other'], resource.business_category) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, t('devise.registrations.new.email_label') %><br />
+    <%= f.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, t('devise.registrations.new.password_label') %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, t('devise.registrations.new.password_confirmation_label') %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t('devise.registrations.new.submit') %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
