@@ -3,10 +3,8 @@ rw:
   devise:
     confirmations:
       confirmed: Imeli yawe yemejwe neza.
-      send_instructions: Uzakira imeli irimo amabwiriza yo kwemeza imeli yawe mu gihe
-        gito.
-      send_paranoid_instructions: Niba imeli yawe iri mu bubiko bwacu, uzakira amabwiriza
-        yo kwemeza imeli mu gihe gito.
+      send_instructions: Uzakira imeli irimo amabwiriza yo kwemeza imeli yawe mu gihe gito.
+      send_paranoid_instructions: Niba imeli yawe iri mu bubiko bwacu, uzakira amabwiriza yo kwemeza imeli mu gihe gito.
     failure:
       already_authenticated: Murimo musanzwe mwinjiye.
       inactive: Konti yanyu ntirakora.
@@ -32,48 +30,66 @@ rw:
       failure: Ntitwabashije kubemeza kuri %{kind} kubera "%{reason}".
       success: Mwinjiye neza ukoresheje konti ya %{kind}.
     passwords:
-      no_token: Ntushobora kugera kuri uru rubuga uturutse ku butumwa bwo guhindura
-        ijambo ry’ibanga. Niba uva ku butumwa bwo guhindura ijambo ry’ibanga, reba
-        ko ukoresheje URL yuzuye.
-      send_instructions: Uzakira imeli irimo amabwiriza yo guhindura ijambo ry’ibanga
-        mu kanya.
-      send_paranoid_instructions: Niba imeli yawe iri mu bubiko bwacu, uzabona link
-        yo kugarura ijambo ry’ibanga mu kanya.
+      no_token: Ntushobora kugera kuri uru rubuga uturutse ku butumwa bwo guhindura ijambo ry’ibanga. Niba uva ku butumwa bwo guhindura ijambo ry’ibanga, reba ko ukoresheje URL yuzuye.
+      send_instructions: Uzakira imeli irimo amabwiriza yo guhindura ijambo ry’ibanga mu kanya.
+      send_paranoid_instructions: Niba imeli yawe iri mu bubiko bwacu, uzabona link yo kugarura ijambo ry’ibanga mu kanya.
       updated: Ijambo ry’ibanga ryahinduwe neza. Ubu mwinjiye.
       updated_not_active: Ijambo ry’ibanga ryahinduwe neza.
     registrations:
-      destroyed: Murakoze! Konti yanyu yasibwe neza. Tuzishimira kongera kubabona
-        vuba.
+      destroyed: Murakoze! Konti yanyu yasibwe neza. Tuzishimira kongera kubabona vuba.
       signed_up: Murakaza neza! Mwiyandikishije neza.
-      signed_up_but_inactive: Mwiyandikishije neza, ariko ntimwashoboye kwinjira kuko
-        konti yanyu itarakora.
-      signed_up_but_locked: Mwiyandikishije neza, ariko ntimwashoboye kwinjira kuko
-        konti yanyu yafunzwe.
-      signed_up_but_unconfirmed: Ubutumwa burimo link yo kwemeza bwoherejwe kuri imeli
-        yanyu. Mukurikize ayo mabwiriza ngo mukoreshe konti.
-      update_needs_confirmation: Mwahinduye konti neza, ariko tugomba kwemeza imeli
-        nshya. Reba imeli hanyuma ukande kuri link yo kwemeza.
+      signed_up_but_inactive: Mwiyandikishije neza, ariko ntimwashoboye kwinjira kuko konti yanyu itarakora.
+      signed_up_but_locked: Mwiyandikishije neza, ariko ntimwashoboye kwinjira kuko konti yanyu yafunzwe.
+      signed_up_but_unconfirmed: Ubutumwa burimo link yo kwemeza bwoherejwe kuri imeli yanyu. Mukurikize ayo mabwiriza ngo mukoreshe konti.
+      update_needs_confirmation: Mwahinduye konti neza, ariko tugomba kwemeza imeli nshya. Reba imeli hanyuma ukande kuri link yo kwemeza.
       updated: Konti yanyu yahinduwe neza.
-      updated_but_not_signed_in: Konti yahinduwe neza, ariko kubera ko mwahinduye
-        ijambo ry’ibanga, musabwe kongera kwinjira.
+      updated_but_not_signed_in: Konti yahinduwe neza, ariko kubera ko mwahinduye ijambo ry’ibanga, musabwe kongera kwinjira.
+      # Form (views)
+      new:
+        title: "Iyandikishe"
+        email_placeholder: "Imeli"
+        password_placeholder: "Ijambo ry’ibanga"
+        password_confirmation_placeholder: "Emeza ijambo ry’ibanga"
+        submit: "Iyandikishe"
     sessions:
       already_signed_out: Mwasohotse neza.
       signed_in: Mwinjiye neza.
       signed_out: Mwasohotse neza.
+      # Form (views)
+      new:
+        title: "Injira"
+        email_placeholder: "Imeli"
+        password_placeholder: "Ijambo ry’ibanga"
+        remember_me: "Ibuka"
+        submit: "Injira"
     unlocks:
-      send_instructions: Uzakira imeli irimo amabwiriza yo gufungura konti yawe mu
-        kanya.
-      send_paranoid_instructions: Niba konti yawe ihari, uzakira imeli irimo amabwiriza
-        yo kuyifungura mu kanya.
+      send_instructions: Uzakira imeli irimo amabwiriza yo gufungura konti yawe mu kanya.
+      send_paranoid_instructions: Niba konti yawe ihari, uzakira imeli irimo amabwiriza yo kuyifungura mu kanya.
       unlocked: Konti yawe yafunguwe neza. Ongera winjire kugira ngo ukomeze.
+
   errors:
     messages:
       already_confirmed: yari yaramaze kwemezwa, gerageza kwinjira
-      confirmation_period_expired: igomba kwemezwa mu gihe cya %{period}, saba indi
-        link
+      confirmation_period_expired: igomba kwemezwa mu gihe cya %{period}, saba indi link
       expired: byararenze igihe, saba indi nshya
       not_found: ntibibashije kuboneka
       not_locked: ntiyigeze ifungwa
       not_saved:
-        one: 'Ikosa 1 ribujije %{resource} kubikwa:'
-        other: 'Amakosa %{count} yabujije %{resource} kubikwa:'
+        one: "Ikosa 1 ribujije %{resource} kubikwa:"
+        other: "Amakosa %{count} yabujije %{resource} kubikwa:"
+
+  # Optional flat aliases (safe to keep)
+  registrations:
+    new:
+      title: "Iyandikishe"
+      email_placeholder: "Imeli"
+      password_placeholder: "Ijambo ry’ibanga"
+      password_confirmation_placeholder: "Emeza ijambo ry’ibanga"
+      submit: "Iyandikishe"
+  sessions:
+    new:
+      title: "Injira"
+      email_placeholder: "Imeli"
+      password_placeholder: "Ijambo ry’ibanga"
+      remember_me: "Ibuka"
+      submit: "Injira"
