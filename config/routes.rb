@@ -1,10 +1,23 @@
 Rails.application.routes.draw do
   # OmniAuth callbacks must be outside locale scope
-  devise_for :users, only: [ :omniauth_callbacks ], controllers: {
+  devise_for :users, only: [:omniauth_callbacks], controllers: {
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
-  # Locale-scoped routes
+  # === Force locale prefix for first-time visitors ===
+  LOCALE_REGEX = /^(en|rw)$/
+
+  constraints(lambda { |req|
+    # No locale prefix at the start of the path AND not a Rails health check
+    !req.path.match(%r{\A/(en|rw)(/|$)}) && req.path != "/up"
+  }) do
+    get "(*path)", to: redirect { |params, req|
+      qs = req.query_string.present? ? "?#{req.query_string}" : ""
+      "/#{I18n.default_locale}/#{params[:path]}#{qs}"
+    }
+  end
+
+  # === Locale-scoped routes ===
   scope "(:locale)", locale: /en|rw/ do
     # Admin routes
     draw :madmin
@@ -22,7 +35,7 @@ Rails.application.routes.draw do
 
     # Admin Dashboard routes
     namespace :admin do
-      resources :data_access_requests, only: [ :index, :update ]
+      resources :data_access_requests, only: [:index, :update]
     end
 
     # FSP Dashboard routes
@@ -32,7 +45,7 @@ Rails.application.routes.draw do
     end
 
     # Devise user routes (excluding omniauth_callbacks)
-    devise_for :users, skip: [ :omniauth_callbacks ], controllers: {
+    devise_for :users, skip: [:omniauth_callbacks], controllers: {
       sessions: "users/sessions",
       registrations: "users/registrations",
       passwords: "users/passwords",
@@ -58,10 +71,10 @@ Rails.application.routes.draw do
     resources :products
 
     # Announcements and notifications
-    resources :notifications, only: [ :index ]
-    resources :announcements, only: [ :index ]
+    resources :notifications, only: [:index]
+    resources :announcements, only: [:index]
 
-    # Authenticated root paths
+    # Authenticated roots
     authenticated :user do
       root to: "dashboard#index", as: :authenticated_root
     end
@@ -70,7 +83,7 @@ Rails.application.routes.draw do
       root to: "fsp_dashboard/fsp_dashboard#index", as: :authenticated_fsp_root
     end
 
-    # Default root
+    # Default root (locale-scoped)
     root to: "home#index"
   end
 
