@@ -1,16 +1,16 @@
+# db/migrate/20250812042841_add_status_to_feedbacks.rb
 class AddStatusToFeedbacks < ActiveRecord::Migration[7.1]
   def up
-    unless column_exists?(:feedbacks, :status)
+    if !column_exists?(:feedbacks, :status)
       add_column :feedbacks, :status, :string, null: false, default: "open"
     else
-      # Make sure the constraints are what we expect
+      # Enforce expected constraints if column is already present
       change_column_default :feedbacks, :status, "open"
       change_column_null :feedbacks, :status, false
     end
   end
 
   def down
-    # Only remove if present (keeps rollback safe)
     remove_column :feedbacks, :status if column_exists?(:feedbacks, :status)
   end
 end
