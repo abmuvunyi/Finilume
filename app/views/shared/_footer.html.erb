@@ -8,6 +8,9 @@
       <li class="list-inline-item me-3">
         <%= link_to t('shared.footer.privacy'), privacy_path, class: "text-decoration-none text-white" %>
       </li>
+      <li class="list-inline-item me-3">
+        <%= link_to t('shared.feedback.link', default: "Send Feedback"), new_feedback_path, class: "text-decoration-none text-white" %>
+      </li>
       <li class="list-inline-item">
         <a href="https://facebook.com" target="_blank" class="text-decoration-none text-white" aria-label="<%= t('shared.footer.facebook') %>">
           <i class="fab fa-facebook-f"></i>

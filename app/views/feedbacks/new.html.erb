@@ -1,0 +1,24 @@
+<h1><%= t("feedbacks.new.title", default: "Send Feedback") %></h1>
+
+<%= form_with model: @feedback, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :category %>
+    <% categories = (defined?(Feedback::CATEGORIES) ? Feedback::CATEGORIES : %w[bug feature ui other]) %>
+    <%= f.select :category,
+          categories.map { |c| [t("feedbacks.categories.#{c}", default: c.humanize), c] },
+          { include_blank: true },
+          class: "form-select", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :message %>
+    <%= f.text_area :message, rows: 6, class: "form-control", required: true %>
+  </div>
+
+  <%= f.submit t("feedbacks.new.submit", default: "Submit"), class: "btn btn-primary" %>
+<% end %>

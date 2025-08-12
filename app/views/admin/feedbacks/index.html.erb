@@ -1,0 +1,41 @@
+<h1><%= t("admin.feedbacks.index.title", default: "Feedback") %></h1>
+
+<div class="mb-3">
+  <%= link_to t("admin.feedbacks.filters.all", default: "All"), admin_feedbacks_path %> ·
+  <% Feedback.statuses.keys.each do |s| %>
+    <%= link_to t("admin.feedbacks.status.#{s}", default: s.humanize),
+                admin_feedbacks_path(status: s) %><%= " · " unless s == Feedback.statuses.keys.last %>
+  <% end %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= t("admin.feedbacks.columns.created_at", default: "Created") %></th>
+      <th><%= t("admin.feedbacks.columns.email", default: "Email") %></th>
+      <th><%= t("admin.feedbacks.columns.category", default: "Category") %></th>
+      <th><%= t("admin.feedbacks.columns.status", default: "Status") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @feedbacks.each do |fb| %>
+      <tr>
+        <td><%= l fb.created_at, format: :short %></td>
+        <td><%= fb.email %></td>
+        <td>
+          <% cat = fb.category.presence || 'other' %>
+          <%= t("feedbacks.categories.#{cat}", default: cat.humanize) %>
+        </td>
+        <td>
+          <% stat = fb.status.presence || 'open' %>
+          <%= t("admin.feedbacks.status.#{stat}", default: stat.humanize) %>
+        </td>
+        <td><%= link_to t("admin.feedbacks.view", default: "View"), admin_feedback_path(fb) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%# If you’re paginating, keep this. If not, remove it. %>
+<%#= paginate @feedbacks, params: { status: params[:status] } %>

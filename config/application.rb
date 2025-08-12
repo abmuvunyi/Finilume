@@ -19,10 +19,10 @@ module Finreach
     config.autoload_lib(ignore: %w[assets tasks])
 
     # config.i18n.available_locales = [:en, :rw]
-   
-    config.i18n.available_locales = %i[en rw]
+
+    config.i18n.available_locales = %i[rw en]
     config.i18n.default_locale = :rw
-    config.i18n.fallbacks         = [:rw]  # optional, helpful
+    config.i18n.fallbacks         = [ :rw ]  # optional, helpful
 
     # Configuration for the application, engines, and railties goes here.
     #

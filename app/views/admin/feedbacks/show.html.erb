@@ -1,0 +1,31 @@
+<h1><%= t("admin.feedbacks.show.title", default: "Feedback") %></h1>
+
+<p><strong><%= t("admin.feedbacks.columns.email", default: "Email") %>:</strong> <%= @feedback.email %></p>
+
+<p><strong><%= t("admin.feedbacks.columns.category", default: "Category") %>:</strong>
+  <% cat = @feedback.category.presence || "other" %>
+  <%= t("feedbacks.categories.#{cat}", default: cat.humanize) %>
+</p>
+
+<p><strong><%= t("admin.feedbacks.columns.status", default: "Status") %>:</strong>
+  <% stat = @feedback.status.presence || "open" %>
+  <%= t("admin.feedbacks.status.#{stat}", default: stat.humanize) %>
+</p>
+
+<p><strong><%= t("feedbacks.form.message", default: "Message") %>:</strong><br>
+  <%= simple_format(@feedback.message) %>
+</p>
+
+<hr>
+
+<%= form_with model: [:admin, @feedback], method: :patch, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :status, t("admin.feedbacks.form.status", default: "Status") %>
+    <%= f.select :status,
+          Feedback.statuses.keys.map { |s| [t("admin.feedbacks.status.#{s}", default: s.humanize), s] },
+          {}, class: "form-select" %>
+  </div>
+
+  <%= f.submit t("admin.feedbacks.update.submit", default: "Update"),
+               class: "btn btn-primary" %>
+<% end %>

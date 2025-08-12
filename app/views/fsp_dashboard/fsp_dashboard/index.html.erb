@@ -2,6 +2,14 @@
   <h1><%= t('fsp.index.title') %></h1>
   <h2 class="h5 text-muted mb-3"><%= t('fsp.index.subtitle') %></h2>
 
+  <!-- Feedback quick link (FSP Dashboard) -->
+<div class="d-flex justify-content-end mb-3">
+  <%= link_to t('shared.feedback.link', default: "Send Feedback"),
+              new_feedback_path,
+              class: "btn btn-outline-primary btn-sm" %>
+</div>
+
+
   <table class="table table-striped">
     <thead>
       <tr>

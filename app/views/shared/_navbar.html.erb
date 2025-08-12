@@ -61,6 +61,12 @@
                       <i class="fas fa-database me-2" aria-hidden="true"></i> <%= t('shared.nav.data_access_requests') %>
                     <% end %>
                   </li>
+                  <li>
+                    <%= link_to admin_feedbacks_path, class: "dropdown-item" do %>
+                      <i class="fas fa-comment-dots me-2" aria-hidden="true"></i>
+                      <%= t('shared.nav.admin_feedbacks') %>
+                    <% end %>
+                  </li>
                 <% end %>
               <% elsif fsp_user_signed_in? %>
                 <li>
@@ -85,6 +91,11 @@
           <li class="nav-item"><%= link_to t('shared.nav.sign_up'), new_user_registration_path, class: "nav-link" %></li>
           <li class="nav-item"><%= link_to t('shared.nav.login'),   new_user_session_path,      class: "nav-link" %></li>
         <% end %>
+
+        <!-- Feedback link -->
+        <li class="nav-item">
+          <%= link_to t('shared.feedback.link', default: "Send Feedback"), new_feedback_path, class: "nav-link" %>
+        </li>
 
         <!-- Locale dropdown -->
         <li class="nav-item dropdown d-flex align-items-center">

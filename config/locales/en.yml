@@ -5,16 +5,30 @@ en:
       income: Income
       sale: Sale
   admin:
-    data_access_requests:
-      index:
-        actions: Actions
-        approve: Approve
-        empty: No requests found.
-        reject: Reject
-        requester: Requester
+    feedbacks:
+      flash:
+        updated: Feedback updated.
+      form:
         status: Status
-        title: Data Access Requests
-        user: User
+      index:
+        columns:
+          category: Category
+          created_at: Created
+          email: Email
+          status: Status
+        filters:
+          all: All
+        title: Feedback
+      show:
+        title: Feedback
+      status:
+        archived: Archived
+        in_review: In review
+        new: New
+        resolved: Resolved
+      update:
+        submit: Update
+      view: View
   announcements:
     date:
       formats:
@@ -117,6 +131,19 @@ en:
       name: Name
       title: Expense Details
       user: User
+  feedbacks:
+    categories:
+      bug: Bug
+      idea: Idea
+      other: Other
+      question: Question
+    form:
+      category: Category
+      email: Email
+      message: Message
+    new:
+      submit: Submit
+      title: Send Feedback
   fsp:
     index:
       actions:

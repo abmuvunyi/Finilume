@@ -1,5 +1,13 @@
 <h1><%= t('dashboard.title') %></h1>
 
+<!-- Feedback quick link (Business Dashboard) -->
+<div class="d-flex justify-content-end mb-3">
+  <%= link_to t('shared.feedback.link', default: "Send Feedback"),
+              new_feedback_path,
+              class: "btn btn-outline-primary btn-sm" %>
+</div>
+
+
 <div class="container">
   <div class="row">
     <!-- Total Revenue Card -->

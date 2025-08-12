@@ -5,16 +5,30 @@ rw:
       income: Inyinjiza
       sale: Igurishwa
   admin:
-    data_access_requests:
-      index:
-        actions: Ibikorwa
-        approve: Emeza
-        empty: Nta busabe bubonetse.
-        reject: Hakana
-        requester: Usaba
+    feedbacks:
+      flash:
+        updated: Ubutumwa bwavuguruwe.
+      form:
         status: Imiterere
-        title: Ubusabe bwo Kugera ku Makuru
-        user: Ukoresha
+      index:
+        columns:
+          category: Icyiciro
+          created_at: Byashyizweho
+          email: Imeli
+          status: Imiterere
+        filters:
+          all: Byose
+        title: Ubutumwa
+      show:
+        title: Ubutumwa
+      status:
+        archived: Cyabitswe
+        in_review: Gusuzumwa
+        new: Gishya
+        resolved: Cyakemutse
+      update:
+        submit: Hindura
+      view: Reba
   announcements:
     date:
       formats:
@@ -117,6 +131,19 @@ rw:
       name: Izina
       title: Ibisobanuro by’Ikiguzi
       user: Ukoresha
+  feedbacks:
+    categories:
+      bug: Ikosa/Ikibazo
+      idea: Igitekerezo
+      other: Ibindi
+      question: Ikibazo (kubaza)
+    form:
+      category: Icyiciro
+      email: Imeli
+      message: Ubutumwa
+    new:
+      submit: Ohereza
+      title: Twoherereze ubutumwa
   fsp:
     index:
       actions:
