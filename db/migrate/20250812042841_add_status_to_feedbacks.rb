@@ -14,3 +14,4 @@ class AddStatusToFeedbacks < ActiveRecord::Migration[7.1]
     remove_column :feedbacks, :status if column_exists?(:feedbacks, :status)
   end
 end
+# This migration adds a 'status' column to the feedbacks table, ensuring it has a default value of "open" and cannot be null.

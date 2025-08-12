@@ -37,3 +37,5 @@ class AddFieldsToFeedbacks < ActiveRecord::Migration[7.1]
     remove_column :feedbacks, :email    if column_exists?(:feedbacks, :email)
   end
 end
+# This migration adds email, category, and message fields to the feedbacks table,
+# ensuring they are not null. It also includes optional index creation for performance.
