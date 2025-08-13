@@ -56,7 +56,12 @@ class SalesController < ApplicationController
 
   # Do NOT permit :total_price (computed in model).
   # :date is permitted only to allow backdated/late entries manually if you ever show a date field again.
+  private
+
   def sale_params
-    params.require(:sale).permit(:product_id, :quantity, :discount_amount, :date)
+    permitted = params.require(:sale).permit(:product_id, :quantity, :discount_amount, :date)
+    # If discount is "", make it 0 so we never send NULL to the DB
+    permitted[:discount_amount] = 0 if permitted[:discount_amount].blank?
+    permitted
   end
 end

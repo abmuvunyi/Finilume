@@ -1,31 +1,38 @@
+# app/models/sale.rb
 class Sale < ApplicationRecord
   belongs_to :user
   belongs_to :product
   has_one    :income, dependent: :nullify
 
   # quantity:int, total_price:numeric (default 0), date:timestamp (nullable)
-  # discount_amount:numeric (nullable or default 0)
+  # discount_amount:numeric (NOT NULL at DB level)
   validates :product, presence: true
   validates :quantity, numericality: { greater_than: 0 }
-  validates :discount_amount, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :discount_amount, numericality: { greater_than_or_equal_to: 0 }
 
   validate  :enough_stock, on: :create
 
+  # Ensure discount is never nil BEFORE computing totals
+  before_validation :normalize_discount
   before_validation :compute_total_price_and_date
   after_commit      :apply_sale_effects, on: :create
 
   private
 
+  # Turn "", nil => 0 so we never try to insert NULL into a NOT NULL column
+  def normalize_discount
+    self.discount_amount = 0 if discount_amount.blank?
+  end
+
   def compute_total_price_and_date
-    # Use product price and quantity to compute the gross
     unit_price = product&.price.to_d
     qty        = quantity.to_i
-    discount   = (discount_amount.presence || 0).to_d
+    discount   = discount_amount.to_d
 
     gross = unit_price * qty
-    self.total_price = [gross - discount, 0].max
+    self.total_price = [ gross - discount, 0 ].max
 
-    # If date not provided, set from "now" (created_at isn’t set yet here)
+    # If date not provided, set from "now"
     self.date ||= Time.zone.now
   end
 
@@ -51,7 +58,7 @@ class Sale < ApplicationRecord
       date:     (date || created_at || Time.current).to_date
     }
 
-    # Only attach sale_id if the column exists (works whether you added it or not)
+    # Only attach sale_id if the column exists (safe on older schemas too)
     attrs[:sale_id] = id if Income.column_names.include?("sale_id")
 
     Income.create!(attrs)
@@ -61,7 +68,7 @@ class Sale < ApplicationRecord
 
   # --- Ransack allow‑list ---
   def self.ransackable_attributes(_auth_object = nil)
-    %w[id product_id quantity total_price user_id date created_at updated_at]
+    %w[id product_id quantity total_price user_id date created_at updated_at discount_amount]
   end
 
   def self.ransackable_associations(_auth_object = nil)

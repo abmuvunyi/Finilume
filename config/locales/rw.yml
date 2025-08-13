@@ -461,9 +461,17 @@ products:
     added_stock_expense: "Kongera ibicuruzwa kuri %{name}"
 sales:
     form:
-      discount_amount: "Kugabanya igiciro"
       prompts:
         product: "Hitamo Igicuruzwa"
+      discount_amount: "Kugabanyirizwa"
+      discount_placeholder: "ntacyo"
+    index:
+      columns:
+        quantity: "Umubare"
+    flash:
+      created: "Kugurisha byakozwe neza."
+      updated: "Kugurisha byavuguruwe neza."
+      destroyed: "Kugurisha byasanzwe neza."
     errors:
-      not_enough_stock: "Ibicuruzwa ntibihagije ku bubiko"
-    income_name: "Icuruzwa rya %{name}"
+      not_enough_stock: "Ntabyo bihagije bihari"
+    income_name: "Kugurisha %{name}"

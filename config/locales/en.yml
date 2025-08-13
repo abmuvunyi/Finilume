@@ -459,9 +459,17 @@ products:
     added_stock_expense: "Added stock for %{name}"
 sales:
     form:
-      discount_amount: "Discount"
       prompts:
         product: "Select a Product"
+      discount_amount: "Discount"
+      discount_placeholder: "optional"
+    index:
+      columns:
+        quantity: "Quantity"
+    flash:
+      created: "Sale was successfully created."
+      updated: "Sale was successfully updated."
+      destroyed: "Sale was successfully destroyed."
     errors:
       not_enough_stock: "Not enough stock"
     income_name: "Sale of %{name}"
