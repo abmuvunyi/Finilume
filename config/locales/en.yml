@@ -451,3 +451,17 @@ en:
       short: "%b %d, %Y %H:%M"
       ymd: "%Y-%m-%d"
   unauthorized: You are not authorized to perform this action.
+
+products:
+    form:
+      cost_price: "Cost price"
+    initial_stock_expense: "Initial stock purchase for %{name}"
+    added_stock_expense: "Added stock for %{name}"
+sales:
+    form:
+      discount_amount: "Discount"
+      prompts:
+        product: "Select a Product"
+    errors:
+      not_enough_stock: "Not enough stock"
+    income_name: "Sale of %{name}"

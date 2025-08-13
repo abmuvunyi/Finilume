@@ -454,3 +454,16 @@ rw:
       short: "%d %b %Y %H:%M"
       ymd: "%Y-%m-%d"
   unauthorized: Ntaburenganzira ufite bwo gukora iki gikorwa.
+products:
+    form:
+      cost_price: "Igiciro cy'ibyo kugura"
+    initial_stock_expense: "Igura rya mbere rya %{name}"
+    added_stock_expense: "Kongera ibicuruzwa kuri %{name}"
+sales:
+    form:
+      discount_amount: "Kugabanya igiciro"
+      prompts:
+        product: "Hitamo Igicuruzwa"
+    errors:
+      not_enough_stock: "Ibicuruzwa ntibihagije ku bubiko"
+    income_name: "Icuruzwa rya %{name}"

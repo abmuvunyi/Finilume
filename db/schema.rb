@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_12_045157) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_13_191308) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_12_045157) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_expenses_on_product_id"
     t.index ["user_id"], name: "index_expenses_on_user_id"
   end
 
@@ -113,6 +115,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_12_045157) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "sale_id"
+    t.index ["sale_id"], name: "index_incomes_on_sale_id"
     t.index ["user_id"], name: "index_incomes_on_user_id"
   end
 
@@ -148,6 +152,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_12_045157) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "cost_price", precision: 12, scale: 2, default: "0.0", null: false
+    t.index ["cost_price"], name: "index_products_on_cost_price"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -159,6 +165,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_12_045157) do
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "discount_amount", precision: 12, scale: 2, default: "0.0", null: false
+    t.index ["discount_amount"], name: "index_sales_on_discount_amount"
     t.index ["product_id"], name: "index_sales_on_product_id"
     t.index ["user_id"], name: "index_sales_on_user_id"
   end
@@ -200,7 +208,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_12_045157) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "data_access_requests", "fsp_users"
   add_foreign_key "data_access_requests", "users"
+  add_foreign_key "expenses", "products"
   add_foreign_key "expenses", "users"
+  add_foreign_key "incomes", "sales"
   add_foreign_key "incomes", "users"
   add_foreign_key "products", "users"
   add_foreign_key "sales", "products"

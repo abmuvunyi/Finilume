@@ -1,7 +1,13 @@
 <%= form_with(model: product) do |form| %>
   <% if product.errors.any? %>
     <div id="error_explanation">
-      <h2><%= t('shared.errors.prohibited_save', count: product.errors.count, resource: t('products.singular')) %></h2>
+      <h2>
+        <%= t('errors.template.header',
+              count: product.errors.count,
+              model: t('activerecord.models.product', default: 'product')) %>
+        <%= t('errors.template.prohibited',
+              model: t('activerecord.models.product', default: 'product')) %>
+      </h2>
       <ul>
         <% product.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,40 +17,52 @@
   <% end %>
 
   <div class="mb-3">
-    <%= form.label :name, t('products.form.name'), class: 'form-label' %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.label :name, t('products.fields.name', default: 'Name'), class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control',
+          placeholder: t('products.form.name', default: 'e.g., Sugar') %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :category, t('products.form.category'), class: 'form-label' %>
-    <%= form.text_field :category, class: 'form-control' %>
+    <%= form.label :category, t('products.fields.category', default: 'Category'), class: 'form-label' %>
+    <%= form.text_field :category, class: 'form-control',
+          placeholder: t('products.form.category', default: 'e.g., Grocery') %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :price, t('products.form.price'), class: 'form-label' %>
-    <%= form.number_field :price, class: 'form-control', step: 0.01 %>
+    <%= form.label :price, t('products.fields.price', default: 'Price'), class: 'form-label' %>
+    <%= form.number_field :price, class: 'form-control', step: 0.01, min: 0 %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :quantity, t('products.form.quantity'), class: 'form-label' %>
-    <%= form.number_field :quantity, class: 'form-control' %>
+    <%= form.label :cost_price, t('products.form.cost_price', default: 'Cost price'), class: 'form-label' %>
+    <%= form.number_field :cost_price, class: 'form-control', step: 0.01, min: 0,
+          placeholder: t('products.form.cost_price_placeholder', default: 'e.g., 2.50') %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :quantity, t('products.fields.quantity', default: 'Quantity'), class: 'form-label' %>
+    <%= form.number_field :quantity, class: 'form-control', step: 1, min: 0 %>
   </div>
 
   <div class="mb-3">
     <% if product.persisted? %>
       <div class="float-end">
-        <%= link_to t('products.form.destroy'), product, method: :delete,
-                    class: "text-danger",
-                    data: { confirm: t('shared.confirm') } %>
+        <%= link_to t('shared.buttons.destroy', default: 'Destroy'), product, method: :delete,
+              class: "text-danger",
+              data: { confirm: t('shared.confirmations.destroy', default: 'Are you sure?') } %>
       </div>
     <% end %>
 
-    <%= form.submit t('shared.save'), class: 'btn btn-primary' %>
+    <%= form.submit(
+          product.persisted? ? t('shared.buttons.update', default: 'Update')
+                             : t('shared.buttons.save', default: 'Save'),
+          class: 'btn btn-primary'
+        ) %>
 
     <% if product.persisted? %>
-      <%= link_to t('shared.cancel'), product, class: "btn btn-link" %>
+      <%= link_to t('shared.buttons.cancel', default: 'Cancel'), product, class: "btn btn-link" %>
     <% else %>
-      <%= link_to t('shared.cancel'), products_path, class: "btn btn-link" %>
+      <%= link_to t('shared.buttons.cancel', default: 'Cancel'), products_path, class: "btn btn-link" %>
     <% end %>
   </div>
 <% end %>

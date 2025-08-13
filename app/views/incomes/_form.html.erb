@@ -20,25 +20,22 @@
   <div class="mb-3">
     <%= form.label :name, t('activerecord.attributes.income.name'), class: 'form-label' %>
     <%= form.text_field :name, class: 'form-control',
-          placeholder: t('incomes.form.placeholders.name') %>
+          placeholder: t('incomes.form.placeholders.name', default: 'e.g., Service payment') %>
   </div>
 
   <div class="mb-3">
     <%= form.label :amount, t('activerecord.attributes.income.amount'), class: 'form-label' %>
     <%= form.text_field :amount, class: 'form-control',
-          placeholder: t('incomes.form.placeholders.amount') %>
+          placeholder: t('incomes.form.placeholders.amount', default: 'e.g., 150000') %>
   </div>
 
   <div class="mb-3">
     <%= form.label :category, t('activerecord.attributes.income.category'), class: 'form-label' %>
     <%= form.text_field :category, class: 'form-control',
-          placeholder: t('incomes.form.placeholders.category') %>
+          placeholder: t('incomes.form.placeholders.category', default: 'e.g., Consulting') %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :date, t('activerecord.attributes.income.date'), class: 'form-label' %>
-    <%= form.date_field :date, class: 'form-control' %>
-  </div>
+  <%# DATE FIELD REMOVED — recorded from created_at or inherited from sale %>
 
   <div class="mb-3">
     <% if income.persisted? %>

@@ -4,9 +4,9 @@
       <h2>
         <%= t('errors.template.header',
               count: sale.errors.count,
-              model: t('activerecord.models.sale')) %>
+              model: t('activerecord.models.sale', default: 'sale')) %>
         <%= t('errors.template.prohibited',
-              model: t('activerecord.models.sale')) %>
+              model: t('activerecord.models.sale', default: 'sale')) %>
       </h2>
       <ul>
         <% sale.errors.full_messages.each do |message| %>
@@ -17,41 +17,45 @@
   <% end %>
 
   <div class="mb-3">
-    <%= form.label :product_id, t('activerecord.attributes.sale.product'), class: 'form-label' %>
-    <%= form.collection_select :product_id, @products, :id, :name,
-          { prompt: t('sales.form.prompts.product') },
-          { class: 'form-control' } %>
+    <%= form.label :product_id, t('sales.form.prompts.product', default: 'Select a Product'), class: 'form-label' %>
+    <%= form.collection_select :product_id, @products, :id, :name, { prompt: true }, class: "form-select" %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :quantity, t('activerecord.attributes.sale.quantity'), class: 'form-label' %>
-    <%= form.number_field :quantity, class: 'form-control',
-          placeholder: t('sales.form.placeholders.quantity') %>
+    <%= form.label :quantity, t('sales.index.columns.quantity', default: 'Quantity'), class: 'form-label' %>
+    <%= form.number_field :quantity, class: 'form-control', step: 1, min: 1 %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :date, t('activerecord.attributes.sale.date'), class: 'form-label' %>
-    <%= form.datetime_field :date, class: 'form-control' %>
+    <%= form.label :discount_amount, t('sales.form.discount_amount', default: 'Discount'), class: 'form-label' %>
+    <%= form.number_field :discount_amount,
+          value: (sale.persisted? ? sale.discount_amount : nil),
+          step: 0.01, min: 0, class: 'form-control',
+          placeholder: t('sales.form.discount_placeholder', default: 'optional') %>
+    <%# empty on new, keep value on edit %>
   </div>
+
+  <%# No :date field — it’s set from timestamp or backdated via controller/model %>
 
   <div class="mb-3">
     <% if sale.persisted? %>
       <div class="float-end">
-        <%= link_to t('shared.buttons.destroy'), sale, method: :delete,
+        <%= link_to t('shared.buttons.destroy', default: 'Destroy'), sale, method: :delete,
               class: "text-danger",
-              data: { confirm: t('shared.confirmations.destroy') } %>
+              data: { confirm: t('shared.confirmations.destroy', default: 'Are you sure?') } %>
       </div>
     <% end %>
 
     <%= form.submit(
-          sale.persisted? ? t('shared.buttons.update') : t('shared.buttons.save'),
+          sale.persisted? ? t('shared.buttons.update', default: 'Update')
+                          : t('shared.buttons.save', default: 'Save'),
           class: 'btn btn-primary'
         ) %>
 
     <% if sale.persisted? %>
-      <%= link_to t('shared.buttons.cancel'), sale, class: "btn btn-link" %>
+      <%= link_to t('shared.buttons.cancel', default: 'Cancel'), sale, class: "btn btn-link" %>
     <% else %>
-      <%= link_to t('shared.buttons.cancel'), sales_path, class: "btn btn-link" %>
+      <%= link_to t('shared.buttons.cancel', default: 'Cancel'), sales_path, class: "btn btn-link" %>
     <% end %>
   </div>
 <% end %>
