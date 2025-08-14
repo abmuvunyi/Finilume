@@ -1,56 +1,70 @@
 class Product < ApplicationRecord
   belongs_to :user
-  has_many :sales, dependent: :restrict_with_error
-  has_many :expenses, dependent: :nullify
+  has_many   :sales, dependent: :restrict_with_exception
+  has_many   :expenses, dependent: :nullify, foreign_key: :product_id, inverse_of: :product
 
-  # Ensure numeric presence (optional; adjust to your app’s style)
-  validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
-  validates :cost_price, numericality: { greater_than_or_equal_to: 0 }
+  validates :name, presence: true
+  validates :price,       numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :cost_price,  numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :quantity,    numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
 
-  # Record expense for initial stock on create
+  # --- Expense creation hooks ---
   after_commit :record_initial_stock_expense, on: :create
-  # Record expense when stock increases
-  after_update :record_added_stock_expense, if: :saved_change_to_quantity?
+  after_commit :record_added_stock_expense,   on: :update
 
-  private
-
+  # ===== Helpers =====
   def record_initial_stock_expense
-    qty = quantity.to_i
-    return if qty <= 0 || cost_price.to_d <= 0
+    q  = quantity.to_i
+    cp = cost_price.to_d
+    return if q <= 0 || cp <= 0
 
-    expenses.create!(
-      user_id:   user_id,
-      name:      I18n.t("products.initial_stock_expense", default: "Initial stock purchase for %{name}", name: name),
-      amount:    (cost_price.to_d * qty),
-      category:  "product_purchase",
-      date:      (respond_to?(:created_at) ? created_at.to_date : Date.current)
+    Rails.logger.info("[Product##{id}] initial stock expense -> q=#{q}, cp=#{cp}, amount=#{cp * q}")
+
+    Expense.create!(
+      user_id:    user_id,
+      product_id: id,
+      name:       I18n.t("products.expenses.initial_stock_name", default: "Initial stock for %{name}", name: name),
+      amount:     cp * q,
+      category:   "product_purchase",
+      date:       (created_at || Time.current).to_date
     )
   rescue => e
-    Rails.logger.error("[Products#record_initial_stock_expense] #{e.class}: #{e.message}")
+    Rails.logger.error("[Product#record_initial_stock_expense] #{e.class}: #{e.message}")
   end
 
   def record_added_stock_expense
-    before_qty, after_qty = saved_change_to_quantity
-    delta = after_qty.to_i - before_qty.to_i
-    return if delta <= 0 || cost_price.to_d <= 0
+    # Only when quantity actually changed AND increased
+    return unless saved_change_to_quantity?
 
-    expenses.create!(
-      user_id:   user_id,
-      name:      I18n.t("products.added_stock_expense", default: "Added stock for %{name}", name: name),
-      amount:    (cost_price.to_d * delta),
-      category:  "product_purchase",
-      date:      Date.current
+    before_q = quantity_before_last_save.to_i
+    after_q  = quantity.to_i
+    added    = after_q - before_q
+    cp       = cost_price.to_d
+
+    Rails.logger.info("[Product##{id}] quantity change: #{before_q} -> #{after_q} (added=#{added}), cp=#{cp}")
+
+    return if added <= 0 || cp <= 0
+
+    Rails.logger.info("[Product##{id}] added stock expense -> added=#{added}, cp=#{cp}, amount=#{cp * added}")
+
+    Expense.create!(
+      user_id:    user_id,
+      product_id: id,
+      name:       I18n.t("products.expenses.added_stock_name", default: "Added stock for %{name}", name: name),
+      amount:     cp * added,
+      category:   "product_purchase",
+      date:       (updated_at || Time.current).to_date
     )
   rescue => e
-    Rails.logger.error("[Products#record_added_stock_expense] #{e.class}: #{e.message}")
+    Rails.logger.error("[Product#record_added_stock_expense] #{e.class}: #{e.message}")
   end
-    # --- Ransack allow‑list (ADD this block near the bottom of the class) ---
-    def self.ransackable_attributes(_auth_object = nil)
-      %w[id name category price cost_price quantity user_id created_at updated_at]
-    end
 
-    def self.ransackable_associations(_auth_object = nil)
-      %w[sales user]
-    end
-  # --- end Ransack allow‑list ---
+  # --- Ransack allow‑list ---
+  def self.ransackable_attributes(_ = nil)
+    %w[id name category price cost_price quantity user_id created_at updated_at]
+  end
+
+  def self.ransackable_associations(_ = nil)
+    %w[sales user expenses]
+  end
 end
