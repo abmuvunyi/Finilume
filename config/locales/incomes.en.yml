@@ -1,0 +1,11 @@
+en:
+  incomes:
+    form:
+      placeholders:
+        name: "Income source"
+        amount: "Amount in currency"
+        category: "Category"
+    flash:
+      created: "Income was successfully recorded."
+      updated: "Income was successfully updated."
+      destroyed: "Income was successfully deleted."

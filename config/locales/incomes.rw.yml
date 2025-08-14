@@ -1,0 +1,11 @@
+rw:
+  incomes:
+    form:
+      placeholders:
+        name: "Inkomoko y'inyungu"
+        amount: "Amafaranga mu mafaranga y'igihugu"
+        category: "Icyiciro"
+    flash:
+      created: "Inyungu yinjiye yashyizwe neza."
+      updated: "Inyungu yinjiye yavuguruwe neza."
+      destroyed: "Inyungu yinjiye yasibwe neza."

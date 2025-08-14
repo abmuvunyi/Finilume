@@ -33,8 +33,19 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    if @product.sales.exists?
+      redirect_to products_path,
+        alert: t("products.flash.cannot_destroy_with_sales",
+                 default: "Cannot delete a product that has sales. Consider archiving it instead.")
+      return
+    end
+
+    # No sales: it's safe to delete. Detach any expense rows first.
+    Expense.where(product_id: @product.id).update_all(product_id: nil)
     @product.destroy!
-    redirect_to products_path, status: :see_other, notice: t("products.flash.destroyed", default: "Product was successfully destroyed.")
+
+    redirect_to products_path,
+      notice: t("products.flash.destroyed", default: "Product was successfully destroyed.")
   end
 
   private

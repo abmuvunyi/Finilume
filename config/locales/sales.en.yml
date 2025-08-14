@@ -1,0 +1,24 @@
+en:
+  sales:
+    form:
+      prompts:
+        product: "Select a Product"
+      discount_amount: "Discount"
+      discount_placeholder: "optional"
+    index:
+      columns:
+        quantity: "Quantity"
+    errors:
+      not_enough_stock: "Not enough stock"
+    income_name: "Sale of %{name}"
+sales:
+    income_name: "Sale of %{name}"
+    form:
+      discount_amount: "Discount"
+      discount_placeholder: "optional"
+    errors:
+      not_enough_stock: "Not enough stock"
+    flash:
+      created: "Sale was successfully created."
+      updated: "Sale was successfully updated."
+      destroyed: "Sale was successfully destroyed."

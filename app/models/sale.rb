@@ -30,7 +30,7 @@ class Sale < ApplicationRecord
     discount   = discount_amount.to_d
 
     gross = unit_price * qty
-    self.total_price = [ gross - discount, 0 ].max
+    self.total_price = [gross - discount, 0].max
 
     # If date not provided, set from "now"
     self.date ||= Time.zone.now
@@ -38,6 +38,7 @@ class Sale < ApplicationRecord
 
   def enough_stock
     return if product.blank?
+
     if product.quantity.to_i < quantity.to_i
       errors.add(:quantity, I18n.t("sales.errors.not_enough_stock", default: "Not enough stock"))
     end
@@ -58,7 +59,7 @@ class Sale < ApplicationRecord
       date:     (date || created_at || Time.current).to_date
     }
 
-    # Only attach sale_id if the column exists (safe on older schemas too)
+    # Only attach sale_id if the column exists (safe for older schemas)
     attrs[:sale_id] = id if Income.column_names.include?("sale_id")
 
     Income.create!(attrs)

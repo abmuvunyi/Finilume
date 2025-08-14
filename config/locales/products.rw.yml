@@ -1,0 +1,14 @@
+rw:
+  products:
+    flash:
+      cannot_destroy_with_sales: "Ntushobora gusiba igicuruzwa gifitanye isano n’igurishwa. Hitamo kugihagarika (archive) aho kugisiba."
+      destroyed: "Igicuruzwa gisibwe neza."
+    labels:
+      has_sales_cannot_delete: "Gifite ibyagurishijwe — ntigisibika"
+    expense:
+      initial_stock_name: "Stoke ya mbere ya %{name}"
+      added_stock_name: "Stoke yongeye kuri %{name}"
+products:
+    expense:
+      initial_stock_name: "Stoke ya mbere ya %{name}"
+      added_stock_name: "Stoke yongeye kuri %{name}"

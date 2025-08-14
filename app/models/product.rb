@@ -23,7 +23,8 @@ class Product < ApplicationRecord
     Expense.create!(
       user_id:    user_id,
       product_id: id,
-      name:       I18n.t("products.expenses.initial_stock_name", default: "Initial stock for %{name}", name: name),
+      name: I18n.t("products.expense.initial_stock_name",
+             default: "Initial stock for %{name}", name: name),
       amount:     cp * q,
       category:   "product_purchase",
       date:       (created_at || Time.current).to_date
@@ -50,7 +51,8 @@ class Product < ApplicationRecord
     Expense.create!(
       user_id:    user_id,
       product_id: id,
-      name:       I18n.t("products.expenses.added_stock_name", default: "Added stock for %{name}", name: name),
+      name: I18n.t("products.expense.added_stock_name",
+             default: "Added stock for %{name}", name: name),
       amount:     cp * added,
       category:   "product_purchase",
       date:       (updated_at || Time.current).to_date

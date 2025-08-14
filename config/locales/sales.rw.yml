@@ -1,0 +1,24 @@
+rw:
+  sales:
+    form:
+      prompts:
+        product: "Hitamo Igicuruzwa"
+      discount_amount: "Igabanywa"
+      discount_placeholder: "si ngombwa"
+    index:
+      columns:
+        quantity: "Ingano"
+    errors:
+      not_enough_stock: "Stoke ntihagije"
+    income_name: "Igurishwa rya %{name}"
+sales:
+    income_name: "Igurishwa rya %{name}"
+    form:
+      discount_amount: "Kugabanya igiciro"
+      discount_placeholder: "bitari ngombwa"
+    errors:
+      not_enough_stock: "Ntihari stoke ihagije"
+    flash:
+      created: "Igurishwa ryakozwe neza."
+      updated: "Igurishwa ryavuguruwe neza."
+      destroyed: "Igurishwa risibwe neza."

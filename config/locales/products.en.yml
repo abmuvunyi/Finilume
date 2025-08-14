@@ -1,0 +1,14 @@
+en:
+  products:
+    flash:
+      cannot_destroy_with_sales: "You can’t delete a product that has sales. Consider archiving it instead."
+      destroyed: "Product was successfully deleted."
+    labels:
+      has_sales_cannot_delete: "Has sales — cannot delete"
+    expense:
+      initial_stock_name: "Initial stock for %{name}"
+      added_stock_name: "Added stock for %{name}"
+products:
+    expense:
+      initial_stock_name: "Initial stock for %{name}"
+      added_stock_name: "Added stock for %{name}"
