@@ -473,3 +473,81 @@ sales:
     errors:
       not_enough_stock: "Not enough stock"
     income_name: "Sale of %{name}"
+currency:
+    unit: "RWF"
+dashboard:
+    title: "Dashboard"
+    download_pdf: "Download PDF"
+    filters:
+      start_date: "Start date"
+      end_date: "End date"
+      quick: "Quick"
+    quick:
+      today: "Today"
+      this_week: "This Week"
+      mtd: "Month to Date"
+      last_30: "Last 30 Days"
+    cards:
+      revenue_in_range: "Revenue"
+      gross_margin_in_range: "Gross Margin"
+      avg_order_value_in_range: "Avg Order"
+      discounts_in_range: "Discounts"
+      expenses_in_range: "Expenses"
+      net_profit_in_range: "Net Profit"
+      low_stock_products: "Low Stock Products"
+      top_selling_products: "Top-Selling Products (Qty)"
+    sections:
+      trends_selected_range: "Revenue vs Expenses (Selected Range)"
+      top_products_selected_range: "Top Products by Revenue (Selected Range)"
+    tables:
+      trends:
+        date: "Date"
+        revenue: "Revenue"
+        expenses: "Expenses"
+      top_products:
+        product: "Product"
+        revenue: "Revenue"
+      products:
+        title: "Products"
+        search_placeholder: "Search products by name"
+        columns:
+          name: "Name"
+          category: "Category"
+          price: "Price"
+          quantity: "Quantity"
+      sales:
+        title: "Sales"
+        search_placeholder: "Search sales by product"
+        columns:
+          product: "Product"
+          quantity: "Qty"
+          total_price: "Total Price"
+          date: "Date"
+      incomes:
+        title: "Income"
+        search_placeholder: "Search income by name"
+        columns:
+          name: "Name"
+          category: "Category"
+          amount: "Amount"
+          date: "Date"
+      expenses:
+        title: "Expenses"
+        search_placeholder: "Search expenses by name"
+        columns:
+          name: "Name"
+          category: "Category"
+          amount: "Amount"
+          date: "Date"
+    labels:
+      mtd: "MTD Revenue"
+      stock_left: "Stock left"
+      sold: "Sold"
+    messages:
+      all_stock_ok: "All products have sufficient stock."
+      no_top_selling: "No sales yet."
+      no_trend_data: "No data for the selected range."
+      no_top_products: "No top products in the selected range."
+    pie:
+      income: "Income"
+      expenses: "Expenses"

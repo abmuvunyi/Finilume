@@ -10,3 +10,17 @@
 // @import "bootstrap-mixins"; // Optional: for Bootstrap mixins
 // @import "custom"; // Optional: for your own styles
 // @import "font-awesome"; // Optional: for Font Awesome icons
+/* app/assets/stylesheets/dashboard.css */
+.card .table thead th {
+    z-index: 1;
+    /* keep sticky header above scroll */
+}
+
+.card .table thead {
+    position: sticky;
+    top: 0;
+}
+
+.badge {
+    font-weight: 500;
+}

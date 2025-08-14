@@ -11,7 +11,8 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "kaminari"
-
+# dashboard
+gem "chartkick"
 # App features
 gem "groupdate"
 gem "prawn"
@@ -33,6 +34,7 @@ gem "pundit", "~> 2.1"
 gem "sitemap_generator", "~> 6.1"
 gem "whenever", require: false
 gem "responders", github: "heartcombo/responders", branch: "main"
+
 
 # i18n (needed in all environments)
 gem "rails-i18n", "~> 7.0"
