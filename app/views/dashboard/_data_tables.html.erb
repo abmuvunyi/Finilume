@@ -1,0 +1,101 @@
+<div class="row">
+  <!-- Products Table -->
+  <div class="col-md-12 mb-4">
+    <h5><%= t('dashboard.tables.products.title') %></h5>
+    <table class="table table-hover table-sm">
+      <thead>
+        <tr>
+          <th><%= t("dashboard.tables.products.columns.name") %></th>
+          <th><%= t("dashboard.tables.products.columns.category") %></th>
+          <th><%= t("dashboard.tables.products.columns.price") %></th>
+          <th><%= t("dashboard.tables.products.columns.quantity") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.each do |product| %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.category %></td>
+            <td>RWF <%= product.price %></td>
+            <td><%= product.quantity %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Sales Table -->
+  <div class="col-md-12 mb-4">
+    <h5><%= t('dashboard.tables.sales.title') %></h5>
+    <table class="table table-hover table-sm">
+      <thead>
+        <tr>
+          <th><%= t("dashboard.tables.sales.columns.product") %></th>
+          <th><%= t("dashboard.tables.sales.columns.quantity") %></th>
+          <th><%= t("dashboard.tables.sales.columns.total_price") %></th>
+          <th><%= t("dashboard.tables.sales.columns.date") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% sales.each do |sale| %>
+          <tr>
+            <td><%= sale.product.name %></td>
+            <td><%= sale.quantity %></td>
+            <td>RWF <%= sale.total_price %></td>
+            <td><%= l(sale.date, format: :ymd) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Incomes Table -->
+  <div class="col-md-12 mb-4">
+    <h5><%= t('dashboard.tables.incomes.title') %></h5>
+    <table class="table table-hover table-sm">
+      <thead>
+        <tr>
+          <th><%= t("dashboard.tables.incomes.columns.name") %></th>
+          <th><%= t("dashboard.tables.incomes.columns.category") %></th>
+          <th><%= t("dashboard.tables.incomes.columns.amount") %></th>
+          <th><%= t("dashboard.tables.incomes.columns.date") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% incomes.each do |income| %>
+          <tr>
+            <td><%= income.name %></td>
+            <td><%= income.category %></td>
+            <td>RWF <%= income.amount %></td>
+            <td><%= l(income.date, format: :ymd) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Expenses Table -->
+  <div class="col-md-12 mb-4">
+    <h5><%= t('dashboard.tables.expenses.title') %></h5>
+    <table class="table table-hover table-sm">
+      <thead>
+        <tr>
+          <th><%= t("dashboard.tables.expenses.columns.name") %></th>
+          <th><%= t("dashboard.tables.expenses.columns.category") %></th>
+          <th><%= t("dashboard.tables.expenses.columns.amount") %></th>
+          <th><%= t("dashboard.tables.expenses.columns.date") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% expenses.each do |expense| %>
+          <tr>
+            <td><%= expense.name %></td>
+            <td><%= expense.category %></td>
+            <td>RWF <%= expense.amount %></td>
+            <td><%= l(expense.date, format: :ymd) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

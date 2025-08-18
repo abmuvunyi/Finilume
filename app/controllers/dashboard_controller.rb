@@ -30,9 +30,9 @@ class DashboardController < ApplicationController
   def download_pdf
     # IMPORTANT: reuse the same @*_in_range values already computed in set_dashboard_data
     pdf = Prawn::Document.new
-    pdf.text "Business Report (#{@range_start.to_date} → #{@range_end.to_date})", size: 18, style: :bold
+    pdf.text "Business Report (#{@range_start.to_date} to #{@range_end.to_date})", size: 18, style: :bold
     pdf.move_down 10
-
+  
     # Summary (Selected Range)
     pdf.text "Summary (Selected Range)", size: 14, style: :bold
     pdf.text "Revenue:      RWF #{@revenue_in_range.to_i}"
@@ -43,8 +43,8 @@ class DashboardController < ApplicationController
     pdf.text "Avg Order:    RWF #{@avg_order_value_in_range.to_i}"
     pdf.text "Net Profit:   RWF #{@net_profit_in_range.to_i}"
     pdf.move_down 15
-
-    # Products (Selected Range: basic current list unchanged to keep it simple)
+  
+    # Products (Selected Range)
     pdf.text "Products List", size: 13, style: :bold
     pdf.move_down 5
     if current_user.products.any?
@@ -57,9 +57,9 @@ class DashboardController < ApplicationController
       pdf.text "No products available."
     end
     pdf.move_down 10
-
+  
     # Sales (Selected Range)
-    pdf.text "Sales (#{@range_start.to_date} → #{@range_end.to_date})", size: 13, style: :bold
+    pdf.text "Sales (#{@range_start.to_date} to #{@range_end.to_date})", size: 13, style: :bold
     pdf.move_down 5
     sales_in_range = current_user.sales.where(date: @range_start..@range_end).includes(:product)
     if sales_in_range.any?
@@ -78,9 +78,9 @@ class DashboardController < ApplicationController
       pdf.text "No sales in selected range."
     end
     pdf.move_down 10
-
+  
     # Incomes (Selected Range)
-    pdf.text "Income (#{@range_start.to_date} → #{@range_end.to_date})", size: 13, style: :bold
+    pdf.text "Income (#{@range_start.to_date} to #{@range_end.to_date})", size: 13, style: :bold
     pdf.move_down 5
     incomes_in_range = current_user.incomes.where(date: @range_start..@range_end)
     if incomes_in_range.any?
@@ -93,9 +93,9 @@ class DashboardController < ApplicationController
       pdf.text "No income in selected range."
     end
     pdf.move_down 10
-
+  
     # Expenses (Selected Range)
-    pdf.text "Expenses (#{@range_start.to_date} → #{@range_end.to_date})", size: 13, style: :bold
+    pdf.text "Expenses (#{@range_start.to_date} to #{@range_end.to_date})", size: 13, style: :bold
     pdf.move_down 5
     expenses_in_range = current_user.expenses.where(date: @range_start..@range_end)
     if expenses_in_range.any?
@@ -107,11 +107,13 @@ class DashboardController < ApplicationController
     else
       pdf.text "No expenses in selected range."
     end
-
-    send_data pdf.render, filename: "business_report_#{@range_start.to_date}_to_#{@range_end.to_date}.pdf",
-                          type: "application/pdf",
-                          disposition: "attachment"
+  
+    send_data pdf.render,
+              filename: "business_report_#{@range_start.to_date}_to_#{@range_end.to_date}.pdf",
+              type: "application/pdf",
+              disposition: "attachment"
   end
+  
 
   private
 

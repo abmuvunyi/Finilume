@@ -1,0 +1,18 @@
+<div class="row mb-4">
+  <div class="col-md-6">
+    <h5><%= t("dashboard.charts.monthly_revenue") %></h5>
+    <%= line_chart revenue_by_month, height: "250px", library: { colors: ["#007bff"] } %>
+  </div>
+
+  <div class="col-md-6">
+    <h5><%= t("dashboard.charts.monthly_expenses") %></h5>
+    <%= line_chart expenses_by_month, height: "250px", library: { colors: ["#ffc107"] } %>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <h5><%= t("dashboard.charts.income_vs_expense") %></h5>
+    <%= column_chart income_vs_expense, stacked: true, height: "250px", library: { colors: ["#28a745", "#dc3545"] } %>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <h1><%= t('admin.data_access_requests.index.title') %></h1>
 
-<% if @requests.present? %>
+<% if @data_access_requests.present? %>
   <table class="table">
     <thead>
       <tr>
@@ -11,16 +11,18 @@
       </tr>
     </thead>
     <tbody>
-      <% @requests.each do |r| %>
+      <% @data_access_requests.each do |r| %>
         <tr id="<%= dom_id(r) %>">
           <td><%= r.fsp_user&.email || '—' %></td>
           <td><%= r.user&.email || '—' %></td>
           <td><%= r.status %></td>
           <td class="d-flex gap-2">
             <%= button_to t('admin.data_access_requests.index.approve'),
-                          admin_data_access_request_path(r, status: 'approved'),
-                          method: :patch,
-                          class: "btn btn-sm btn-success" %>
+                admin_data_access_request_path(r, approve: true),
+                method: :patch,
+                data: { turbo_confirm: t('are_you_sure') },
+                class: "btn btn-sm btn-success" %>
+
 
             <%= button_to t('admin.data_access_requests.index.reject'),
                           admin_data_access_request_path(r, status: 'rejected'),
