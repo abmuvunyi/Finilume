@@ -1,5 +1,5 @@
-# app/helpers/dashboard_data_helper.rb
-module DashboardDataHelper
+# app/helpers/dashboard_helper.rb
+module DashboardHelper
   def build_dashboard_metrics(user)
     {
       total_revenue:  user.sales.sum(:total_price),
