@@ -1,11 +1,11 @@
-include DashboardDataHelper
+include DashboardHelper
 module FspDashboard
   class FspDashboardController < ApplicationController
     before_action :authenticate_fsp_user!
-    before_action :check_approval, only: [:view_business]
+    before_action :check_approval, only: [ :view_business ]
 
     def index
-      @users = User.where.not(email: [nil, '']).where(admin: false)
+      @users = User.where.not(email: [ nil, "" ]).where(admin: false)
       @data_access_requests = DataAccessRequest.where(fsp_user: current_fsp_user).index_by(&:user_id)
     end
 
@@ -44,7 +44,7 @@ module FspDashboard
       metrics = build_dashboard_metrics(@user)
       metrics.each { |k, v| instance_variable_set("@#{k}", v) }
     end
-    
+
 
     private
 
