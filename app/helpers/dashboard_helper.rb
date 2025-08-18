@@ -1,4 +1,3 @@
-# app/helpers/dashboard_helper.rb
 module DashboardHelper
   def build_dashboard_metrics(user)
     {
