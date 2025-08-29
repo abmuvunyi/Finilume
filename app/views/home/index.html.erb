@@ -1,139 +1,138 @@
-<!-- Hero Section -->
-<div class="container-fluid hero-section text-white text-center py-5"
-     style="background: url('') no-repeat center center; background-size: cover; padding-left: 20%; padding-right: 20%;">
-  <div class="container">
-    <h1 class="display-3 mb-4" style="color: #DAA520; font-weight: bold;">
-      <%= t('home.index.hero.title') %>
-    </h1>
-    <p class="lead mb-4" style="font-size: 1.5rem;">
-      <%= t('home.index.hero.subtitle') %>
-    </p>
-    <%= link_to t('home.index.hero.cta'),
-                new_user_registration_path,
-                class: "btn btn-warning btn-lg px-5 py-3" %>
-  </div>
-</div>
+<!-- app/views/home/index.html.erb — FULL‑BLEED, NO‑SCSS, DARK THEME -->
+<!--
+This version fixes the side margins even if your layout wraps <%= yield %> in .container.
+Technique: per‑section full‑bleed using negative margins (calc(50% - 50vw)) + container for content.
+All copy remains in I18n keys you provided.
+Requires Bootstrap + (optionally) Font Awesome.
+-->
 
-<!-- Features Section -->
-<div class="container features-section mt-5">
-  <div class="text-center mb-5">
-    <h2><%= t('home.index.features.title') %></h2>
-    <p class="text-muted"><%= t('home.index.features.subtitle') %></p>
+<!-- HERO (full‑bleed, dark gradient) -->
+<section class="position-relative text-white text-center overflow-hidden py-5" style="min-height:56vh; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#1b1930;">
+  <div class="position-absolute top-0 start-0 w-100 h-100" style="background:
+    radial-gradient(1200px 400px at 10% 10%, rgba(24, 92, 194, 0.08), transparent),
+    radial-gradient(900px 300px at 90% 30%, rgba(228, 191, 95, 0.18), transparent);"></div>
+  <div class="container position-relative" style="max-width:1000px;">
+    <h1 class="display-4 fw-bold mb-3" style="color:#DAA520;"><%= t('home.index.hero.title') %></h1>
+    <p class="lead mb-4" style="opacity:.9;"><%= t('home.index.hero.subtitle') %></p>
+    <%= link_to t('home.index.hero.cta'), new_user_registration_path, class: "btn btn-warning btn-lg px-5 py-3 shadow-sm" %>
   </div>
+</section>
 
-  <div class="row text-center">
-    <div class="col-md-4 mb-4">
-      <div class="card border-0 shadow-sm h-100">
-        <div class="card-body">
-          <i class="fas fa-wallet fa-3x text-primary mb-3" aria-hidden="true"></i>
-          <h5 class="card-title"><%= t('home.index.features.cards.manage.title') %></h5>
-          <p class="card-text text-muted"><%= t('home.index.features.cards.manage.body') %></p>
+<!-- FEATURES (full‑bleed dark; frosted cards) -->
+<section class="position-relative overflow-hidden py-5" style="margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#201455;">
+  <div class="position-absolute top-0 start-0 w-100 h-100" style="pointer-events:none; background:
+    radial-gradient(700px 260px at 10% 0%, rgba(13,110,253,.07), transparent),
+    radial-gradient(700px 260px at 90% 40%, rgba(32,201,151,.07), transparent);"></div>
+  <div class="container position-relative">
+    <div class="text-center mb-5">
+      <h2 class="h1 fw-bold mb-2 text-white"><%= t('home.index.features.title') %></h2>
+      <p class="mb-0" style="color:rgba(255,255,255,.72);"><%= t('home.index.features.subtitle') %></p>
+    </div>
+
+    <div class="row g-4 text-center">
+      <div class="col-md-4">
+        <div class="rounded-4 h-100 p-4 shadow-sm" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); color:#e5e7eb;">
+          <i class="fas fa-wallet fa-3x mb-3" style="color:#4ea1ff;" aria-hidden="true"></i>
+          <h5 class="fw-semibold mb-2 text-white"><%= t('home.index.features.cards.manage.title') %></h5>
+          <p class="mb-0" style="color:rgba(255,255,255,.75);"><%= t('home.index.features.cards.manage.body') %></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rounded-4 h-100 p-4 shadow-sm" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); color:#e5e7eb;">
+          <i class="fas fa-chart-pie fa-3x mb-3" style="color:#20c997;" aria-hidden="true"></i>
+          <h5 class="fw-semibold mb-2 text-white"><%= t('home.index.features.cards.insights.title') %></h5>
+          <p class="mb-0" style="color:rgba(255,255,255,.75);"><%= t('home.index.features.cards.insights.body') %></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rounded-4 h-100 p-4 shadow-sm" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); color:#e5e7eb;">
+          <i class="fas fa-university fa-3x mb-3" style="color:#ff6b6b;" aria-hidden="true"></i>
+          <h5 class="fw-semibold mb-2 text-white"><%= t('home.index.features.cards.services.title') %></h5>
+          <p class="mb-0" style="color:rgba(255,255,255,.75);"><%= t('home.index.features.cards.services.body') %></p>
         </div>
       </div>
     </div>
-
-    <div class="col-md-4 mb-4">
-      <div class="card border-0 shadow-sm h-100">
-        <div class="card-body">
-          <i class="fas fa-chart-pie fa-3x text-success mb-3" aria-hidden="true"></i>
-          <h5 class="card-title"><%= t('home.index.features.cards.insights.title') %></h5>
-          <p class="card-text text-muted"><%= t('home.index.features.cards.insights.body') %></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 mb-4">
-      <div class="card border-0 shadow-sm h-100">
-        <div class="card-body">
-          <i class="fas fa-university fa-3x text-danger mb-3" aria-hidden="true"></i>
-          <h5 class="card-title"><%= t('home.index.features.cards.services.title') %></h5>
-          <p class="card-text text-muted"><%= t('home.index.features.cards.services.body') %></p>
-        </div>
-      </div>
-    </div>
   </div>
-</div>
+</section>
 
-<!-- How It Works Section -->
-<div class="container-fluid how-it-works-section bg-light py-5 mt-5">
+<!-- HOW IT WORKS (full‑bleed slightly lighter dark) -->
+<section class="position-relative overflow-hidden py-5" style="margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#1b1930;">
   <div class="container">
     <div class="text-center mb-5">
-      <h2><%= t('home.index.how_it_works.title') %></h2>
-      <p class="text-muted"><%= t('home.index.how_it_works.subtitle') %></p>
+      <h2 class="h1 fw-bold mb-2 text-white"><%= t('home.index.how_it_works.title') %></h2>
+      <p class="mb-0" style="color:rgba(255,255,255,.72);"><%= t('home.index.how_it_works.subtitle') %></p>
     </div>
 
-    <div class="row">
-      <div class="col-md-4 text-center">
-        <div class="card border-0 h-100">
-          <div class="card-body">
-            <i class="fas fa-user-plus fa-3x text-info mb-3" aria-hidden="true"></i>
-            <h5 class="card-title"><%= t('home.index.how_it_works.steps.step1.title') %></h5>
-            <p><%= t('home.index.how_it_works.steps.step1.body') %></p>
+    <div class="row g-4 text-center">
+      <div class="col-md-4">
+        <div class="rounded-4 h-100 p-4 shadow-sm bg-white" style="background:rgba(255,255,255,.06)!important; border:1px solid rgba(255,255,255,.1); color:#e5e7eb;">
+          <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px;border:2px solid #DAA520;color:#DAA520;font-size:1.25rem;">
+            <i class="fas fa-user-plus" aria-hidden="true"></i>
           </div>
+          <h5 class="fw-semibold mb-2 text-white"><%= t('home.index.how_it_works.steps.step1.title') %></h5>
+          <p class="mb-0" style="color:rgba(255,255,255,.75);"><%= t('home.index.how_it_works.steps.step1.body') %></p>
         </div>
       </div>
-
-      <div class="col-md-4 text-center">
-        <div class="card border-0 h-100">
-          <div class="card-body">
-            <i class="fas fa-edit fa-3x text-warning mb-3" aria-hidden="true"></i>
-            <h5 class="card-title"><%= t('home.index.how_it_works.steps.step2.title') %></h5>
-            <p><%= t('home.index.how_it_works.steps.step2.body') %></p>
+      <div class="col-md-4">
+        <div class="rounded-4 h-100 p-4 shadow-sm bg-white" style="background:rgba(255,255,255,.06)!important; border:1px solid rgba(255,255,255,.1); color:#e5e7eb;">
+          <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px;border:2px solid #DAA520;color:#DAA520;font-size:1.25rem;">
+            <i class="fas fa-edit" aria-hidden="true"></i>
           </div>
+          <h5 class="fw-semibold mb-2 text-white"><%= t('home.index.how_it_works.steps.step2.title') %></h5>
+          <p class="mb-0" style="color:rgba(255,255,255,.75);"><%= t('home.index.how_it_works.steps.step2.body') %></p>
         </div>
       </div>
-
-      <div class="col-md-4 text-center">
-        <div class="card border-0 h-100">
-          <div class="card-body">
-            <i class="fas fa-chart-line fa-3x text-success mb-3" aria-hidden="true"></i>
-            <h5 class="card-title"><%= t('home.index.how_it_works.steps.step3.title') %></h5>
-            <p><%= t('home.index.how_it_works.steps.step3.body') %></p>
+      <div class="col-md-4">
+        <div class="rounded-4 h-100 p-4 shadow-sm bg-white" style="background:rgba(255,255,255,.06)!important; border:1px solid rgba(255,255,255,.1); color:#e5e7eb;">
+          <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px;border:2px solid #DAA520;color:#DAA520;font-size:1.25rem;">
+            <i class="fas fa-chart-line" aria-hidden="true"></i>
           </div>
+          <h5 class="fw-semibold mb-2 text-white"><%= t('home.index.how_it_works.steps.step3.title') %></h5>
+          <p class="mb-0" style="color:rgba(255,255,255,.75);"><%= t('home.index.how_it_works.steps.step3.body') %></p>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- Testimonials Section -->
-<div class="container testimonials-section py-5 mt-5">
-  <div class="text-center mb-5">
-    <h2><%= t('home.index.testimonials.title') %></h2>
-    <p class="text-muted"><%= t('home.index.testimonials.subtitle') %></p>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6 mb-4">
-      <div class="card border-0 shadow-sm h-100">
-        <div class="card-body text-center">
-          <blockquote class="blockquote">
-            <p>“<%= t('home.index.testimonials.items.john.quote') %>”</p>
-            <footer class="blockquote-footer"><%= t('home.index.testimonials.items.john.author') %></footer>
+<!-- TESTIMONIALS (full‑bleed dark to darker gradient) -->
+<section class="position-relative overflow-hidden py-5" style="margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:linear-gradient(180deg,#171424 0%, #120f17 100%);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="h1 fw-bold mb-2 text-white"><%= t('home.index.testimonials.title') %></h2>
+      <p class="mb-0" style="color:rgba(255,255,255,.72);"><%= t('home.index.testimonials.subtitle') %></p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="rounded-4 h-100 p-4 text-center" style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:#e5e7eb;">
+          <blockquote class="blockquote mb-0">
+            <p class="mb-3">“<%= t('home.index.testimonials.items.john.quote') %>”</p>
+            <footer class="blockquote-footer" style="color:rgba(255,255,255,.6);"><%= t('home.index.testimonials.items.john.author') %></footer>
           </blockquote>
         </div>
       </div>
-    </div>
-
-    <div class="col-md-6 mb-4">
-      <div class="card border-0 shadow-sm h-100">
-        <div class="card-body text-center">
-          <blockquote class="blockquote">
-            <p>“<%= t('home.index.testimonials.items.jane.quote') %>”</p>
-            <footer class="blockquote-footer"><%= t('home.index.testimonials.items.jane.author') %></footer>
+      <div class="col-md-6">
+        <div class="rounded-4 h-100 p-4 text-center" style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:#e5e7eb;">
+          <blockquote class="blockquote mb-0">
+            <p class="mb-3">“<%= t('home.index.testimonials.items.jane.quote') %>”</p>
+            <footer class="blockquote-footer" style="color:rgba(255,255,255,.6);"><%= t('home.index.testimonials.items.jane.author') %></footer>
           </blockquote>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- Call to Action Section -->
-<div class="container-fluid call-to-action-section text-white py-5 mt-5 text-center"
-     style="background: linear-gradient(to right, #A0E7E5, #FBE7C6); padding-left: 15%; padding-right: 15%;">
-  <h2 style="color: #DAA520; font-weight: bold;"><%= t('home.index.cta.title') %></h2>
-  <p class="lead mb-4"><%= t('home.index.cta.subtitle') %></p>
-  <%= link_to t('home.index.cta.button'),
-              new_user_registration_path,
-              class: "btn btn-warning btn-lg px-5 py-3" %>
-</div>
+<!-- CTA (full‑bleed light gradient) -->
+<section class="text-center py-5" style="margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:linear-gradient(120deg, rgba(160,231,229,1) 0%, rgba(251,231,198,1) 100%);">
+  <div class="container" style="max-width:980px;">
+    <h2 class="fw-bold mb-2" style="color:#1b1b1b;"><span style="color:#DAA520;"><%= t('home.index.cta.title') %></span></h2>
+    <p class="lead mb-4" style="color:#1b1b1b; opacity:.9;"><%= t('home.index.cta.subtitle') %></p>
+    <%= link_to t('home.index.cta.button'), new_user_registration_path, class: "btn btn-warning btn-lg px-5 py-3 shadow-sm" %>
+  </div>
+</section>
+
+<!-- Tips:
+• If your layout wraps yield with <div class="container">, this full‑bleed approach still stretches backgrounds edge‑to‑edge.
+• No SCSS needed; colors can be tuned inline.
+• Keep Font Awesome loaded for icons. -->

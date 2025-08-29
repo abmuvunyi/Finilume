@@ -2,7 +2,7 @@
 rw:
   activerecord:
     models:
-      income: Inyinjiza
+      income: Ibyinjiye
       sale: Igurishwa
   admin:
     feedbacks:
@@ -18,29 +18,29 @@ rw:
           status: Imiterere
         filters:
           all: Byose
-        title: Ubutumwa
+        title: Umutwe
       show:
-        title: Ubutumwa
+        title: Umutwe
       status:
         archived: Cyabitswe
         in_review: Gusuzumwa
         new: Gishya
         resolved: Cyakemutse
       update:
-        submit: Hindura
+        submit: Tanga
       view: Reba
   announcements:
     date:
       formats:
         short: "%b %d"
     index:
-      empty: Hari ibintu bishimishije biza vuba!
-      title: Ibyo Hashya
+      empty: ubusa
+      title: Umutwe
     types:
       alert: Iburira
       info: Amakuru
       update: Amakuru Mashya
-  are_you_sure: Wemeza?
+  are_you_sure: uremeza neza?
   currency:
     unit: "FRw "
   dashboard:
@@ -51,12 +51,12 @@ rw:
       top_selling: Ibicuruzwa byaguzwe cyane
       top_selling_products: Ibicuruzwa byaguzwe cyane
       total_expenses: Ibisohoka byose
-      total_income: Inyinjiza zose
+      total_income: Ibyinjiye byose 
       total_revenue: Amafaranga yinjiye yose
     download_pdf: Kuramo Raporo y’Ubucuruzi (PDF)
     labels:
       sold: Byagurishijwe
-      stock_left: Ibiri ku bubiko
+      stock_left: Ibiri mu bubiko
     messages:
       all_stock_ok: Ibicuruzwa byose bihagije ku bubiko.
       no_top_selling: Nta bicuruzwa biri ku isonga bibonetse.
@@ -75,8 +75,8 @@ rw:
           category: Icyiciro
           date: Itariki
           name: Izina
-        search_placeholder: Shakisha inyinjiza ukoresheje izina
-        title: Urutonde rw’Inyinjiza
+        search_placeholder: Shakisha  ukoresheje izina
+        title: Urutonde rw’Ibyinjiye
       products:
         columns:
           category: Icyiciro
@@ -93,7 +93,7 @@ rw:
           total_price: Igiciro cyose
         search_placeholder: Shakisha ibyagurishijwe ukoresheje izina ry’icyicuruzwa
         title: Urutonde rw’Ibyagurishijwe
-    title: Dashboard y’Ubucuruzi
+    title: Icyegeranyo y’Ubucuruzi
   date:
     formats:
       ymd: "%Y-%m-%d"
@@ -110,7 +110,7 @@ rw:
       placeholders:
         amount: "urugero: 50000"
         category: "urugero: Serivisi"
-        name: "urugero: Ubukode bw’ofisi"
+        name: "urugero: Ubukode bw’iduka"
     index:
       add_new: Ongeraho Ikiguzi Gishya
       columns:
@@ -118,7 +118,7 @@ rw:
         category: Icyiciro
         date: Itariki
         name: Izina
-        user: Ukoresha
+        user: Umukozi
       title: Ibisohoka
     new:
       title: Ikiguzi Gishya
@@ -130,7 +130,7 @@ rw:
       edit: Hindura
       name: Izina
       title: Ibisobanuro by’Ikiguzi
-      user: Ukoresha
+      user: Umukozi
   feedbacks:
     categories:
       bug: Ikosa/Ikibazo
@@ -148,7 +148,7 @@ rw:
     index:
       actions:
         request_access: Saba Kwinjiza Amakuru
-        view_dashboard: Reba Dashboard y’Ubucuruzi
+        view_dashboard: Reba Icyegeranyo cy’Ubucuruzi
       status:
         pending: Gusaba biri gutegereza kwemezwa
       subtitle: Abakoresha biyandikishije bafite amakuru y’ubucuruzi
@@ -157,9 +157,9 @@ rw:
         business_category: Icyiciro cy’Ubucuruzi
         contact: Numero ya Telefone
         user_name: Amazina y’Umukoresha
-      title: Dashboard y’Abatanga Serivisi z’Imari
+      title: Icyegeranyo cy’Abatanga Serivisi z’Imari
     view:
-      title: Dashboard y’Ubucuruzi ya %{name}
+      title: Icyegeranyo cy’Ubucuruzi ya %{name}
   fsp_devise:
     confirmations:
       new:
@@ -190,7 +190,7 @@ rw:
           Hari uwasabye ihuzanzira ryo guhindura ijambo ry’ibanga. Mushobora
           kubikora mukanda kuri link iri hepfo.
         warning:
-          Ijambo ry’ibanga ntirihita rihinduka kugeza mukandye kuri link iri
+          Ijambo ry’ibanga ntirihita rihinduka kugeza mukanze kuri link iri
           hejuru mukemeza irishya.
       unlock_instructions:
         greeting: Muraho %{email}!
@@ -254,25 +254,24 @@ rw:
       cta:
         button: Iyandikishe Ubu
         subtitle:
-          Jya mu bihumbi by’abamaze guteza imbere ejo hazaza habo h’imari
+          Jya mu bandi babamaze guteza imbere ubucuruzi bwabo
           binyuze muri FinReach.
         title: Witeguye Gufata Igenzura ry’Imari Yawe?
       features:
         cards:
           insights:
             body:
-              Sobanura amakuru yawe y’imari ubone ubwenge bugufasha gufata ibyemezo
-              byiza.
+              Sesengura amakuru ajyanye n'ubucuruzi bwawe unavumbure ibigufasha gufata ibyemezo nyabyo.
             title: Shyira mu Migirire
           manage:
             body:
-              Kurikira inyinjiza, ibisohoka no kuzigama byoroshye binyuze kuri
-              dashboard yoroshye.
-            title: Cunga Imari Yawe
+              Kurikirana ibyinjira, ibisohoka no kuzigama byoroshye binyuze ku
+              Cyegeranyo gisobanutse.
+            title: Bona Inyungurabwenge.
           services:
             body:
-              Huzaho byoroshye n’abatanga serivisi ziringirwa mu micungire y’imari
-              yawe.
+              Hura byoroshye n’abatanga serivisi z'imari bagufashe guteza imbere ubucuruzi 
+              bwawe.
             title: Geraho Serivisi z’Imari
         subtitle: Dushyigikira urugendo rwawe rw’imari dukoresheje ibisubizo bigezweho.
         title: Iby’ingenzi dukora
