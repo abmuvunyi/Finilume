@@ -7,6 +7,7 @@
 import "@hotwired/turbo-rails"
 import "bootstrap"
 import "@popperjs/core"
+import "chartkick/chart.js"
 
 require("@rails/activestorage").start()
 //require("trix")

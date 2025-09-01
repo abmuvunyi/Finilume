@@ -22,17 +22,27 @@
           <label class="form-label"><%= t('dashboard.filters.end_date', default: 'End date') %></label>
           <%= date_field_tag :end_date, params[:end_date] || (@range_end&.to_date), class: "form-control" %>
         </div>
+        
         <div class="col-12 col-md-3">
           <label class="form-label"><%= t('dashboard.filters.quick', default: 'Quick') %></label>
-          <%= select_tag :quick,
-                options_for_select([
-                  [t('dashboard.quick.today',     default: 'Today'),        'today'],
-                  [t('dashboard.quick.this_week', default: 'This Week'),    'this_week'],
-                  [t('dashboard.quick.mtd',       default: 'MTD'),          'mtd'],
-                  [t('dashboard.quick.last_30',   default: 'Last 30 Days'), 'last_30']
-                ], selected: params[:quick] || @quick),
-                include_blank: true, class: "form-select" %>
+          <%= select_tag(
+                :quick,
+                options_for_select(
+                  [
+                    [t('dashboard.quick.today',     default: 'Today'),        'today'],
+                    [t('dashboard.quick.this_week', default: 'This Week'),    'this_week'],
+                    [t('dashboard.quick.mtd',       default: 'MTD'),          'mtd'],
+                    [t('dashboard.quick.last_30',   default: 'Last 30 Days'), 'last_30']
+                  ],
+                  # keep selection on reload
+                  (params[:quick].presence || @quick)
+                ),
+                include_blank: true,
+                class: "form-select",
+                id: "quick-preset"
+              ) %>
         </div>
+
         <div class="col-12 col-md-3 d-flex gap-2">
           <%= submit_tag t('shared.buttons.apply', default: 'Apply'), class: "btn btn-primary flex-grow-1" %>
           <%= link_to t('dashboard.download_pdf', default: 'Download PDF'),
@@ -435,4 +445,26 @@
       </div>
     </div>
   </div>
+  <!-- put this near the bottom of index.html.erb (once per page) -->
+  <script>
+  document.addEventListener('turbo:load', function () {
+    var select = document.getElementById('quick-preset');
+    if (!select) return;
+
+    select.addEventListener('change', function () {
+      var v = this.value;
+      var form = this.form;
+      if (!form) return;
+
+      // If a preset is chosen, clear date fields (so UI reflects preset cleanly)
+      if (v) {
+        var start = form.querySelector('input[name="start_date"]');
+        var end   = form.querySelector('input[name="end_date"]');
+        if (start) start.value = '';
+        if (end)   end.value   = '';
+        form.submit();
+      }
+    });
+  });
+  </script>
 </div>

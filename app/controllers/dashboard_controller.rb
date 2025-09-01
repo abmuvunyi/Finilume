@@ -120,11 +120,12 @@ class DashboardController < ApplicationController
   # -------------------
   # Date Range Handling
   # -------------------
+  # app/controllers/dashboard_controller.rb
   def set_range
     @tz = ActiveSupport::TimeZone["Africa/Kigali"] || Time.zone
 
-    # Quick presets: today | this_week | mtd | last_30
-    @quick = params[:quick].presence
+    # normalize quick ('' -> nil, strip, downcase)
+    @quick = params[:quick].presence&.to_s&.strip&.downcase
 
     start_param = params[:start_date].presence
     end_param   = params[:end_date].presence
@@ -140,7 +141,12 @@ class DashboardController < ApplicationController
       when "last_30"
         @range_end   = @tz.now.end_of_day
         @range_start = (@range_end - 29.days).beginning_of_day
-      else # "mtd" or unknown → default MTD
+      when "mtd"
+        @range_start = @tz.now.beginning_of_month
+        @range_end   = @tz.now.end_of_day
+      else
+        # unknown => default to MTD and reflect that in @quick
+        @quick       = "mtd"
         @range_start = @tz.now.beginning_of_month
         @range_end   = @tz.now.end_of_day
       end
@@ -148,7 +154,6 @@ class DashboardController < ApplicationController
       @range_start = @tz.parse(start_param).beginning_of_day
       @range_end   = @tz.parse(end_param).end_of_day
     else
-      # Default: Month to date
       @range_start = @tz.now.beginning_of_month
       @range_end   = @tz.now.end_of_day
       @quick       = "mtd"
@@ -159,6 +164,7 @@ class DashboardController < ApplicationController
     @range_end   = @tz.now.end_of_day
     @quick       = "mtd"
   end
+
 
   # -------------------------
   # KPI & Insight Computation
