@@ -26,9 +26,9 @@
           <label class="form-label"><%= t('dashboard.filters.quick', default: 'Quick') %></label>
           <%= select_tag :quick,
                 options_for_select([
-                  [t('dashboard.quick.today',     default: 'Today'),     'today'],
-                  [t('dashboard.quick.this_week', default: 'This Week'), 'this_week'],
-                  [t('dashboard.quick.mtd',       default: 'MTD'),       'mtd'],
+                  [t('dashboard.quick.today',     default: 'Today'),        'today'],
+                  [t('dashboard.quick.this_week', default: 'This Week'),    'this_week'],
+                  [t('dashboard.quick.mtd',       default: 'MTD'),          'mtd'],
                   [t('dashboard.quick.last_30',   default: 'Last 30 Days'), 'last_30']
                 ], selected: params[:quick] || @quick),
                 include_blank: true, class: "form-select" %>
@@ -62,7 +62,7 @@
           <div class="card-body">
             <div class="small opacity-75"><%= label %></div>
             <div class="fs-4 fw-semibold">
-              <%= number_to_currency(value, unit: t('currency.unit', default: 'RWF'), precision: 0) %>
+              <%= number_to_currency(value, unit: t('currency.unit', default: 'RWF '), precision: 0) %>
             </div>
 
             <%# Sparkline (tiny line) %>
@@ -76,7 +76,7 @@
                         elements: { point: { radius: 0 } }
                       },
                       thousands: ",",
-                      prefix: t('currency.unit', default: 'RWF') + " " %>
+                      prefix: t('currency.unit', default: 'RWF ') %>
               </div>
             <% end %>
           </div>
@@ -85,14 +85,13 @@
     <% end %>
   </div>
 
-
   <!-- MTD vs Previous MTD tiny comparison -->
   <div class="text-muted small mt-1">
     <%= t('dashboard.labels.mtd', default: 'MTD Revenue') %>:
-    <strong><%= number_to_currency(@mtd_revenue, unit: t('currency.unit', default: 'RWF'), precision: 0) %></strong>
+    <strong><%= number_to_currency(@mtd_revenue, unit: t('currency.unit', default: 'RWF '), precision: 0) %></strong>
     <% if @mtd_revenue_change_pct %>
       (<span class="<%= @mtd_revenue_change_pct >= 0 ? 'text-success' : 'text-danger' %>">
-        <%= @mtd_revenue_change_pct %>%</span> vs prev MTD)
+        <%= @mtd_revenue_change_pct %>%</span> <%= t('dashboard.labels.vs_prev_mtd', default: 'vs prev MTD') %>)
     <% end %>
   </div>
 
@@ -102,18 +101,20 @@
     <div class="col-12 col-xl-6">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <div class="fw-semibold mb-2">Revenue vs Expenses (Selected Range)</div>
+          <div class="fw-semibold mb-2">
+            <%= t('dashboard.headings.revenue_vs_expenses_selected_range', default: 'Revenue vs Expenses (Selected Range)') %>
+          </div>
           <% if defined?(line_chart) %>
             <%= line_chart [
-                  {name: "Revenue",  data: @daily_revenue},
-                  {name: "Expenses", data: @daily_expenses}
+                  {name: t('dashboard.series.revenue',  default: 'Revenue'),  data: @daily_revenue},
+                  {name: t('dashboard.series.expenses', default: 'Expenses'), data: @daily_expenses}
                 ],
                 library: {legend: {display: true}},
                 thousands: ",",
-                prefix: t('currency.unit', default: 'RWF') + " ",
+                prefix: t('currency.unit', default: 'RWF '),
                 points: false %>
           <% else %>
-            <p class="text-muted">Charts not available.</p>
+            <p class="text-muted"><%= t('dashboard.messages.charts_unavailable', default: 'Charts not available.') %></p>
           <% end %>
         </div>
       </div>
@@ -123,13 +124,15 @@
     <div class="col-12 col-xl-6">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <div class="fw-semibold mb-2">Top Products by Revenue</div>
+          <div class="fw-semibold mb-2">
+            <%= t('dashboard.headings.top_products_by_revenue', default: 'Top Products by Revenue') %>
+          </div>
           <% if defined?(column_chart) && @top_products_by_revenue.present? %>
             <%= column_chart @top_products_by_revenue.transform_keys { |(id, name)| name },
                 thousands: ",",
-                prefix: t('currency.unit', default: 'RWF') + " " %>
+                prefix: t('currency.unit', default: 'RWF ') %>
           <% else %>
-            <p class="text-muted">No product revenue in range.</p>
+            <p class="text-muted"><%= t('dashboard.messages.no_product_revenue', default: 'No product revenue in range.') %></p>
           <% end %>
         </div>
       </div>
@@ -142,13 +145,15 @@
     <div class="col-12 col-xl-6">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <div class="fw-semibold mb-2">Revenue by Category</div>
+          <div class="fw-semibold mb-2">
+            <%= t('dashboard.headings.revenue_by_category', default: 'Revenue by Category') %>
+          </div>
           <% if defined?(pie_chart) && @revenue_by_category.present? %>
             <%= pie_chart @revenue_by_category,
                 thousands: ",",
-                prefix: t('currency.unit', default: 'RWF') + " " %>
+                prefix: t('currency.unit', default: 'RWF ') %>
           <% else %>
-            <p class="text-muted">No category data available.</p>
+            <p class="text-muted"><%= t('dashboard.messages.no_category_data', default: 'No category data available.') %></p>
           <% end %>
         </div>
       </div>
@@ -158,57 +163,68 @@
     <div class="col-12 col-xl-6">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <div class="fw-semibold mb-2">Income vs Expenses</div>
+          <div class="fw-semibold mb-2">
+            <%= t('dashboard.headings.income_vs_expenses', default: 'Income vs Expenses') %>
+          </div>
           <% if defined?(pie_chart) %>
             <%= pie_chart @income_vs_expenses, donut: true,
                 thousands: ",",
-                prefix: t('currency.unit', default: 'RWF') + " " %>
+                prefix: t('currency.unit', default: 'RWF ') %>
           <% else %>
-            <p class="text-muted">Charts not available.</p>
+            <p class="text-muted"><%= t('dashboard.messages.charts_unavailable', default: 'Charts not available.') %></p>
           <% end %>
         </div>
       </div>
     </div>
   </div>
-<!-- ========== Charts Row 3 (Stacked) ========== -->
-<div class="row g-3 mt-1">
-  <div class="col-12">
-    <div class="card shadow-sm h-100">
-      <div class="card-body">
-        <div class="fw-semibold mb-2">Revenue vs COGS vs Expenses (Stacked)</div>
-        <% if defined?(column_chart) %>
-          <%= column_chart [
-                { name: "Revenue",  data: @daily_revenue },
-                { name: "COGS",     data: @daily_cogs },
-                { name: "Expenses", data: @daily_expenses }
-              ],
-              stacked: true,
-              thousands: ",",
-              prefix: t('currency.unit', default: 'RWF') + " " %>
-        <% else %>
-          <p class="text-muted">Charts not available.</p>
-        <% end %>
+
+  <!-- ========== Charts Row 3 (Stacked) ========== -->
+  <div class="row g-3 mt-1">
+    <div class="col-12">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <div class="fw-semibold mb-2">
+            <%= t('dashboard.headings.revenue_vs_cogs_vs_expenses', default: 'Revenue vs COGS vs Expenses (Stacked)') %>
+          </div>
+          <% if defined?(column_chart) %>
+            <%= column_chart [
+                  { name: t('dashboard.series.revenue',  default: 'Revenue'),  data: @daily_revenue },
+                  { name: t('dashboard.series.cogs',     default: 'COGS'),     data: @daily_cogs },
+                  { name: t('dashboard.series.expenses', default: 'Expenses'), data: @daily_expenses }
+                ],
+                stacked: true,
+                thousands: ",",
+                prefix: t('currency.unit', default: 'RWF ') %>
+          <% else %>
+            <p class="text-muted"><%= t('dashboard.messages.charts_unavailable', default: 'Charts not available.') %></p>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-  <!-- ========== Your existing: Low Stock / Top-Selling (Qty) ========== -->
+  <!-- ========== Low Stock / Top-Selling (Qty) ========== -->
   <div class="row">
     <!-- Low Stock Products Card -->
     <div class="col-md-6">
       <div class="card mb-3 border-0 shadow-sm" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
-        <div class="card-header bg-transparent fw-semibold">Low Stock Products</div>
+        <div class="card-header bg-transparent fw-semibold">
+          <%= t('dashboard.headings.low_stock_products', default: 'Low Stock Products') %>
+        </div>
         <div class="card-body">
           <% if @low_stock_products.any? %>
             <% @low_stock_products.each do |product| %>
               <p class="mb-1">
                 <strong><%= product.name %></strong>
-                <span class="badge bg-dark ms-2"><%= t('dashboard.labels.stock_left', default: 'Stock left') %>: <%= product.quantity %></span>
+                <span class="badge bg-dark ms-2">
+                  <%= t('dashboard.labels.stock_left', default: 'Stock left') %>: <%= product.quantity %>
+                </span>
               </p>
             <% end %>
           <% else %>
-            <p class="text-muted mb-0"><%= t('dashboard.messages.all_stock_ok', default: 'All products have sufficient stock.') %></p>
+            <p class="text-muted mb-0">
+              <%= t('dashboard.messages.all_stock_ok', default: 'All products have sufficient stock.') %>
+            </p>
           <% end %>
         </div>
       </div>
@@ -217,17 +233,23 @@
     <!-- Top-Selling Products by Quantity -->
     <div class="col-md-6">
       <div class="card mb-3 border-0 shadow-sm" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
-        <div class="card-header bg-transparent fw-semibold">Top-Selling Products (Qty)</div>
+        <div class="card-header bg-transparent fw-semibold">
+          <%= t('dashboard.cards.top_selling_products', default: 'Top-Selling Products (Qty)') %>
+        </div>
         <div class="card-body">
           <% if @top_selling_products.any? %>
             <% @top_selling_products.each do |product| %>
               <p class="mb-1">
                 <strong><%= product.name %></strong>
-                <span class="badge bg-secondary ms-2"><%= t('dashboard.labels.sold', default: 'Sold') %>: <%= product.total_sold %></span>
+                <span class="badge bg-secondary ms-2">
+                  <%= t('dashboard.labels.sold', default: 'Sold') %>: <%= product.total_sold %>
+                </span>
               </p>
             <% end %>
           <% else %>
-            <p class="text-muted mb-0"><%= t('dashboard.messages.no_top_selling', default: 'No sales yet.') %></p>
+            <p class="text-muted mb-0">
+              <%= t('dashboard.messages.no_top_selling', default: 'No sales yet.') %>
+            </p>
           <% end %>
         </div>
       </div>
@@ -239,7 +261,7 @@
   <!-- Products List -->
   <div class="row">
     <div class="col-md-12 mt-4">
-      <h2>Products</h2>
+      <h2><%= t('dashboard.headings.products', default: 'Products') %></h2>
       <%= search_form_for @q_products, url: authenticated_root_path, method: :get do |f| %>
         <div class="row g-2">
           <div class="col-md-10">
@@ -257,10 +279,10 @@
         <table class="table table-striped align-middle">
           <thead class="table-light position-sticky top-0">
             <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th class="text-end">Price</th>
-              <th class="text-end">Quantity</th>
+              <th><%= t('dashboard.tables.products.columns.name', default: 'Name') %></th>
+              <th><%= t('dashboard.tables.products.columns.category', default: 'Category') %></th>
+              <th class="text-end"><%= t('dashboard.tables.products.columns.price', default: 'Price') %></th>
+              <th class="text-end"><%= t('dashboard.tables.products.columns.quantity', default: 'Quantity') %></th>
             </tr>
           </thead>
           <tbody>
@@ -268,7 +290,7 @@
               <tr>
                 <td><%= product.name %></td>
                 <td><%= product.category %></td>
-                <td class="text-end"><%= t('currency.unit', default: 'RWF') %> <%= product.price %></td>
+                <td class="text-end"><%= t('currency.unit', default: 'RWF ') %><%= product.price %></td>
                 <td class="text-end"><%= product.quantity %></td>
               </tr>
             <% end %>
@@ -283,7 +305,7 @@
 
     <!-- Sales List -->
     <div class="col-md-12 mt-4">
-      <h2>Sales</h2>
+      <h2><%= t('dashboard.headings.sales', default: 'Sales') %></h2>
       <%= search_form_for @q_sales, url: authenticated_root_path, method: :get do |f| %>
         <div class="row g-2">
           <div class="col-md-10">
@@ -301,10 +323,10 @@
         <table class="table table-striped align-middle">
           <thead class="table-light position-sticky top-0">
             <tr>
-              <th>Product</th>
-              <th class="text-end">Qty</th>
-              <th class="text-end">Total Price</th>
-              <th>Date</th>
+              <th><%= t('dashboard.tables.sales.columns.product', default: 'Product') %></th>
+              <th class="text-end"><%= t('dashboard.tables.sales.columns.quantity', default: 'Qty') %></th>
+              <th class="text-end"><%= t('dashboard.tables.sales.columns.total_price', default: 'Total Price') %></th>
+              <th><%= t('dashboard.tables.sales.columns.date', default: 'Date') %></th>
             </tr>
           </thead>
           <tbody>
@@ -312,7 +334,7 @@
               <tr>
                 <td><%= sale.product&.name %></td>
                 <td class="text-end"><%= sale.quantity %></td>
-                <td class="text-end"><%= t('currency.unit', default: 'RWF') %> <%= sale.total_price %></td>
+                <td class="text-end"><%= t('currency.unit', default: 'RWF ') %><%= sale.total_price %></td>
                 <td><%= l(sale.date, format: :ymd) %></td>
               </tr>
             <% end %>
@@ -327,7 +349,7 @@
 
     <!-- Income List -->
     <div class="col-md-12 mt-4">
-      <h2>Income</h2>
+      <h2><%= t('dashboard.headings.incomes', default: 'Income') %></h2>
       <%= search_form_for @q_incomes, url: authenticated_root_path, method: :get do |f| %>
         <div class="row g-2">
           <div class="col-md-10">
@@ -345,10 +367,10 @@
         <table class="table table-striped align-middle">
           <thead class="table-light position-sticky top-0">
             <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th class="text-end">Amount</th>
-              <th>Date</th>
+              <th><%= t('dashboard.tables.incomes.columns.name', default: 'Name') %></th>
+              <th><%= t('dashboard.tables.incomes.columns.category', default: 'Category') %></th>
+              <th class="text-end"><%= t('dashboard.tables.incomes.columns.amount', default: 'Amount') %></th>
+              <th><%= t('dashboard.tables.incomes.columns.date', default: 'Date') %></th>
             </tr>
           </thead>
           <tbody>
@@ -356,7 +378,7 @@
               <tr>
                 <td><%= income.name %></td>
                 <td><%= income.category %></td>
-                <td class="text-end"><%= t('currency.unit', default: 'RWF') %> <%= income.amount %></td>
+                <td class="text-end"><%= t('currency.unit', default: 'RWF ') %><%= income.amount %></td>
                 <td><%= l(income.date, format: :ymd) %></td>
               </tr>
             <% end %>
@@ -371,7 +393,7 @@
 
     <!-- Expenses List -->
     <div class="col-md-12 mt-4 mb-5">
-      <h2>Expenses</h2>
+      <h2><%= t('dashboard.headings.expenses', default: 'Expenses') %></h2>
       <%= search_form_for @q_expenses, url: authenticated_root_path, method: :get do |f| %>
         <div class="row g-2">
           <div class="col-md-10">
@@ -389,10 +411,10 @@
         <table class="table table-striped align-middle">
           <thead class="table-light position-sticky top-0">
             <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th class="text-end">Amount</th>
-              <th>Date</th>
+              <th><%= t('dashboard.tables.expenses.columns.name', default: 'Name') %></th>
+              <th><%= t('dashboard.tables.expenses.columns.category', default: 'Category') %></th>
+              <th class="text-end"><%= t('dashboard.tables.expenses.columns.amount', default: 'Amount') %></th>
+              <th><%= t('dashboard.tables.expenses.columns.date', default: 'Date') %></th>
             </tr>
           </thead>
           <tbody>
@@ -400,7 +422,7 @@
               <tr>
                 <td><%= expense.name %></td>
                 <td><%= expense.category %></td>
-                <td class="text-end"><%= t('currency.unit', default: 'RWF') %> <%= expense.amount %></td>
+                <td class="text-end"><%= t('currency.unit', default: 'RWF ') %><%= expense.amount %></td>
                 <td><%= l(expense.date, format: :ymd) %></td>
               </tr>
             <% end %>
