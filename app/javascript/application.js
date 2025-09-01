@@ -7,7 +7,15 @@
 import "@hotwired/turbo-rails"
 import "bootstrap"
 import "@popperjs/core"
-import "chartkick/chart.js"
+
+
+// ✅ Chartkick + Chart.js (esbuild)
+import Chartkick from "chartkick"
+import Chart from "chart.js/auto"
+Chartkick.use(Chart)
+
+// If you reference Chartkick from inline scripts, expose it:
+window.Chartkick = Chartkick
 
 require("@rails/activestorage").start()
 //require("trix")
