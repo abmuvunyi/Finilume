@@ -4,23 +4,17 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
+  # ✅ Madmin outside locale scope
+  draw :madmin
+
   scope "(:locale)", locale: /en|rw/ do
-    draw :madmin
     get "/privacy", to: "home#privacy"
     get "/terms",   to: "home#terms"
 
-    authenticate :user, lambda { |u| u.admin? } do
-      namespace :madmin do
-        resources :impersonates do
-          post :impersonate, on: :member
-          post :stop_impersonating, on: :collection
-        end
-      end
-    end
-
+    # Admin routes (still localized if you want them)
     namespace :admin do
       resources :data_access_requests, only: [:index, :update]
-      resources :feedbacks, only: [:index, :show, :update] # ✅ Admin feedback inside locale
+      resources :feedbacks, only: [:index, :show, :update]
     end
 
     namespace :fsp_dashboard do
