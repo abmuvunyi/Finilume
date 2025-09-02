@@ -24,16 +24,18 @@
   </div>
 
  <div class="mb-3">
-  <%= f.label :business_category, t('registrations.form.business_category.label'), class: "form-label" %>
-  <%= f.select :business_category,
-        options_for_select([
-          [t('registrations.form.business_category.options.retail'),       'retail'],
-          [t('registrations.form.business_category.options.services'),     'services'],
-          [t('registrations.form.business_category.options.manufacturer'), 'manufacturer'],
-          [t('registrations.form.business_category.options.other'),        'other']
-        ], f.object.business_category),
-        { include_blank: true },
-        class: "form-select" %>
+    <%= f.label :business_category, t("devise.registrations.new.business_category_label") %>
+    <%= f.select :business_category, 
+          options_for_select(
+            [
+              [t("devise.registrations.new.business_category_options.retail"), "retail"],
+              [t("devise.registrations.new.business_category_options.services"), "services"],
+              [t("devise.registrations.new.business_category_options.manufacturers"), "manufacturers"],
+              [t("devise.registrations.new.business_category_options.others"), "others"]
+            ],
+            f.object.business_category
+          ),
+          {}, class: "form-select" %>
 </div>
 
 

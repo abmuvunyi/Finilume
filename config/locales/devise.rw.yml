@@ -3,9 +3,11 @@ rw:
   devise:
     confirmations:
       confirmed: Imeli yawe yemejwe neza.
-      send_instructions: Uzakira imeli irimo amabwiriza yo kwemeza imeli yawe mu gihe
+      send_instructions:
+        Uzakira imeli irimo amabwiriza yo kwemeza imeli yawe mu gihe
         gito.
-      send_paranoid_instructions: Niba imeli yawe iri mu bubiko bwacu, uzakira amabwiriza
+      send_paranoid_instructions:
+        Niba imeli yawe iri mu bubiko bwacu, uzakira amabwiriza
         yo kwemeza imeli mu gihe gito.
     failure:
       already_authenticated: Murimo musanzwe mwinjiye.
@@ -32,43 +34,57 @@ rw:
       failure: Ntitwabashije kubemeza kuri %{kind} kubera "%{reason}".
       success: Mwinjiye neza ukoresheje konti ya %{kind}.
     passwords:
-      no_token: Ntushobora kugera kuri uru rubuga uturutse ku butumwa bwo guhindura
+      no_token:
+        Ntushobora kugera kuri uru rubuga uturutse ku butumwa bwo guhindura
         ijambo ry’ibanga. Niba uva ku butumwa bwo guhindura ijambo ry’ibanga, reba
         ko ukoresheje URL yuzuye.
-      send_instructions: Uzakira imeli irimo amabwiriza yo guhindura ijambo ry’ibanga
+      send_instructions:
+        Uzakira imeli irimo amabwiriza yo guhindura ijambo ry’ibanga
         mu kanya.
-      send_paranoid_instructions: Niba imeli yawe iri mu bubiko bwacu, uzabona link
+      send_paranoid_instructions:
+        Niba imeli yawe iri mu bubiko bwacu, uzabona link
         yo kugarura ijambo ry’ibanga mu kanya.
       updated: Ijambo ry’ibanga ryahinduwe neza. Ubu mwinjiye.
       updated_not_active: Ijambo ry’ibanga ryahinduwe neza.
     registrations:
-      destroyed: Murakoze! Konti yanyu yasibwe neza. Tuzishimira kongera kubabona
+      destroyed:
+        Murakoze! Konti yanyu yasibwe neza. Tuzishimira kongera kubabona
         vuba.
       new:
-        business_category_label: Icyiciro cy’Ubucuruzi
+        title: "Iyandikishe"
+        login: "Injira"
+        submit: "Iyandikishe"
+
+        first_name_label: "Izina ry’Idini"
+        last_name_label: "Izina ry’Umuryango"
+        phone_number_label: "Numero ya telefoni"
+        email_label: "Imeli"
+        password_label: "Ijambo ry’ibanga"
+        password_confirmation_label: "Emeza ijambo ry’ibanga"
+
+        business_name_label: "Izina ry’Iduka ryawe"
+        business_category_label: "Icyiciro cy’Ubucuruzi"
         business_category_options:
-          retail: Ubucuruzi bw’amaduka
-        business_name_label: Izina ry’Ubucuruzi
-        email_label: Imeli
-        first_name_label: Izina ry’Itangwa
-        last_name_label: Izina ry’Umuryango
-        login: Injira
-        password_confirmation_label: Emeza ijambo ry’ibanga
-        password_label: Ijambo ry’ibanga
-        phone_number_label: Numero ya telefoni
-        submit: Iyandikishe
-        title: Iyandikishe
+          retail: "Ubucuruzi bw’amaduka"
+          services: "Ubucuruzi bwa serivisi"
+          manufacturers: "Uruganda/Abakora ibicuruzwa"
+          others: "Ibindi"
       signed_up: Murakaza neza! Mwiyandikishije neza.
-      signed_up_but_inactive: Mwiyandikishije neza, ariko ntimwashoboye kwinjira kuko
+      signed_up_but_inactive:
+        Mwiyandikishije neza, ariko ntimwashoboye kwinjira kuko
         konti yanyu itarakora.
-      signed_up_but_locked: Mwiyandikishije neza, ariko ntimwashoboye kwinjira kuko
+      signed_up_but_locked:
+        Mwiyandikishije neza, ariko ntimwashoboye kwinjira kuko
         konti yanyu yafunzwe.
-      signed_up_but_unconfirmed: Ubutumwa burimo link yo kwemeza bwoherejwe kuri imeli
+      signed_up_but_unconfirmed:
+        Ubutumwa burimo link yo kwemeza bwoherejwe kuri imeli
         yanyu. Mukurikize ayo mabwiriza ngo mukoreshe konti.
-      update_needs_confirmation: Mwahinduye konti neza, ariko tugomba kwemeza imeli
+      update_needs_confirmation:
+        Mwahinduye konti neza, ariko tugomba kwemeza imeli
         nshya. Reba imeli hanyuma ukande kuri link yo kwemeza.
       updated: Konti yanyu yahinduwe neza.
-      updated_but_not_signed_in: Konti yahinduwe neza, ariko kubera ko mwahinduye
+      updated_but_not_signed_in:
+        Konti yahinduwe neza, ariko kubera ko mwahinduye
         ijambo ry’ibanga, musabwe kongera kwinjira.
     sessions:
       already_signed_out: Mwasohotse neza.
@@ -83,19 +99,22 @@ rw:
       signed_in: Mwinjiye neza.
       signed_out: Mwasohotse neza.
     unlocks:
-      send_instructions: Uzakira imeli irimo amabwiriza yo gufungura konti yawe mu
+      send_instructions:
+        Uzakira imeli irimo amabwiriza yo gufungura konti yawe mu
         kanya.
-      send_paranoid_instructions: Niba konti yawe ihari, uzakira imeli irimo amabwiriza
+      send_paranoid_instructions:
+        Niba konti yawe ihari, uzakira imeli irimo amabwiriza
         yo kuyifungura mu kanya.
       unlocked: Konti yawe yafunguwe neza. Ongera winjire kugira ngo ukomeze.
   errors:
     messages:
       already_confirmed: yari yaramaze kwemezwa, gerageza kwinjira
-      confirmation_period_expired: igomba kwemezwa mu gihe cya %{period}, saba indi
+      confirmation_period_expired:
+        igomba kwemezwa mu gihe cya %{period}, saba indi
         link
       expired: byararenze igihe, saba indi nshya
       not_found: ntibibashije kuboneka
       not_locked: ntiyigeze ifungwa
       not_saved:
-        one: 'Ikosa 1 ribujije %{resource} kubikwa:'
-        other: 'Amakosa %{count} yabujije %{resource} kubikwa:'
+        one: "Ikosa 1 ribujije %{resource} kubikwa:"
+        other: "Amakosa %{count} yabujije %{resource} kubikwa:"

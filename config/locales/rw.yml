@@ -67,7 +67,7 @@ rw:
         category: "urugero: Serivisi"
         name: "urugero: Ubukode bw’iduka"
     index:
-      title: "Ibisohoka"
+      title: "ayasohotse"
       add_new: "Ongeraho Ikiguzi Gishya"
       columns:
         amount: "Umubare w’amafaranga"
@@ -80,7 +80,7 @@ rw:
     show:
       title: "Ibisobanuro by’Ikiguzi"
       amount: "Umubare w’amafaranga"
-      back_to_all: "Ibisohoka Byose"
+      back_to_all: "ayasohotse Byose"
       category: "Icyiciro"
       date: "Itariki"
       edit: "Hindura"
@@ -208,7 +208,7 @@ rw:
         cards:
           manage:
             title: "Bona Inyungurabwenge"
-            body: "Kurikirana ibyinjira, ibisohoka no kuzigama byoroshye binyuze ku cyegeranyo gisobanutse."
+            body: "Kurikirana ibyinjira, ayasohotse no kuzigama byoroshye binyuze ku cyegeranyo gisobanutse."
           insights:
             title: "Shyira mu Migirire"
             body: "Sesengura amakuru y’ubucuruzi bwawe, ubone ibyagufasha gufata ibyemezo nyabyo."
@@ -224,7 +224,7 @@ rw:
             body: "Jya kuri FinReach utangire urugendo rwawe rw’imari."
           step2:
             title: "Intambwe ya 2: Shyiramo Amakuru"
-            body: "Andika ibyinjira, ibisohoka, kandi wihaze intego z’imari kugira ngo utangire gukurikirana."
+            body: "Andika ibyinjira, ayasohotse, kandi wihaze intego z’imari kugira ngo utangire gukurikirana."
           step3:
             title: "Intambwe ya 3: Menya byinshi"
             body: "Geraho ishusho zerekana uko imari ihagaze maze ufate ububasha bwo gukura."
@@ -274,7 +274,7 @@ rw:
 
   meta:
     title: "%{app} — Imicungire y’imari yoroshye ku bacuruzi bari gukura"
-    description: "Kurikira ibicuruzwa, ibyagurishijwe, ibyinjiye n’ibisohoka. Sobanukirwa imigendekere kandi uterere imbere ukoresheje inama zigaragara."
+    description: "Kurikira ibicuruzwa, ibyagurishijwe, ibyinjiye n’ayasohotse. Sobanukirwa imigendekere kandi uterere imbere ukoresheje inama zigaragara."
 
   notifications:
     index:
@@ -386,7 +386,7 @@ rw:
       admin_area: "Ahantu h’Umuyobozi"
       dashboard: "Urubariro"
       data_access_requests: "Gusaba Kwinjiza Amakuru"
-      expenses: "Ibisohoka"
+      expenses: "ayasohotse"
       impersonating: "Uri kwinjira nka %{name} (%{email})"
       incomes: "Ibyinjiye"
       locale:
@@ -422,18 +422,18 @@ rw:
   # Dashboard (consolidated)
   # =======================
   dashboard:
-    title: "Urubariro"
+    title: "Umutwe"
     download_pdf: "Kuramo PDF"
 
     filters:
-      start_date: "Itariki itangiriro"
+      start_date: "Itariki itangira"
       end_date: "Itariki isoza"
       quick: "Byihuse"
 
     quick:
       today: "Uyu munsi"
       this_week: "Iki cyumweru"
-      mtd: "Uyu kwezi kugeza ubu"
+      mtd: "Uku kwezi kugeza ubu"
       last_30: "Iminsi 30 ishize"
 
     cards:
@@ -441,7 +441,7 @@ rw:
       gross_margin_in_range: "Urusobe rw’inyungu (Margin)"
       avg_order_value_in_range: "Agaciro k’itumiza ku bwinshi (Avg Order)"
       discounts_in_range: "Kugabanyirizwa (Discounts)"
-      expenses_in_range: "Ibisohoka"
+      expenses_in_range: "ayasohotse"
       net_profit_in_range: "Inyungu isigaye"
       low_stock_products: "Ibicuruzwa bike mu bubiko"
       top_selling_products: "Ibicuruzwa byagurishijwe cyane (Qty)"
@@ -451,26 +451,26 @@ rw:
       net_profit: "Inyungu isigaye"
 
     labels:
-      mtd: "Inyungu za MTD"
-      vs_prev_mtd: "ugereranyije n’ukwezi gushize muri iki gihe"
+      mtd: "Inyungu z’uku kwezi"
+      vs_prev_mtd: "ugereranyije n’ukwezi gushize"
       stock_left: "Bisigaye mu bubiko"
       sold: "Byagurishijwe"
 
     headings:
-      revenue_vs_expenses_selected_range: "Inyungu vs Ibisohoka (Igihe cyahiswemo)"
+      revenue_vs_expenses_selected_range: "Inyungu vs ayasohotse (Igihe cyahiswemo)"
       top_products_by_revenue: "Ibicuruzwa byinjije cyane"
       revenue_by_category: "Inyungu bitewe n’icyiciro"
-      income_vs_expenses: "Ibyinjiye vs Ibisohoka"
-      revenue_vs_cogs_vs_expenses: "Inyungu vs Igiciro cy’Ibicuruzwa vs Ibisohoka (Stacked)"
+      income_vs_expenses: "Ibyinjiye vs ayasohotse"
+      revenue_vs_cogs_vs_expenses: "Inyungu vs Igiciro cy’Ibicuruzwa vs ayasohotse (Stacked)"
       low_stock_products: "Ibicuruzwa bike mu bubiko"
       products: "Ibicuruzwa"
       sales: "Ibyagurishijwe"
       incomes: "Ibyinjiye"
-      expenses: "Ibisohoka"
+      expenses: "ayasohotse"
 
     series:
       revenue: "Inyungu"
-      expenses: "Ibisohoka"
+      expenses: "ayasohotse"
       cogs: "Igiciro cy’Ibicuruzwa (COGS)"
 
     messages:
@@ -506,8 +506,8 @@ rw:
           amount: "Umubare w’amafaranga"
           date: "Itariki"
       expenses:
-        title: "Urutonde rw’Ibisohoka"
-        search_placeholder: "Shakisha ibisohoka ukoresheje izina"
+        title: "Urutonde rw’ayasohotse"
+        search_placeholder: "Shakisha ayasohotse ukoresheje izina"
         columns:
           name: "Izina"
           category: "Icyiciro"
