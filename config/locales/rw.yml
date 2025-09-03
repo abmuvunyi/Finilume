@@ -298,7 +298,7 @@ rw:
       price: "Igiciro"
       quantity: "Ingano"
       destroy: "Siba"
-      cost_price: "Igiciro cy'ibyo kugura"
+      cost_price: "Ikiranguzo"
     index:
       title: "Ibicuruzwa"
       add_new: "Ongeraho Igicuruzwa Gishya"
