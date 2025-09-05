@@ -26,15 +26,18 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  # config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  # config/initializers/devise.rb
+  # Use an env var, fallback to your Gmail
+  config.mailer_sender = ENV.fetch("DEVISE_MAILER_SENDER", "finilume2025@gmail.com")
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
-  config.router_name = :main_app
-  config.parent_controller = 'Madmin::BaseController'
+  # config.router_name = :main_app
+  # config.parent_controller = 'Madmin::BaseController'
   
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
