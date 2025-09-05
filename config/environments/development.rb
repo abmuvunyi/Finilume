@@ -38,17 +38,29 @@ Rails.application.configure do
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
 
-  # Set localhost to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+  # # Set localhost to be used by links generated in mailer templates.
+  # config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
-  config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address:              ENV.fetch("SMTP_ADDRESS", "smtp.gmail.com"),
+  #   port:                 ENV.fetch("SMTP_PORT", "587").to_i,
+  #   user_name:            ENV.fetch("SMTP_USERNAME", "finilume2025@gmail.com"),
+  #   password:             ENV.fetch("SMTP_PASSWORD", "ssqxtozmnxwxwyjj"), # leave blank locally if you don't want to send
+  #   authentication:       :plain,
+  #   enable_starttls_auto: true
+  # }
+
+
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV.fetch("SMTP_ADDRESS", "smtp.gmail.com"),
-    port:                 ENV.fetch("SMTP_PORT", "587").to_i,
-    user_name:            ENV.fetch("SMTP_USERNAME", "finilume2025@gmail.com"),
-    password:             ENV.fetch("SMTP_PASSWORD", "ssqxtozmnxwxwyjj"), # leave blank locally if you don't want to send
-    authentication:       :plain,
+    address: "smtp.gmail.com",
+    port: 587,
+    user_name: ENV.fetch("SMTP_USERNAME", nil),
+    password:  ENV.fetch("SMTP_PASSWORD", nil),
+    authentication: :plain,
     enable_starttls_auto: true
   }
 
