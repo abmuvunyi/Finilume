@@ -369,6 +369,7 @@ en:
       save: "Save"
       search: "Search"
       update: "Update"
+      apply: "Apply"         # ← missing before
     cancel: "Cancel"
     confirm: "Are you sure?"
     confirmations:
@@ -407,6 +408,8 @@ en:
     notices:
       close: "Close"
     save: "Save"
+    feedback:
+      link: "Send us feedback"
 
   time:
     formats:
