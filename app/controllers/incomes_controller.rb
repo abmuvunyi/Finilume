@@ -3,7 +3,7 @@ class IncomesController < ApplicationController
 
   # GET /incomes or /incomes.json
   def index
-    @incomes = current_user.incomes
+    @incomes = current_user.incomes.order(created_at: :desc)
   end
 
   # GET /incomes/1 or /incomes/1.json

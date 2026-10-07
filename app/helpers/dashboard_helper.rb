@@ -5,11 +5,11 @@ module DashboardHelper
       total_expenses: user.expenses.sum(:amount),
       total_income:   user.incomes.sum(:amount),
       net_profit:     user.incomes.sum(:amount) - user.expenses.sum(:amount),
-      low_stock_products: user.products.where('quantity < ?', 5),
+      low_stock_products: user.products.where("quantity < ?", 5),
       top_selling_products: user.products.joins(:sales)
-                                          .select('products.*, SUM(sales.quantity) AS total_sold')
-                                          .group('products.id')
-                                          .order('total_sold DESC')
+                                          .select("products.*, SUM(sales.quantity) AS total_sold")
+                                          .group("products.id")
+                                          .order("total_sold DESC")
                                           .limit(5),
       products: user.products,
       sales:    user.sales,

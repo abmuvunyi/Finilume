@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  fsp_user: one
+  fsp_user: user_one
   user: one
-  status: MyString
+  status: 0
 
 two:
-  fsp_user: two
+  fsp_user: user_two
   user: two
-  status: MyString
+  status: 0

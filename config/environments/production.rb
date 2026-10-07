@@ -38,7 +38,7 @@ Rails.application.configure do
   logger = ActiveSupport::Logger.new(STDOUT)
   logger.formatter = config.log_formatter
   config.logger = ActiveSupport::TaggedLogging.new(logger)
-  
+
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!)
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
@@ -86,7 +86,7 @@ Rails.application.configure do
   #   authentication:       :plain,
   #   enable_starttls_auto: true
   # }
-  # 
+  #
   config.action_mailer.default_url_options = {
     host: ENV.fetch("APP_HOST", "finilume.onrender.com"), protocol: "https"
   }

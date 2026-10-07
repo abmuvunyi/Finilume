@@ -4,4 +4,3 @@ class AddDefaultValueToDataAccessRequestStatus < ActiveRecord::Migration[7.0]
   end
 end
 # Update any existing records with nil status to default status value 'pending'
-

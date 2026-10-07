@@ -57,7 +57,7 @@ if Rails.env.development? || Rails.env.test?
       product = tester.products.order("RANDOM()").first
       next unless product
 
-      quantity_sold = [rand(1..5), product.quantity].min
+      quantity_sold = [ rand(1..5), product.quantity ].min
       next if quantity_sold <= 0
 
       date        = Date.today - rand(1..10).days

@@ -30,7 +30,7 @@ class Sale < ApplicationRecord
     discount   = discount_amount.to_d
 
     gross = unit_price * qty
-    self.total_price = [gross - discount, 0].max
+    self.total_price = [ gross - discount, 0 ].max
 
     # If date not provided, set from "now"
     self.date ||= Time.zone.now

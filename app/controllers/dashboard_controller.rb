@@ -32,7 +32,7 @@ class DashboardController < ApplicationController
     pdf = Prawn::Document.new
     pdf.text "Business Report (#{@range_start.to_date} to #{@range_end.to_date})", size: 18, style: :bold
     pdf.move_down 10
-  
+
     # Summary (Selected Range)
     pdf.text "Summary (Selected Range)", size: 14, style: :bold
     pdf.text "Revenue:      RWF #{@revenue_in_range.to_i}"
@@ -43,7 +43,7 @@ class DashboardController < ApplicationController
     pdf.text "Avg Order:    RWF #{@avg_order_value_in_range.to_i}"
     pdf.text "Net Profit:   RWF #{@net_profit_in_range.to_i}"
     pdf.move_down 15
-  
+
     # Products (Selected Range)
     pdf.text "Products List", size: 13, style: :bold
     pdf.move_down 5
@@ -57,7 +57,7 @@ class DashboardController < ApplicationController
       pdf.text "No products available."
     end
     pdf.move_down 10
-  
+
     # Sales (Selected Range)
     pdf.text "Sales (#{@range_start.to_date} to #{@range_end.to_date})", size: 13, style: :bold
     pdf.move_down 5
@@ -78,7 +78,7 @@ class DashboardController < ApplicationController
       pdf.text "No sales in selected range."
     end
     pdf.move_down 10
-  
+
     # Incomes (Selected Range)
     pdf.text "Income (#{@range_start.to_date} to #{@range_end.to_date})", size: 13, style: :bold
     pdf.move_down 5
@@ -93,7 +93,7 @@ class DashboardController < ApplicationController
       pdf.text "No income in selected range."
     end
     pdf.move_down 10
-  
+
     # Expenses (Selected Range)
     pdf.text "Expenses (#{@range_start.to_date} to #{@range_end.to_date})", size: 13, style: :bold
     pdf.move_down 5
@@ -107,13 +107,13 @@ class DashboardController < ApplicationController
     else
       pdf.text "No expenses in selected range."
     end
-  
+
     send_data pdf.render,
               filename: "business_report_#{@range_start.to_date}_to_#{@range_end.to_date}.pdf",
               type: "application/pdf",
               disposition: "attachment"
   end
-  
+
 
   private
 

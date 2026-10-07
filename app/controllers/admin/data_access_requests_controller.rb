@@ -5,7 +5,6 @@ module Admin
 
     def index
       @data_access_requests = DataAccessRequest.pending.includes(:user, :fsp_user).reload
-
     end
 
     def update
@@ -28,7 +27,7 @@ module Admin
         end
       end
     end
-    
+
 
     private
 
