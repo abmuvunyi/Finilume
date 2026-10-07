@@ -1,8 +1,8 @@
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    layout 'application'
-    before_action :set_service, except: [:failure]
-    before_action :set_user, except: [:failure]
+    layout "application"
+    before_action :set_service, except: [ :failure ]
+    before_action :set_user, except: [ :failure ]
 
     attr_reader :service, :user
 
@@ -41,7 +41,7 @@ module Users
     end
 
     def auth
-      request.env['omniauth.auth']
+      request.env["omniauth.auth"]
     end
 
     def set_service
@@ -69,17 +69,16 @@ module Users
           uid: auth.uid,
           expires_at: expires_at,
           access_token: auth.credentials.token,
-          access_token_secret: auth.credentials.secret,
+          access_token_secret: auth.credentials.secret
       }
     end
 
     def create_user
       User.create(
         email: auth.info.email,
-        #name: auth.info.name,
-        password: Devise.friendly_token[0,20]
+        # name: auth.info.name,
+        password: Devise.friendly_token[0, 20]
       )
     end
-
   end
 end

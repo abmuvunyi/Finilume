@@ -1,8 +1,13 @@
 require "test_helper"
 
 class ExpensesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @user = users(:one)
+    sign_in @user
     @expense = expenses(:one)
+    @expense.update(user: @user)
   end
 
   test "should get index" do
@@ -17,30 +22,30 @@ class ExpensesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create expense" do
     assert_difference("Expense.count") do
-      post expenses_url, params: { expense: { amount: @expense.amount, category: @expense.category, date: @expense.date, name: @expense.name, user_id: @expense.user_id } }
+      post expenses_url, params: { expense: { amount: @expense.amount, category: @expense.category, date: @expense.date, name: @expense.name, user_id: @user.id } }
     end
 
-    assert_redirected_to expense_url(Expense.last)
+    assert_redirected_to expense_url(Expense.last, locale: I18n.default_locale)
   end
 
   test "should show expense" do
-    get expense_url(@expense)
+    get expense_url(@expense, locale: I18n.default_locale)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_expense_url(@expense)
+    get edit_expense_url(@expense, locale: I18n.default_locale)
     assert_response :success
   end
 
   test "should update expense" do
-    patch expense_url(@expense), params: { expense: { amount: @expense.amount, category: @expense.category, date: @expense.date, name: @expense.name, user_id: @expense.user_id } }
-    assert_redirected_to expense_url(@expense)
+    patch expense_url(@expense, locale: I18n.default_locale), params: { expense: { amount: @expense.amount, category: @expense.category, date: @expense.date, name: @expense.name, user_id: @user.id } }
+    assert_redirected_to expense_url(@expense, locale: I18n.default_locale)
   end
 
   test "should destroy expense" do
     assert_difference("Expense.count", -1) do
-      delete expense_url(@expense)
+      delete expense_url(@expense, locale: I18n.default_locale)
     end
 
     assert_redirected_to expenses_url

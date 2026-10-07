@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FspUsers::ConfirmationsController < Devise::ConfirmationsController
-   layout 'application'
+   layout "application"
   # GET /resource/confirmation/new
   # def new
   #   super

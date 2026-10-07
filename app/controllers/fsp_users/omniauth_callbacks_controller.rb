@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FspUsers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-   layout 'application'
+   layout "application"
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 

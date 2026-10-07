@@ -75,12 +75,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_13_191308) do
   end
 
   create_table "feedbacks", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "category", null: false
+    t.text "message", null: false
+    t.string "status", default: "open", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status"
-    t.string "email"
-    t.string "category"
-    t.text "message"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

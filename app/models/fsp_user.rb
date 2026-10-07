@@ -3,7 +3,6 @@ class FspUser < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
-  # enum role: { bank: 0, insurance: 1 }       
- 
+
+  # enum role: { bank: 0, insurance: 1 }
 end

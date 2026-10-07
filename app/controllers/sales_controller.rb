@@ -4,7 +4,7 @@ class SalesController < ApplicationController
   before_action :set_products_collection, only: %i[new create edit update]
 
   def index
-    @sales = current_user.sales.order(created_at: :desc)
+    @sales = current_user.sales.includes(:product).order(created_at: :desc)
   end
 
   def show; end

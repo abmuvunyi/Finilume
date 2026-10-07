@@ -2,7 +2,7 @@
 class Admin::FeedbacksController < ApplicationController
   before_action :authenticate_user!
   before_action :require_admin!
-  before_action :set_feedback, only: [:show, :update]
+  before_action :set_feedback, only: [ :show, :update ]
 
   def index
     scope = Feedback.order(created_at: :desc)

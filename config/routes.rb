@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # OmniAuth callbacks outside locale scope
-  devise_for :users, only: [:omniauth_callbacks], controllers: {
+  devise_for :users, only: [ :omniauth_callbacks ], controllers: {
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
     # Admin routes (still localized if you want them)
     namespace :admin do
-      resources :data_access_requests, only: [:index, :update]
-      resources :feedbacks, only: [:index, :show, :update]
+      resources :data_access_requests, only: [ :index, :update ]
+      resources :feedbacks, only: [ :index, :show, :update ]
     end
 
     namespace :fsp_dashboard do
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       post "request_data_access/:id", to: "fsp_dashboard#request_data_access", as: "request_data_access"
     end
 
-    devise_for :users, skip: [:omniauth_callbacks], controllers: {
+    devise_for :users, skip: [ :omniauth_callbacks ], controllers: {
       sessions:      "users/sessions",
       registrations: "users/registrations",
       passwords:     "users/passwords",
@@ -46,11 +46,11 @@ Rails.application.routes.draw do
     resources :sales
     resources :products
 
-    resources :notifications, only: [:index]
-    resources :announcements, only: [:index]
+    resources :notifications, only: [ :index ]
+    resources :announcements, only: [ :index ]
 
     # ✅ Feedback form inside locale
-    resources :feedbacks, only: [:new, :create]
+    resources :feedbacks, only: [ :new, :create ]
 
     authenticated :user do
       root to: "dashboard#index", as: :authenticated_root
